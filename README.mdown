@@ -118,13 +118,6 @@ The Google Places Autocomplete API is a web service that returns Place informati
 	successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
-Method for address:
-```objective-c
-- (void)loadStaticMapImageForAddress:(NSString*)address zoomLevel:(int)zoom imageSize:(CGSize)size 
-	imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers 
-	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
-```
-
 You can use blocks and delegate methods:
 
 ```objective-c
@@ -161,10 +154,94 @@ Google Speak Text.
 **Parameters:**
 
 * **Text** - Text for convert.
+
+```objective-c
 - (void)speakText:(NSString*)text failureBlock:(void (^)(NSError *error))failure;
+```
 
+##Geocoding service
 
+Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map.
 
+**Parameters:**
+
+* **Location** - The location (such as 40.457375,-80.009353). or **Address** - The address (such as Chagrin Falls, OH).
+* **Filter Components** - A component filter for which you wish to obtain a geocode. The components filter will also be accepted as an optional parameter if an address is provided. See LPGeocodingFilter.h for components.
+
+Method for location:
+```objective-c
+- (void)loadGeocodingForLocation:(LPLocation*)location filterComponents:(NSArray*)filterComponents 
+	successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+```
+
+Method for address:
+```objective-c
+- (void)loadGeocodingForAddress:(NSString*)address filterComponents:(NSArray*)filterComponents 
+	successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+```
+
+You can use blocks and delegate methods:
+
+```objective-c
+- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions*)googleFunctions forAddress:(NSString*)address filterComponents:(NSArray*)filterComponents;
+- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions*)googleFunctions forLocation:(LPLocation*)location filterComponents:(NSArray*)filterComponents;
+- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingGeocodingWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions didLoadGeocodingResults:(LPGeocodingResults*)geocodingResults;
+```
+
+##Place Autocomplate with Details service
+
+Place Autocomplate + Place Details
+
+**Parameters:**
+
+* **Input** - The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
+* **Offset** - The character position in the input term at which the service uses text for predictions. For example, if the input is 'Googl' and the completion point is 3, the service will match on 'Goo'. The offset should generally be set to the position of the text caret. If no offset is supplied, the service will use the entire term.
+* **Radius** - The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
+* **Location** - The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
+* **Place Type - The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
+
+```objective-c
+- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius 
+	placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+```
+
+##Place Text Search service
+
+The Google Places API Text Search Service is a web service that returns information about a set of Places based on a string — for example "pizza in New York" or "shoe stores near Ottawa".
+
+**Parameters:**
+
+* **Query** -  The text string on which to search, for example: "restaurant". The Place service will return candidate matches based on this string and order the results based on their perceived relevance.
+* **Location** - The latitude/longitude around which to retrieve Place information. This must be specified as latitude,longitude. If you specify a location parameter, you must also specify a radius parameter.
+* **Radius** - Defines the distance (in meters) within which to bias Place results. The maximum allowed radius is 50 000 meters. Results inside of this region will be ranked higher than results outside of the search circle; however, prominent results from outside of the search radius may be included.
+
+```objective-c
+- (void)loadPlaceTextSearchForQuery:(NSString*)query location:(LPLocation*)location radius:(int)radius 
+	successfulBlock:(void (^)(LPPlaceSearchResults *placeResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+```
+
+You can use blocks and delegate methods:
+
+```objective-c
+- (void)googleFunctionsWillLoadPlaceSearch:(LPGoogleFunctions *)googleFunctions forQuery:(NSString*)guery;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceSearch:(LPPlaceSearchResults*)placeResults;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlaceSearchWithStatus:(LPGoogleStatus)status;
+```
+
+##Place Photo for Reference service
+
+The Places Photo service is a read-only API that allows you to easily add high quality photographic content to your application. The Photo service gives you access to the millions of photos stored in the Places and Google+ Local database. When you search for Places using either a Place Search or Place Details request, photo references will be returned for relevant photographic content. The Photo service lets you access the referenced photos, and resize the image to the optimal size for your application.
+
+**Parameters:**
+
+* **Max Height** - Max image height (accept an integer between 1 and 1600).
+* **Max Width** - Min image height (accept an integer between 1 and 1600).
+
+```objective-c
+- (void)loadPlacePhotoForReference:(NSString*)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth 
+	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+```
 
 ##Using Frameworks - Libraries:
 

@@ -633,7 +633,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [operation start];
 }
 
-- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure {
+- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure {
     [self loadPlacesAutocomplateForInput:input offset:offset radius:radius location:location placeType:placeType successfulBlock:^(LPPlacesAutocomplate *placesAutocomplate) {
         
         __block int whichLoaded = 0;

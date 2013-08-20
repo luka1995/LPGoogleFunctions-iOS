@@ -176,7 +176,7 @@ typedef enum {
 
 /**
  * Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map.
- * @param The textual latitude/longitude value for which you wish to obtain the closest, human-readable address.
+ * @param The location that you want to geocode.
  * @param A component filter for which you wish to obtain a geocode. The components filter will also be accepted as an optional parameter if an address is provided. See LPGeocodingFilter.h for components.
  * @param Successful block with results.
  * @param Failure block with status.
@@ -193,7 +193,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Google Places API Text Search Service is a web service that returns information about a set of Places based on a string — for example "pizza in New York" or "shoe stores near Ottawa".
