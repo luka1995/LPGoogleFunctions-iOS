@@ -10,15 +10,15 @@
 #import "LPLocation.h"
 
 typedef enum {
-    LPGoogleMapImageSizeTiny,
-    LPGoogleMapImageSizeMid,
-    LPGoogleMapImageSizeSmall,
-    LPGoogleMapImageSizeNormal
-} LPGoogleMapImageSize;
+    LPGoogleMapImageMarkerSizeTiny,
+    LPGoogleMapImageMarkerSizeMid,
+    LPGoogleMapImageMarkerSizeSmall,
+    LPGoogleMapImageMarkerSizeNormal
+} LPGoogleMapImageMarkerSize;
 
 @interface LPMapImageMarker : NSObject <NSCoding>
 
-@property (nonatomic, assign) LPGoogleMapImageSize size;
+@property (nonatomic, assign) LPGoogleMapImageMarkerSize size;
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, strong) NSString *label;
 @property (nonatomic, strong) LPLocation *location;

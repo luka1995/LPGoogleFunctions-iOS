@@ -60,7 +60,7 @@
         CGFloat red = 0.0, green = 0.0, blue = 0.0, alpha =0.0;
         [self.color getRed:&red green:&green blue:&blue alpha:&alpha];
 
-        return [NSString stringWithFormat:@"0x%02X%02X%02X",(char)(255.0 * red),(char)(255.0 * green),(char)(255.0 * blue)];
+        return [NSString stringWithFormat:@"0x%02x%02x%02x",(int)(255.0 * red),(int)(255.0 * green),(int)(255.0 * blue)];
     } else {
         return @"0x000000";
     }
@@ -69,11 +69,11 @@
 - (NSString*)getSizeString
 {
     switch (self.size) {
-        case LPGoogleMapImageSizeMid:
+        case LPGoogleMapImageMarkerSizeMid:
             return @"mid";
-        case LPGoogleMapImageSizeTiny:
+        case LPGoogleMapImageMarkerSizeTiny:
             return @"tiny";
-        case LPGoogleMapImageSizeSmall:
+        case LPGoogleMapImageMarkerSizeSmall:
             return @"small";
         default:
             return @"";
@@ -83,7 +83,8 @@
 - (NSString*)getMarkerURLString
 {
     NSString *string = [NSString stringWithFormat:@"size:%@|color:%@|label:%@|%f,%f",[self getSizeString],[self getColorString],self.label,self.location.latitude,self.location.longitude];
-        return string;
+    NSLog(@"%@",string);
+    return string;
 }
 
 - (id)copyWithZone:(NSZone *)zone
