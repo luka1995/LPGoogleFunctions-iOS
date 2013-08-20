@@ -207,6 +207,7 @@ typedef enum {
 
 /**
  * The Places Photo service is a read-only API that allows you to easily add high quality photographic content to your application. The Photo service gives you access to the millions of photos stored in the Places and Google+ Local database. When you search for Places using either a Place Search or Place Details request, photo references will be returned for relevant photographic content. The Photo service lets you access the referenced photos, and resize the image to the optimal size for your application.
+ * @param A string identifier that uniquely identifies a photo. Photo references are returned from either a Place Search or Place Details request.
  * @param Max image height (accept an integer between 1 and 1600).
  * @param Min image height (accept an integer between 1 and 1600).
  * @param Successful block with results.
