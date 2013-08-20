@@ -1,6 +1,6 @@
 #LPGoogleFunctions
 
-LPGoogleFunctions is an iOS library that provides easy access to certain google Google API functions.
+LPGoogleFunctions is an iOS library that provides easy access to certain Google API functions.
 https://developers.google.com/
 
 Created by Luka Penger
