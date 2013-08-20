@@ -235,7 +235,7 @@ The Places Photo service is a read-only API that allows you to easily add high q
 
 **Parameters:**
 
-* **Reference** - 
+* **Reference** - A string identifier that uniquely identifies a photo. Photo references are returned from either a Place Search or Place Details request.
 * **Max Height** - Max image height (accept an integer between 1 and 1600).
 * **Max Width** - Min image height (accept an integer between 1 and 1600).
 
