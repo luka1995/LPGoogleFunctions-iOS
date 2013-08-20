@@ -278,7 +278,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [operation start];
 }
 
-- (void)loadStaticMapImageForCenter:(NSString*)center zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure {
+- (void)loadStaticMapImageForLocation:(LPLocation*)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure {
     
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIStaticMapImageURL]];
     
@@ -286,7 +286,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     
     NSString *URL = googleAPIStaticMapImageURL;
     
-    URL = [URL stringByAppendingFormat:@"center=%@&",center];
+    URL = [URL stringByAppendingFormat:@"center=%f,%f&",location.latitude,location.longitude];
     URL = [URL stringByAppendingFormat:@"sensor=%@&",self.sensor?@"true":@"false"];
     URL = [URL stringByAppendingFormat:@"zoom=%d&",zoom];
     URL = [URL stringByAppendingFormat:@"scale=%d&",scale];
@@ -299,6 +299,41 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         URL = [URL stringByAppendingFormat:@"markers=%@&",[marker getMarkerURLString]];
     }
 
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    
+    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
+        return image;
+    } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        if(successful!=nil)
+            successful(image);
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        if(failure!=nil)
+            failure(error);
+    }];
+    [operation start];
+}
+
+- (void)loadStaticMapImageForAddress:(NSString*)address zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure {
+    
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIStaticMapImageURL]];
+    
+    [httpClient setParameterEncoding:AFJSONParameterEncoding];
+    
+    NSString *URL = googleAPIStaticMapImageURL;
+    
+    URL = [URL stringByAppendingFormat:@"center=%@&",address];
+    URL = [URL stringByAppendingFormat:@"sensor=%@&",self.sensor?@"true":@"false"];
+    URL = [URL stringByAppendingFormat:@"zoom=%d&",zoom];
+    URL = [URL stringByAppendingFormat:@"scale=%d&",scale];
+    URL = [URL stringByAppendingFormat:@"size=%dx%d&",(int)size.width,(int)size.height];
+    
+    for(int i=0;i<markers.count;i++)
+    {
+        LPMapImageMarker *marker = (LPMapImageMarker*)[markers objectAtIndex:i];
+        
+        URL = [URL stringByAppendingFormat:@"markers=%@&",[marker getMarkerURLString]];
+    }
+    
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {

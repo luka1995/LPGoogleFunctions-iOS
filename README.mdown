@@ -1,6 +1,6 @@
 #LPGoogleFunctions
 
-LPGoogleFunctions is library for iOS developers with Google API functions.
+LPGoogleFunctions is an iOS library that provides easy access to certain google Google API functions.
 https://developers.google.com/
 
 Created by Luka Penger
@@ -38,7 +38,7 @@ The Google Directions API is a service that calculates directions between locati
 	failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
-You can use blocks or delegate methods:
+You can use blocks and delegate methods:
 
 ```objective-c
 - (void)googleFunctionsWillLoadDirections:(LPGoogleFunctions*)googleFunctions;
@@ -46,7 +46,7 @@ You can use blocks or delegate methods:
 - (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingDirectionsWithStatus:(LPGoogleStatus)status;
 ```
 
-##Street View Images
+##Street View Images service
 
 The Google Maps Image APIs make it easy to embed a street view image into your image view.
 
@@ -72,9 +72,96 @@ Method for address:
 	failureBlock:(void (^)(NSError *error))failure;
 ```
 
-##Static Map Images
+Successful block will return UIImage.
+
+##Static Map Images service
 
 The Google Maps Image APIs make it easy to embed a static Google Maps image into your image view.
+
+**Parameters:**
+
+* **Location** - The location (such as 40.457375,-80.009353). or **Address** - The address (such as Chagrin Falls, OH). Defines the center of the map.
+* **Zoom** - (required if markers not present) defines the zoom level of the map, which determines the magnification level of the map. This parameter takes a numerical value corresponding to the zoom level of the region desired.
+* **Image Size** - (required) Specifies the output size of the image in pixels.
+* **Map Type** - (optional) defines the type of map to construct. There are several possible maptype values, including roadmap, satellite, hybrid, and terrain. Use LPGoogleMapType.
+* **Markers Array** - (optional) define one or more markers to attach to the image at specified locations. This parameter takes a single marker definition with parameters separated by the pipe character (|). Multiple markers may be placed within the same markers parameter as long as they exhibit the same style; you may add additional markers of differing styles by adding additional markers parameters. Note that if you supply markers for a map, you do not need to specify the (normally required) center and zoom parameters. Use LPMapImageMarker.
+
+Method for location:
+```objective-c
+- (void)loadStaticMapImageForLocation:(LPLocation*)location zoomLevel:(int)zoom imageSize:(CGSize)size 
+	imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers 
+	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+```
+
+Method for address:
+```objective-c
+- (void)loadStaticMapImageForAddress:(NSString*)address zoomLevel:(int)zoom imageSize:(CGSize)size 
+	imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers 
+	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+```
+
+Successful block will return UIImage.
+
+##Places Autocomplate service
+
+The Google Places Autocomplete API is a web service that returns Place information based on text search terms, and, optionally, geographic bounds. The API can be used to provide autocomplete functionality for text-based geographic searches, by returning Places such as businesses, addresses, and points of interest as a user types.
+
+* **Input** - The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
+* **Offset** - The character position in the input term at which the service uses text for predictions. For example, if the input is 'Googl' and the completion point is 3, the service will match on 'Goo'. The offset should generally be set to the position of the text caret. If no offset is supplied, the service will use the entire term.
+* **Radius** - The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
+* **Location** - The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
+* **Place Type - The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
+
+```objective-c
+- (void)loadPlacesAutocomplateForInput:(NSString*)input offset:(int)offset radius:(int)radius 
+	location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType 
+	successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+```
+
+Method for address:
+```objective-c
+- (void)loadStaticMapImageForAddress:(NSString*)address zoomLevel:(int)zoom imageSize:(CGSize)size 
+	imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers 
+	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+```
+
+You can use blocks and delegate methods:
+
+```objective-c
+- (void)googleFunctionsWillLoadPlacesAutocomplate:(LPGoogleFunctions*)googleFunctions forInput:(NSString*)input;
+- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlacesAutocomplateWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplate:(LPPlacesAutocomplate*)placesAutocomplate;
+```
+
+##Place Details For Reference service
+
+Once you have a reference from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. A Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.
+
+**Parameters:**
+
+* **Reference** - A textual identifier that uniquely identifies a place, returned from a Place search.
+
+```objective-c
+- (void)loadPlaceDetailsForReference:(NSString*)reference successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful 
+	failureBlock:(void (^)(LPGoogleStatus status))failure;
+```
+
+You can use blocks and delegate methods:
+
+```objective-c
+- (void)googleFunctionsWillLoadPlaceDetailsResult:(LPGoogleFunctions*)googleFunctions forReference:(NSString*)reference;
+- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlaceDetailsResultWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions didLoadPlaceDetailsResult:(LPPlaceDetailsResults *)placeDetailsResults;
+```
+
+##Google Text to Speech service
+
+Google Speak Text.
+
+**Parameters:**
+
+* **Text** - Text for convert.
+- (void)speakText:(NSString*)text failureBlock:(void (^)(NSError *error))failure;
 
 
 

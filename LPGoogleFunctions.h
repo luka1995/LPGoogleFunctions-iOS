@@ -117,7 +117,7 @@ typedef enum {
 
 /**
  * The Google Maps Image APIs make it easy to embed a static Google Maps image into your image view.
- * @param (required if markers not present) defines the center of the map, equidistant from all edges of the map. This parameter takes a location as either a comma-separated {latitude,longitude} pair (e.g. "40.714728,-73.998672") or a string address (e.g. "city hall, new york, ny") identifying a unique location on the face of the earth.
+ * @param Defines the center of the map.
  * @param (required if markers not present) defines the zoom level of the map, which determines the magnification level of the map. This parameter takes a numerical value corresponding to the zoom level of the region desired.
  * @param (required) Specifies the output size of the image in pixels.
  * @param (optional) defines the type of map to construct. There are several possible maptype values, including roadmap, satellite, hybrid, and terrain. Use LPGoogleMapType.
@@ -125,7 +125,19 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadStaticMapImageForCenter:(NSString*)center zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStaticMapImageForLocation:(LPLocation*)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+
+/**
+ * The Google Maps Image APIs make it easy to embed a static Google Maps image into your image view.
+ * @param Defines the center of the map.
+ * @param (required if markers not present) defines the zoom level of the map, which determines the magnification level of the map. This parameter takes a numerical value corresponding to the zoom level of the region desired.
+ * @param (required) Specifies the output size of the image in pixels.
+ * @param (optional) defines the type of map to construct. There are several possible maptype values, including roadmap, satellite, hybrid, and terrain. Use LPGoogleMapType.
+ * @param (optional) define one or more markers to attach to the image at specified locations. This parameter takes a single marker definition with parameters separated by the pipe character (|). Multiple markers may be placed within the same markers parameter as long as they exhibit the same style; you may add additional markers of differing styles by adding additional markers parameters. Note that if you supply markers for a map, you do not need to specify the (normally required) center and zoom parameters. Use LPMapImageMarker.
+ * @param Successful block with results.
+ * @param Failure block with status.
+ */
+- (void)loadStaticMapImageForAddress:(NSString*)address zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 
 /**
  * The Google Places Autocomplete API is a web service that returns Place information based on text search terms, and, optionally, geographic bounds. The API can be used to provide autocomplete functionality for text-based geographic searches, by returning Places such as businesses, addresses, and points of interest as a user types.
@@ -148,7 +160,7 @@ typedef enum {
 - (void)loadPlaceDetailsForReference:(NSString*)reference successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
- * Google Speak Text
+ * Google Speak Text.
  * @param Text for convert.
  */
 - (void)speakText:(NSString*)text failureBlock:(void (^)(NSError *error))failure;
