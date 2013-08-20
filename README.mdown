@@ -3,20 +3,23 @@
 LPGoogleFunctions is library for iOS developers with Google API functions.
 https://developers.google.com/
 
+Luka Penger
+http://lukapenger.eu
+
 ##ARC
 
 LPGoogleFunctions uses ARC (Automatic Reference Counting).
 
-If you are using LPGoogleFunctions in your non-arc project, you will need to set a '-fobjc-arc' compiler flag on all of the LPGoogleFunctions source files.
+If you are using LPGoogleFunctions in your non-arc project, you will need to set a `-fobjc-arc` compiler flag on all of the LPGoogleFunctions source files.
 
-To set a compiler flag in Xcode, go to your active target and select the "Build Phases" tab. Now select all LPGoogleFunctions source files, press Enter, insert '-fobjc-arc' and then "Done" to disable ARC for LPGoogleFunctions.
+To set a compiler flag in Xcode, go to your active target and select the "Build Phases" tab. Now select all LPGoogleFunctions source files, press Enter, insert `-fobjc-arc` and then "Done" to disable ARC for LPGoogleFunctions.
 
 ##Directions service
 
 The Google Directions API is a service that calculates directions between locations using an HTTP request. You can search for directions for several modes of transportation, include transit, driving, walking or cycling. Directions may specify origins, destinations and waypoints either as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia") or as latitude/longitude coordinates. The Directions API can return multi-part directions using a series of waypoints.
 
 Parameters:
-* Origin - The latitude/longitude value from which you wish to calculate directions.
+* **Origin** - The latitude/longitude value from which you wish to calculate directions.
 * Destination - The latitude/longitude value from which you wish to calculate directions.
 * Travel Mode - Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure_time or an arrival_time.
 * Avoid - Indicates that the calculated route(s) should avoid the indicated features.
