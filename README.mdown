@@ -3,7 +3,7 @@
 LPGoogleFunctions is library for iOS developers with Google API functions.
 https://developers.google.com/
 
-Luka Penger
+Created by Luka Penger
 http://lukapenger.eu
 
 ##ARC
@@ -49,6 +49,36 @@ You can use blocks or delegate methods:
 ##Street View Images
 
 The Google Maps Image APIs make it easy to embed a street view image into your image view.
+
+**Parameters:**
+
+* **Location** - The location (such as 40.457375,-80.009353).
+or
+* **Address** - The address (such as Chagrin Falls, OH).
+
+* **Image Size** - Specifies the output size of the image in pixels.
+* **Heading** - Indicates the compass heading of the camera. Accepted values are from 0 to 360 (both values indicating North, with 90 indicating East, and 180 South). If no heading is specified, a value will be calculated that directs the camera towards the specified location, from the point at which the closest photograph was taken.
+* **Fov** - Determines the horizontal field of view of the image. The field of view is expressed in degrees, with a maximum allowed value of 120. When dealing with a fixed-size viewport, as with a Street View image of a set size, field of view in essence represents zoom, with smaller numbers indicating a higher level of zoom.
+* **Pitch** - Specifies the up or down angle of the camera relative to the Street View vehicle. This is often, but not always, flat horizontal. Positive values angle the camera up (with 90 degrees indicating straight up); negative values angle the camera down (with -90 indicating straight down).
+
+Method for location:
+```objective-c
+- (void)loadStreetViewImageForLocation:(LPLocation*)location imageSize:(CGSize)size 
+	heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful 
+	failureBlock:(void (^)(NSError *error))failure;
+```
+
+Method for address:
+```objective-c
+- (void)loadStreetViewImageForAddress:(NSString*)address imageSize:(CGSize)size heading:(float)heading 
+	fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful 
+	failureBlock:(void (^)(NSError *error))failure;
+```
+
+##Static Map Images
+
+The Google Maps Image APIs make it easy to embed a static Google Maps image into your image view.
+
 
 
 
