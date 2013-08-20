@@ -1,25 +1,67 @@
 #LPGoogleFunctions
 
-LPGoogleFunctions is library for iOS developers with Google API functions. You can use delegate or block
+LPGoogleFunctions is library for iOS developers with Google API functions.
 https://developers.google.com/
 
-##Features
-Functions:
-###Directions service
+##ARC
+
+LPGoogleFunctions uses ARC (Automatic Reference Counting).
+
+If you are using LPGoogleFunctions in your non-arc project, you will need to set a '-fobjc-arc' compiler flag on all of the LPGoogleFunctions source files.
+
+To set a compiler flag in Xcode, go to your active target and select the "Build Phases" tab. Now select all LPGoogleFunctions source files, press Enter, insert '-fobjc-arc' and then "Done" to disable ARC for LPGoogleFunctions.
+
+##Directions service
+
 The Google Directions API is a service that calculates directions between locations using an HTTP request. You can search for directions for several modes of transportation, include transit, driving, walking or cycling. Directions may specify origins, destinations and waypoints either as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia") or as latitude/longitude coordinates. The Directions API can return multi-part directions using a series of waypoints.
+
+Parameters:
+* Origin - The latitude/longitude value from which you wish to calculate directions.
+* Destination - The latitude/longitude value from which you wish to calculate directions.
+* Travel Mode - Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure_time or an arrival_time.
+* Avoid - Indicates that the calculated route(s) should avoid the indicated features.
+* Unit - Specifies the unit system to use when displaying results.
+* Alternatives - If set to true, specifies that the Directions service may provide more than one route alternative in the response. Note that providing route alternatives may increase the response time from the server.
+* Departure time.
+* Arrival time.
+
 ```objective-c
-- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departure_time:(NSDate*)departure_time arrival_time:(NSDate*)arrival_time waypoints:(NSArray*)waypoints successfulBlock:(void (^)(LPDirections* directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination 
+	directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid 
+	directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives 
+	departure_time:(NSDate*)departure_time arrival_time:(NSDate*)arrival_time 
+	waypoints:(NSArray*)waypoints successfulBlock:(void (^)(LPDirections* directions))successful
+	failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
-Using Apple Frameworks:
+You can use blocks or delegate:
+
+```objective-c
+- (void)googleFunctionsWillLoadDirections:(LPGoogleFunctions*)googleFunctions;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadDirections:(LPDirections*)directions;
+- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingDirectionsWithStatus:(LPGoogleStatus)status;
+```
+
+##Street View Images
+
+The Google Maps Image APIs make it easy to embed a street view image into your image view.
+
+
+
+##Using Frameworks - Libraries:
 
 * UIKit.framework
 * Foundation.framework
 * CoreLocation.framework
 * AVFoundation.framework
 
-LPGoogleFunctions using AFNetworking library for networking. https://github.com/AFNetworking/AFNetworking
+LPGoogleFunctions using AFNetworking library for networking.
+https://github.com/AFNetworking/AFNetworking
 
-**Version 1.0** @ 21.04.2013
+##License
 
-- Initial release.
+This code is distributed under the terms and conditions of the [MIT license](LICENSE). 
+
+##Change log
+
+A brief summary of each LPGoogleFunctions release can be found on the [wiki](https://github.com/luka1995/LPGoogleFunctions/wiki/Change-log).
