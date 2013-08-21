@@ -80,7 +80,7 @@ typedef enum {
  * The Google Directions API is a service that calculates directions between locations using an HTTP request. You can search for directions for several modes of transportation, include transit, driving, walking or cycling. Directions may specify origins, destinations and waypoints either as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia") or as latitude/longitude coordinates. The Directions API can return multi-part directions using a series of waypoints.
  * @param The latitude/longitude value from which you wish to calculate directions.
  * @param The latitude/longitude value from which you wish to calculate directions.
- * @param Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure_time or an arrival_time.
+ * @param Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure time or an arrival time.
  * @param Indicates that the calculated route(s) should avoid the indicated features.
  * @param Specifies the unit system to use when displaying results.
  * @param If set to true, specifies that the Directions service may provide more than one route alternative in the response. Note that providing route alternatives may increase the response time from the server.
@@ -89,7 +89,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departure_time:(NSDate*)departure_time arrival_time:(NSDate*)arrival_time waypoints:(NSArray*)waypoints successfulBlock:(void (^)(LPDirections* directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate*)departureTime arrivalTime:(NSDate*)arrivalTime waypoints:(NSArray*)waypoints successfulBlock:(void (^)(LPDirections* directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Google Maps Image APIs make it easy to embed a street view image into your image view.

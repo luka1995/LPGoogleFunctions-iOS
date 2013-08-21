@@ -102,7 +102,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         return LPGoogleStatusOverQueryLimit;
     } else if([status isEqualToString:STATUS_REQUEST_DENIED]) {
         return LPGoogleStatusRequestDenied;
-    } else { // UNKNOWN_ERROR
+    } else {
         return LPGoogleStatusUnknownError;
     }
 }
@@ -130,7 +130,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     }
 }
 
-- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departure_time:(NSDate*)departure_time arrival_time:(NSDate*)arrival_time waypoints:(NSArray*)waypoints  successfulBlock:(void (^)(LPDirections* directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate*)departureTime arrivalTime:(NSDate*)arrivalTime waypoints:(NSArray*)waypoints  successfulBlock:(void (^)(LPDirections* directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
     if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDirections:)])
     {
@@ -159,13 +159,13 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     //ALTERNATIVES
     [parameters setObject:[NSString stringWithFormat:@"%@",alternatives?@"true":@"false"] forKey:@"alternatives"];
 
-    //departure_time
-    if(departure_time!=nil)
-        [parameters setObject:[NSString stringWithFormat:@"%.0f",[departure_time timeIntervalSince1970]] forKey:@"departure_time"];
+    //departureTime
+    if(departureTime!=nil)
+        [parameters setObject:[NSString stringWithFormat:@"%.0f",[departureTime timeIntervalSince1970]] forKey:@"departure_time"];
     
-    //departure_time
-    if(arrival_time!=nil)
-        [parameters setObject:[NSString stringWithFormat:@"%.0f",[arrival_time timeIntervalSince1970]] forKey:@"arrival_time"];
+    //departureTime
+    if(arrivalTime!=nil)
+        [parameters setObject:[NSString stringWithFormat:@"%.0f",[arrivalTime timeIntervalSince1970]] forKey:@"arrival_time"];
     
     //WAYPOINTS
     if(waypoints.count>0)

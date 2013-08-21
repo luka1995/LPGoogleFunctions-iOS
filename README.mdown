@@ -1,4 +1,4 @@
-#LPGoogleFunctions
+#LPGoogleFunctions [![Build Status](https://travis-ci.org/luka1995/LPGoogleFunctions.png)](https://travis-ci.org/luka1995/LPGoogleFunctions)
 
 LPGoogleFunctions is an iOS library that provides easy access to certain Google API functions.
 
@@ -23,7 +23,7 @@ The Google Directions API is a service that calculates directions between locati
 
 * **Origin** - The latitude/longitude value from which you wish to calculate directions.
 * **Destination** - The latitude/longitude value from which you wish to calculate directions.
-* **Travel Mode** - Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure_time or an arrival_time.
+* **Travel Mode** - Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure time or an arrival time.
 * **Avoid Tolls** - Indicates that the calculated route(s) should avoid the indicated features.
 * **Unit** - Specifies the unit system to use when displaying results.
 * **Alternatives** - If set to true, specifies that the Directions service may provide more than one route alternative in the response. Note that providing route alternatives may increase the response time from the server.
@@ -34,7 +34,7 @@ The Google Directions API is a service that calculates directions between locati
 - (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination 
 	directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid 
 	directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives 
-	departure_time:(NSDate*)departure_time arrival_time:(NSDate*)arrival_time 
+	departureTime:(NSDate*)departureTime arrivalTime:(NSDate*)arrivalTime 
 	waypoints:(NSArray*)waypoints successfulBlock:(void (^)(LPDirections* directions))successful
 	failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
