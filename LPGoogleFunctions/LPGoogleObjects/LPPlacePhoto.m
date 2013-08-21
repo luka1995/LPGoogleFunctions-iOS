@@ -42,7 +42,9 @@
             
             for(int i=0;i<[[dictionary objectForKey:@"html_attributions"] count];i++)
             {
-                [array addObject:[[dictionary objectForKey:@"html_attributions"] objectAtIndex:i]];
+                NSString *string = [[dictionary objectForKey:@"html_attributions"] objectAtIndex:i];
+                
+                [array addObject:string];
             }
             
             new.htmlAttributions = [NSArray arrayWithArray:array];
@@ -70,7 +72,16 @@
     
     if(self.htmlAttributions!=nil && ![self.htmlAttributions isKindOfClass:[NSNull class]])
     {
-        [dictionary setObject:[NSString stringWithFormat:@"%@",self.htmlAttributions.description] forKey:@"htmlAttributions"];
+        NSMutableArray *array = [NSMutableArray new];
+        
+        for(int i=0;i<[self.htmlAttributions count];i++)
+        {
+            NSString *string = (NSString*)[self.htmlAttributions objectAtIndex:i];
+            
+            [array addObject:string.description];
+        }
+        
+        [dictionary setObject:array forKey:@"htmlAttributions"];
     }
     
     [dictionary setObject:[NSString stringWithFormat:@"%d",self.height] forKey:@"height"];
