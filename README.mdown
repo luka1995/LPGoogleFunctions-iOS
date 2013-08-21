@@ -252,7 +252,7 @@ The Places Photo service is a read-only API that allows you to easily add high q
 * CoreLocation.framework
 * AVFoundation.framework
 
-LPGoogleFunctions using AFNetworking library for networking.
+LPGoogleFunctions uses AFNetworking library for networking.
 https://github.com/AFNetworking/AFNetworking
 
 ##License
