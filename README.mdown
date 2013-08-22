@@ -257,7 +257,7 @@ https://github.com/AFNetworking/AFNetworking
 
 ##License
 
-This code is distributed under the terms and conditions of the [MIT license](LICENSE). 
+This code is distributed under the terms and conditions of the [MIT license](https://github.com/luka1995/LPGoogleFunctions/blob/master/LICENSE).
 
 ##Change log
 
