@@ -67,7 +67,7 @@ typedef enum {
     AVAudioPlayer *googlePlayer;
 }
 
-@property (nonatomic, assign) id <LPGoogleFunctionsDelegate> delegate;
+@property (nonatomic, weak) id <LPGoogleFunctionsDelegate> delegate;
 
 @property (nonatomic, assign) BOOL sensor; /** Using GPS location sensor */
 @property (nonatomic, strong) NSString *languageCode; /** Language ISO code (default "en") */
