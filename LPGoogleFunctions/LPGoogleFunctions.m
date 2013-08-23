@@ -35,8 +35,6 @@
 
 @implementation LPGoogleFunctions
 
-NSString *const googleAPIBrowerKey = @"AIzaSyB1KtK1d5tcFfwjmZZZnigBzpd6vB4Y0P0";
-
 NSString *const STATUS_OK = @"OK";
 NSString *const STATUS_NOT_FOUND = @"NOT_FOUND";
 NSString *const STATUS_ZERO_RESULTS = @"ZERO_RESULTS";
@@ -231,7 +229,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d",(int)size.width,(int)size.height] forKey:@"size"];
     [parameters setObject:[NSString stringWithFormat:@"%f,%f",location.latitude,location.longitude] forKey:@"location"];
@@ -263,7 +261,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d",(int)size.width,(int)size.height] forKey:@"size"];
     [parameters setObject:[NSString stringWithFormat:@"%@",address] forKey:@"location"];
@@ -371,7 +369,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",input] forKey:@"input"];
     [parameters setObject:[LPPrediction getStringFromGooglePlaceType:placeType] forKey:@"types"];
     [parameters setObject:[NSString stringWithFormat:@"%d",offset] forKey:@"offset"];
@@ -436,7 +434,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",reference] forKey:@"reference"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
@@ -731,7 +729,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",query] forKey:@"query"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
@@ -793,7 +791,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@",reference] forKey:@"photoreference"];
     
