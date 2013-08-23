@@ -103,7 +103,7 @@ Method for address:
 
 Successful block will return UIImage.
 
-##Places Autocomplate service
+##Places Autocomplete service
 
 The Google Places Autocomplete API is a web service that returns Place information based on text search terms, and, optionally, geographic bounds. The API can be used to provide autocomplete functionality for text-based geographic searches, by returning Places such as businesses, addresses, and points of interest as a user types.
 
@@ -114,17 +114,17 @@ The Google Places Autocomplete API is a web service that returns Place informati
 * **Place Type - The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
 
 ```objective-c
-- (void)loadPlacesAutocomplateForInput:(NSString*)input offset:(int)offset radius:(int)radius 
+- (void)loadPlacesAutocompleteForInput:(NSString*)input offset:(int)offset radius:(int)radius 
 	location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType 
-	successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+	successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 You can use blocks and delegate methods:
 
 ```objective-c
-- (void)googleFunctionsWillLoadPlacesAutocomplate:(LPGoogleFunctions*)googleFunctions forInput:(NSString*)input;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlacesAutocomplateWithStatus:(LPGoogleStatus)status;
-- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplate:(LPPlacesAutocomplate*)placesAutocomplate;
+- (void)googleFunctionsWillLoadPlacesAutocomplete:(LPGoogleFunctions*)googleFunctions forInput:(NSString*)input;
+- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlacesAutocompleteWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplete:(LPPlacesAutocomplete*)placesAutocomplete;
 ```
 
 ##Place Details For Reference service
@@ -190,9 +190,9 @@ You can use blocks and delegate methods:
 - (void)googleFunctions:(LPGoogleFunctions*)googleFunctions didLoadGeocodingResults:(LPGeocodingResults*)geocodingResults;
 ```
 
-##Place Autocomplate with Details service
+##Place Autocomplete with Details service
 
-Place Autocomplate + Place Details
+Place Autocomplete + Place Details
 
 **Parameters:**
 
@@ -203,7 +203,7 @@ Place Autocomplate + Place Details
 * **Place Type** - The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
 
 ```objective-c
-- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius 
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius 
 	placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 

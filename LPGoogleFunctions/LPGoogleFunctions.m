@@ -47,7 +47,7 @@ NSString *const STATUS_UNKNOWN_ERROR = @"UNKNOWN_ERROR";
 NSString *const googleAPIDirectionsURL = @"http://maps.googleapis.com/maps/api/directions/json?";
 NSString *const googleAPIStaticMapImageURL = @"http://maps.googleapis.com/maps/api/staticmap?";
 NSString *const googleAPIStreetViewImageURL = @"http://maps.googleapis.com/maps/api/streetview?";
-NSString *const googleAPIPlacesAutocomplateURL = @"https://maps.googleapis.com/maps/api/place/autocomplete/json?";
+NSString *const googleAPIPlacesAutocompleteURL = @"https://maps.googleapis.com/maps/api/place/autocomplete/json?";
 NSString *const googleAPITextToSpeechURL = @"http://translate.google.com/translate_tts?";
 NSString *const googleAPIPlaceDetailsURL = @"https://maps.googleapis.com/maps/api/place/details/json?";
 NSString *const googleAPIGeocodingURL = @"http://maps.googleapis.com/maps/api/geocode/json?";
@@ -209,7 +209,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             if(failure!=nil)
                 failure(status);
         }
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *reqponse, NSError *error, id neki) {
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
         if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)])
         {
             [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:LPGoogleStatusUnknownError];
@@ -357,14 +357,14 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [operation start];
 }
 
-- (void)loadPlacesAutocomplateForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlacesAutocompleteForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlacesAutocomplate:forInput:)])
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlacesAutocomplete:forInput:)])
     {
-        [self.delegate googleFunctionsWillLoadPlacesAutocomplate:self forInput:input];
+        [self.delegate googleFunctionsWillLoadPlacesAutocomplete:self forInput:input];
     }
     
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIPlacesAutocomplateURL]];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIPlacesAutocompleteURL]];
     
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
@@ -384,41 +384,41 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     }
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
-                                                            path:googleAPIPlacesAutocomplateURL
+                                                            path:googleAPIPlacesAutocompleteURL
                                                       parameters:parameters];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
-        LPPlacesAutocomplate *placesAutocomplate = [LPPlacesAutocomplate placesAutocomplateWithObjects:JSON];
+        LPPlacesAutocomplete *placesAutocomplete = [LPPlacesAutocomplete placesAutocompleteWithObjects:JSON];
         
-        NSString *statusCode = placesAutocomplate.statusCode;
+        NSString *statusCode = placesAutocomplete.statusCode;
         
         if([statusCode isEqualToString:@"OK"])
         {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlacesAutocomplate:)])
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlacesAutocomplete:)])
             {
-                [self.delegate googleFunctions:self didLoadPlacesAutocomplate:placesAutocomplate];
+                [self.delegate googleFunctions:self didLoadPlacesAutocomplete:placesAutocomplete];
             }
             
             if(successful!=nil)
-                successful(placesAutocomplate);
+                successful(placesAutocomplete);
             
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
             
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocomplateWithStatus:)])
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)])
             {
-                [self.delegate googleFunctions:self errorLoadingPlacesAutocomplateWithStatus:status];
+                [self.delegate googleFunctions:self errorLoadingPlacesAutocompleteWithStatus:status];
             }
             
             if(failure!=nil)
                 failure(status);
         }
 
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *reqponse, NSError *error, id neki) {
-        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocomplateWithStatus:)])
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)])
         {
-            [self.delegate googleFunctions:self errorLoadingPlacesAutocomplateWithStatus:LPGoogleStatusUnknownError];
+            [self.delegate googleFunctions:self errorLoadingPlacesAutocompleteWithStatus:LPGoogleStatusUnknownError];
         }
         
         if(failure!=nil)
@@ -477,8 +477,8 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                 failure(status);
         }
 
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *reqponse, NSError *error, id neki) {
-        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocomplateWithStatus:)])
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)])
         {
             [self.delegate googleFunctions:self errorLoadingPlaceDetailsResultWithStatus:LPGoogleStatusUnknownError];
         }
@@ -493,7 +493,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 {
     [googlePlayer stop];
     
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIPlacesAutocomplateURL]];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIPlacesAutocompleteURL]];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"tl"];
@@ -641,7 +641,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                 failure(status);
         }
 
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *reqponse, NSError *error, id neki) {
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
         if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingGeocodingWithStatus:)])
         {
             [self.delegate googleFunctions:self errorLoadingGeocodingWithStatus:LPGoogleStatusUnknownError];
@@ -653,17 +653,17 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [operation start];
 }
 
-- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    [self loadPlacesAutocomplateForInput:input offset:offset radius:radius location:location placeType:placeType countryRestriction:countryRestriction successfulBlock:^(LPPlacesAutocomplate *placesAutocomplate) {
+    [self loadPlacesAutocompleteForInput:input offset:offset radius:radius location:location placeType:placeType countryRestriction:countryRestriction successfulBlock:^(LPPlacesAutocomplete *placesAutocomplete) {
         
         __block int whichLoaded = 0;
         NSMutableArray *array = [NSMutableArray new];
         __block BOOL blockSend = NO;
         
-        for(int i=0;i<[placesAutocomplate.predictions count];i++)
+        for(int i=0;i<[placesAutocomplete.predictions count];i++)
         {
-            NSString *reference = ((LPPrediction*)[placesAutocomplate.predictions objectAtIndex:i]).reference;
+            NSString *reference = ((LPPrediction*)[placesAutocomplete.predictions objectAtIndex:i]).reference;
             
             [self loadPlaceDetailsForReference:reference successfulBlock:^(LPPlaceDetailsResults *placeDetailsResults) {
                 LPPlaceDetails *placeWithDetails = [placeDetailsResults.result copy];
@@ -672,7 +672,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 
                 whichLoaded++;
 
-                if(whichLoaded>=[placesAutocomplate.predictions count])
+                if(whichLoaded>=[placesAutocomplete.predictions count])
                 {
                     if([array count]>0)
                     {
@@ -694,7 +694,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             } failureBlock:^(LPGoogleStatus status) {
                 whichLoaded++;
 
-                if(whichLoaded>=[placesAutocomplate.predictions count])
+                if(whichLoaded>=[placesAutocomplete.predictions count])
                 {
                     if([array count]>0)
                     {
@@ -776,7 +776,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                 failure(status);
         }
         
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *reqponse, NSError *error, id neki) {
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
         if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlaceSearchWithStatus:)])
         {
             [self.delegate googleFunctions:self errorLoadingPlaceSearchWithStatus:LPGoogleStatusUnknownError];

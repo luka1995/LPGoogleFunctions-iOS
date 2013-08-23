@@ -36,7 +36,7 @@
 //Objects
 #import "LPDirections.h"
 #import "LPMapImageMarker.h"
-#import "LPPlacesAutocomplate.h"
+#import "LPPlacesAutocomplete.h"
 #import "LPPlaceDetailsResults.h"
 #import "LPGeocodingFilter.h"
 #import "LPGeocodingResults.h"
@@ -153,7 +153,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacesAutocomplateForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocompleteForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * Once you have a reference from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. A Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.
@@ -198,7 +198,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Google Places API Text Search Service is a web service that returns information about a set of Places based on a string — for example "pizza in New York" or "shoe stores near Ottawa".
@@ -234,9 +234,9 @@ typedef enum {
 - (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingDirectionsWithStatus:(LPGoogleStatus)status;
 
 #pragma mark - Places Autocomplete
-- (void)googleFunctionsWillLoadPlacesAutocomplate:(LPGoogleFunctions*)googleFunctions forInput:(NSString*)input;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlacesAutocomplateWithStatus:(LPGoogleStatus)status;
-- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplate:(LPPlacesAutocomplate*)placesAutocomplate;
+- (void)googleFunctionsWillLoadPlacesAutocomplete:(LPGoogleFunctions*)googleFunctions forInput:(NSString*)input;
+- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlacesAutocompleteWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplete:(LPPlacesAutocomplete*)placesAutocomplete;
 
 #pragma mark - Place Details
 - (void)googleFunctionsWillLoadPlaceDetailsResult:(LPGoogleFunctions*)googleFunctions forReference:(NSString*)reference;
