@@ -7,7 +7,7 @@
 
 // This code is distributed under the terms and conditions of the MIT license.
 
-// Copyright (c) 2013 Luka penger
+// Copyright (c) 2013 Luka Penger
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -149,10 +149,11 @@ typedef enum {
  * @param The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
  * @param The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
  * @param The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
+ * @param A grouping of places to which you would like to restrict your results. Currently, you can use components to filter by country. The country must be passed as a two character, ISO 3166-1 Alpha-2 compatible country code.
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacesAutocomplateForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocomplateForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * Once you have a reference from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. A Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.
@@ -193,10 +194,11 @@ typedef enum {
  * @param The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
  * @param The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
  * @param The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
+ * @param A grouping of places to which you would like to restrict your results. Currently, you can use components to filter by country. The country must be passed as a two character, ISO 3166-1 Alpha-2 compatible country code.
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Google Places API Text Search Service is a web service that returns information about a set of Places based on a string — for example "pizza in New York" or "shoe stores near Ottawa".

@@ -7,7 +7,7 @@
 
 // This code is distributed under the terms and conditions of the MIT license.
 
-// Copyright (c) 2013 Luka penger
+// Copyright (c) 2013 Luka Penger
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -357,7 +357,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [operation start];
 }
 
-- (void)loadPlacesAutocomplateForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlacesAutocomplateForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplate *placesAutocomplate))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
     if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlacesAutocomplate:forInput:)])
     {
@@ -378,6 +378,11 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
 
+    if(countryRestriction!=nil)
+    {
+        [parameters setObject:[NSString stringWithFormat:@"country:%@",countryRestriction] forKey:@"components"];
+    }
+    
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
                                                             path:googleAPIPlacesAutocomplateURL
                                                       parameters:parameters];
@@ -648,9 +653,9 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [operation start];
 }
 
-- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlacesAutocomplateWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    [self loadPlacesAutocomplateForInput:input offset:offset radius:radius location:location placeType:placeType successfulBlock:^(LPPlacesAutocomplate *placesAutocomplate) {
+    [self loadPlacesAutocomplateForInput:input offset:offset radius:radius location:location placeType:placeType countryRestriction:countryRestriction successfulBlock:^(LPPlacesAutocomplate *placesAutocomplate) {
         
         __block int whichLoaded = 0;
         NSMutableArray *array = [NSMutableArray new];
