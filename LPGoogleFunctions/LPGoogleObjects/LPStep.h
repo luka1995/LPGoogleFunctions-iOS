@@ -41,8 +41,6 @@ typedef enum {
 
 - (NSDictionary*)dictionary;
 
-- (NSString*)getInstructionsWithoutHTMLTags;
-
 - (id)copyWithZone:(NSZone *)zone;
 
 @end

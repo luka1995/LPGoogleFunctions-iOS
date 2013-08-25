@@ -80,56 +80,6 @@ NSString *const googleTravelModeWalking = @"walking";
     }
 }
 
-+ (NSString *)removeHTMLTagsFromString:(NSString *)str
-{
-    NSMutableString *html = [NSMutableString stringWithCapacity:[str length]];
-    
-    NSScanner *scanner = [NSScanner scannerWithString:str];
-    scanner.charactersToBeSkipped = NULL;
-    NSString *tempText = nil;
-    
-    while (![scanner isAtEnd])
-    {
-        [scanner scanUpToString:@"<" intoString:&tempText];
-        
-        if (tempText != nil)
-            [html appendString:tempText];
-        
-        [scanner scanUpToString:@">" intoString:NULL];
-        
-        if (![scanner isAtEnd])
-            [scanner setScanLocation:[scanner scanLocation] + 1];
-        
-        tempText = nil;
-    }
-    
-    return html;
-}
-
-+ (NSString*)editHTMLString:(NSString*)string
-{ 
-    //remove <div style="font-size:0.9em">
-    NSRange range = [string rangeOfString:@"<div"];
-    
-    if(range.length>0)
-    {
-        NSString *divstring = [string substringFromIndex:range.location];
-        
-        string = [string substringToIndex:range.location];
-        
-        range = [divstring rangeOfString:@">"];
-        
-        if(range.length>0)
-        {
-            divstring = [divstring substringFromIndex:range.location+1];
-            divstring = [divstring stringByReplacingOccurrencesOfString:@"</div>" withString:@""];
-            string = [string stringByAppendingFormat:@"<br>%@",divstring];
-        }
-    }
-
-    return string;
-}
-
 + (id)stepWithObjects:(NSDictionary*)dictionary
 {
     LPStep *new = [LPStep new];
@@ -153,7 +103,7 @@ NSString *const googleTravelModeWalking = @"walking";
         }
         
         if (![[dictionary objectForKey:@"html_instructions"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"html_instructions"] != nil) {
-            new.htmlInstructions = [LPStep editHTMLString:[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"html_instructions"]]];
+            new.htmlInstructions = [NSString stringWithFormat:@"%@",[dictionary objectForKey:@"html_instructions"]];
         }
         
         if (![[dictionary objectForKey:@"polyline"] isKindOfClass:[NSNull class]] || [dictionary objectForKey:@"polyline"] != nil) {
@@ -249,13 +199,6 @@ NSString *const googleTravelModeWalking = @"walking";
 - (NSString*)description
 {
     return [self dictionary].description;
-}
-
-- (NSString*)getInstructionsWithoutHTMLTags
-{
-    NSString*str=[LPStep editHTMLString:self.htmlInstructions];
-    str = [LPStep removeHTMLTagsFromString:str];
-    return str;
 }
 
 - (id)copyWithZone:(NSZone *)zone
