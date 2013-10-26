@@ -38,7 +38,6 @@
 		0C2DD6AA17C3ECF6009408AE /* LPPlaceDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD67817C3EC6B009408AE /* LPPlaceDetails.m */; };
 		0C2DD6AB17C3ECF8009408AE /* LPPlaceDetailsResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD67A17C3EC6B009408AE /* LPPlaceDetailsResults.m */; };
 		0C2DD6AC17C3ECFA009408AE /* LPPlacePhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD67C17C3EC6B009408AE /* LPPlacePhoto.m */; };
-		0C2DD6AD17C3ECFD009408AE /* LPPlacesAutocomplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD67E17C3EC6B009408AE /* LPPlacesAutocomplate.m */; };
 		0C2DD6AE17C3ED00009408AE /* LPPlaceSearchResults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD68017C3EC6B009408AE /* LPPlaceSearchResults.m */; };
 		0C2DD6AF17C3ED03009408AE /* LPPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD68217C3EC6B009408AE /* LPPolyline.m */; };
 		0C2DD6B017C3ED05009408AE /* LPPrediction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD68417C3EC6B009408AE /* LPPrediction.m */; };
@@ -59,6 +58,7 @@
 		0C2DD6BF17C3ED2F009408AE /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD65017C3EC61009408AE /* AFURLConnectionOperation.m */; };
 		0C2DD6C017C3ED31009408AE /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD65217C3EC61009408AE /* AFXMLRequestOperation.m */; };
 		0C2DD6C117C3ED33009408AE /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C2DD65417C3EC61009408AE /* UIImageView+AFNetworking.m */; };
+		0C4C5B46181C853300D9625D /* LPPlacesAutocomplete.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5B45181C853300D9625D /* LPPlacesAutocomplete.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,8 +142,6 @@
 		0C2DD67A17C3EC6B009408AE /* LPPlaceDetailsResults.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LPPlaceDetailsResults.m; sourceTree = "<group>"; };
 		0C2DD67B17C3EC6B009408AE /* LPPlacePhoto.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPPlacePhoto.h; sourceTree = "<group>"; };
 		0C2DD67C17C3EC6B009408AE /* LPPlacePhoto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LPPlacePhoto.m; sourceTree = "<group>"; };
-		0C2DD67D17C3EC6B009408AE /* LPPlacesAutocomplate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPPlacesAutocomplate.h; sourceTree = "<group>"; };
-		0C2DD67E17C3EC6B009408AE /* LPPlacesAutocomplate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LPPlacesAutocomplate.m; sourceTree = "<group>"; };
 		0C2DD67F17C3EC6B009408AE /* LPPlaceSearchResults.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPPlaceSearchResults.h; sourceTree = "<group>"; };
 		0C2DD68017C3EC6B009408AE /* LPPlaceSearchResults.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LPPlaceSearchResults.m; sourceTree = "<group>"; };
 		0C2DD68117C3EC6B009408AE /* LPPolyline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPPolyline.h; sourceTree = "<group>"; };
@@ -169,6 +167,8 @@
 		0C2DD69517C3EC75009408AE /* LPMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMainViewController.h; sourceTree = "<group>"; };
 		0C2DD69617C3EC75009408AE /* LPMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMainViewController.m; sourceTree = "<group>"; };
 		0C2DD69717C3EC75009408AE /* LPMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMainViewController.xib; sourceTree = "<group>"; };
+		0C4C5B44181C853300D9625D /* LPPlacesAutocomplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPlacesAutocomplete.h; sourceTree = "<group>"; };
+		0C4C5B45181C853300D9625D /* LPPlacesAutocomplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPlacesAutocomplete.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +292,8 @@
 		0C2DD65817C3EC6B009408AE /* LPGoogleObjects */ = {
 			isa = PBXGroup;
 			children = (
+				0C4C5B44181C853300D9625D /* LPPlacesAutocomplete.h */,
+				0C4C5B45181C853300D9625D /* LPPlacesAutocomplete.m */,
 				0C2DD65917C3EC6B009408AE /* LPAddressComponent.h */,
 				0C2DD65A17C3EC6B009408AE /* LPAddressComponent.m */,
 				0C2DD65B17C3EC6B009408AE /* LPAgencie.h */,
@@ -328,8 +330,6 @@
 				0C2DD67A17C3EC6B009408AE /* LPPlaceDetailsResults.m */,
 				0C2DD67B17C3EC6B009408AE /* LPPlacePhoto.h */,
 				0C2DD67C17C3EC6B009408AE /* LPPlacePhoto.m */,
-				0C2DD67D17C3EC6B009408AE /* LPPlacesAutocomplate.h */,
-				0C2DD67E17C3EC6B009408AE /* LPPlacesAutocomplate.m */,
 				0C2DD67F17C3EC6B009408AE /* LPPlaceSearchResults.h */,
 				0C2DD68017C3EC6B009408AE /* LPPlaceSearchResults.m */,
 				0C2DD68117C3EC6B009408AE /* LPPolyline.h */,
@@ -469,6 +469,7 @@
 				0C2DD6A217C3ECE6009408AE /* LPGeocodingFilter.m in Sources */,
 				0C2DD6B417C3ED0F009408AE /* LPTerm.m in Sources */,
 				0C2DD62317C3EC40009408AE /* LPAppDelegate.m in Sources */,
+				0C4C5B46181C853300D9625D /* LPPlacesAutocomplete.m in Sources */,
 				0C2DD69817C3EC75009408AE /* LPMainViewController.m in Sources */,
 				0C2DD69D17C3ECDB009408AE /* LPBounds.m in Sources */,
 				0C2DD6A717C3ECF0009408AE /* LPLocation.m in Sources */,
@@ -497,7 +498,6 @@
 				0C2DD6BD17C3ED2A009408AE /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0C2DD69F17C3ECDF009408AE /* LPDistance.m in Sources */,
 				0C2DD6A317C3ECE8009408AE /* LPGeocodingResults.m in Sources */,
-				0C2DD6AD17C3ECFD009408AE /* LPPlacesAutocomplate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +687,7 @@
 				0C2DD63D17C3EC40009408AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C2DD63E17C3EC40009408AE /* Build configuration list for PBXNativeTarget "StaticMapImagesServiceTests" */ = {
 			isa = XCConfigurationList;
@@ -695,6 +696,7 @@
 				0C2DD64017C3EC40009408AE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

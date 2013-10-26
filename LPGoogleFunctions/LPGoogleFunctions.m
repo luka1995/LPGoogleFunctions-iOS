@@ -299,6 +299,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     URL = [URL stringByAppendingFormat:@"zoom=%d&",zoom];
     URL = [URL stringByAppendingFormat:@"scale=%d&",scale];
     URL = [URL stringByAppendingFormat:@"size=%dx%d&",(int)size.width,(int)size.height];
+    URL = [URL stringByAppendingFormat:@"maptype=%@&",[LPGoogleFunctions getMapType:maptype]];
     
     for(int i=0;i<markers.count;i++)
     {
@@ -336,11 +337,14 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     URL = [URL stringByAppendingFormat:@"scale=%d&",scale];
     URL = [URL stringByAppendingFormat:@"size=%dx%d&",(int)size.width,(int)size.height];
     
-    for(int i=0;i<markers.count;i++)
+    if(markers)
     {
-        LPMapImageMarker *marker = (LPMapImageMarker*)[markers objectAtIndex:i];
-        
-        URL = [URL stringByAppendingFormat:@"markers=%@&",[marker getMarkerURLString]];
+        for(int i=0;i<markers.count;i++)
+        {
+            LPMapImageMarker *marker = (LPMapImageMarker*)[markers objectAtIndex:i];
+            
+            URL = [URL stringByAppendingFormat:@"markers=%@&",[marker getMarkerURLString]];
+        }
     }
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
