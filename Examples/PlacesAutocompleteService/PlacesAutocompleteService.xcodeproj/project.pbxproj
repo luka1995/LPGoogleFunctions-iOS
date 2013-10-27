@@ -50,8 +50,6 @@
 		0C4C5CF9181D4CAA00D9625D /* LPTransitDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5CD8181D4CAA00D9625D /* LPTransitDetails.m */; };
 		0C4C5CFA181D4CAA00D9625D /* LPVehicle.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5CDA181D4CAA00D9625D /* LPVehicle.m */; };
 		0C4C5CFB181D4CAA00D9625D /* LPWaypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5CDC181D4CAA00D9625D /* LPWaypoint.m */; };
-		0C4C5CFF181D4D4800D9625D /* LPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5CFD181D4D4800D9625D /* LPMainViewController.m */; };
-		0C4C5D00181D4D4800D9625D /* LPMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C4C5CFE181D4D4800D9625D /* LPMainViewController.xib */; };
 		0C4C5DD1181D4E3E00D9625D /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DBF181D4E3E00D9625D /* AFHTTPClient.m */; };
 		0C4C5DD2181D4E3E00D9625D /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DC1181D4E3E00D9625D /* AFHTTPRequestOperation.m */; };
 		0C4C5DD3181D4E3E00D9625D /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DC3181D4E3E00D9625D /* AFImageRequestOperation.m */; };
@@ -152,9 +150,6 @@
 		0C4C5CDA181D4CAA00D9625D /* LPVehicle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVehicle.m; sourceTree = "<group>"; };
 		0C4C5CDB181D4CAA00D9625D /* LPWaypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWaypoint.h; sourceTree = "<group>"; };
 		0C4C5CDC181D4CAA00D9625D /* LPWaypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWaypoint.m; sourceTree = "<group>"; };
-		0C4C5CFC181D4D4800D9625D /* LPMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPMainViewController.h; path = ../../../../../Desktop/PlacesAutocomplateService/PlacesAutocomplateService/LPMainViewController.h; sourceTree = "<group>"; };
-		0C4C5CFD181D4D4800D9625D /* LPMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPMainViewController.m; path = ../../../../../Desktop/PlacesAutocomplateService/PlacesAutocomplateService/LPMainViewController.m; sourceTree = "<group>"; };
-		0C4C5CFE181D4D4800D9625D /* LPMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LPMainViewController.xib; path = ../../../../../Desktop/PlacesAutocomplateService/PlacesAutocomplateService/LPMainViewController.xib; sourceTree = "<group>"; };
 		0C4C5DBE181D4E3E00D9625D /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		0C4C5DBF181D4E3E00D9625D /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		0C4C5DC0181D4E3E00D9625D /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -237,9 +232,6 @@
 				0C4C5C9D181D4CA900D9625D /* LPGoogleFunctions */,
 				0C4C5BC4181D4C5000D9625D /* LPAppDelegate.h */,
 				0C4C5BC5181D4C5000D9625D /* LPAppDelegate.m */,
-				0C4C5CFC181D4D4800D9625D /* LPMainViewController.h */,
-				0C4C5CFD181D4D4800D9625D /* LPMainViewController.m */,
-				0C4C5CFE181D4D4800D9625D /* LPMainViewController.xib */,
 				0C4C5BC7181D4C5000D9625D /* Images.xcassets */,
 				0C4C5BBC181D4C5000D9625D /* Supporting Files */,
 			);
@@ -460,7 +452,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C4C5BC0181D4C5000D9625D /* InfoPlist.strings in Resources */,
-				0C4C5D00181D4D4800D9625D /* LPMainViewController.xib in Resources */,
 				0C4C5BC8181D4C5000D9625D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -521,7 +512,6 @@
 				0C4C5CE5181D4CAA00D9625D /* LPGeocodingFilter.m in Sources */,
 				0C4C5DD5181D4E3E00D9625D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0C4C5CF4181D4CAA00D9625D /* LPRoute.m in Sources */,
-				0C4C5CFF181D4D4800D9625D /* LPMainViewController.m in Sources */,
 				0C4C5CED181D4CAA00D9625D /* LPPlaceDetails.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,6 +727,7 @@
 				0C4C5BE0181D4C5000D9625D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0C4C5BE1181D4C5000D9625D /* Build configuration list for PBXNativeTarget "PlacesAutocompleteServiceTests" */ = {
 			isa = XCConfigurationList;
@@ -745,6 +736,7 @@
 				0C4C5BE3181D4C5000D9625D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
