@@ -390,7 +390,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
                                                             path:googleAPIPlacesAutocompleteURL
                                                       parameters:parameters];
-    
+
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         
         LPPlacesAutocomplete *placesAutocomplete = [LPPlacesAutocomplete placesAutocompleteWithObjects:JSON];

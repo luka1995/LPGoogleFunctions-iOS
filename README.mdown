@@ -246,7 +246,7 @@ The Places Photo service is a read-only API that allows you to easily add high q
 	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 ```
 
-##Using Frameworks - Libraries:
+##Uses Frameworks - Libraries:
 
 * UIKit.framework
 * Foundation.framework
