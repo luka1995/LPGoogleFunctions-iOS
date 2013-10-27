@@ -14,7 +14,7 @@
 
 @implementation LPMainViewController
 
-NSString *const googleAPIBrowserKey = @"AIzaSyCi7y2eH4jZWTnoUYLIGeDqSCEmD3-FxNU";
+NSString *const googleAPIBrowserKey = @"";
 
 - (void)viewDidLoad
 {

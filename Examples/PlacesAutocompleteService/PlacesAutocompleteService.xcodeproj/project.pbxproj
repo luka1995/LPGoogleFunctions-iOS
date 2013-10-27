@@ -59,6 +59,8 @@
 		0C4C5DD7181D4E3E00D9625D /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DCC181D4E3E00D9625D /* AFURLConnectionOperation.m */; };
 		0C4C5DD8181D4E3E00D9625D /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DCE181D4E3E00D9625D /* AFXMLRequestOperation.m */; };
 		0C4C5DD9181D4E3E00D9625D /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DD0181D4E3E00D9625D /* UIImageView+AFNetworking.m */; };
+		0C4C5DDD181D553500D9625D /* LPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DDB181D553500D9625D /* LPMainViewController.m */; };
+		0C4C5DDE181D553500D9625D /* LPMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C4C5DDC181D553500D9625D /* LPMainViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +171,9 @@
 		0C4C5DCE181D4E3E00D9625D /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		0C4C5DCF181D4E3E00D9625D /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		0C4C5DD0181D4E3E00D9625D /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		0C4C5DDA181D553500D9625D /* LPMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMainViewController.h; sourceTree = "<group>"; };
+		0C4C5DDB181D553500D9625D /* LPMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMainViewController.m; sourceTree = "<group>"; };
+		0C4C5DDC181D553500D9625D /* LPMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMainViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +237,9 @@
 				0C4C5C9D181D4CA900D9625D /* LPGoogleFunctions */,
 				0C4C5BC4181D4C5000D9625D /* LPAppDelegate.h */,
 				0C4C5BC5181D4C5000D9625D /* LPAppDelegate.m */,
+				0C4C5DDA181D553500D9625D /* LPMainViewController.h */,
+				0C4C5DDB181D553500D9625D /* LPMainViewController.m */,
+				0C4C5DDC181D553500D9625D /* LPMainViewController.xib */,
 				0C4C5BC7181D4C5000D9625D /* Images.xcassets */,
 				0C4C5BBC181D4C5000D9625D /* Supporting Files */,
 			);
@@ -452,6 +460,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C4C5BC0181D4C5000D9625D /* InfoPlist.strings in Resources */,
+				0C4C5DDE181D553500D9625D /* LPMainViewController.xib in Resources */,
 				0C4C5BC8181D4C5000D9625D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +496,7 @@
 				0C4C5CF6181D4CAA00D9625D /* LPStop.m in Sources */,
 				0C4C5CF3181D4CAA00D9625D /* LPPrediction.m in Sources */,
 				0C4C5CF2181D4CAA00D9625D /* LPPolyline.m in Sources */,
+				0C4C5DDD181D553500D9625D /* LPMainViewController.m in Sources */,
 				0C4C5CEC181D4CAA00D9625D /* LPMatchedSubstring.m in Sources */,
 				0C4C5CE9181D4CAA00D9625D /* LPLine.m in Sources */,
 				0C4C5DD6181D4E3E00D9625D /* AFPropertyListRequestOperation.m in Sources */,
