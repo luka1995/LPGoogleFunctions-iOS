@@ -229,7 +229,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d",(int)size.width,(int)size.height] forKey:@"size"];
     [parameters setObject:[NSString stringWithFormat:@"%f,%f",location.latitude,location.longitude] forKey:@"location"];
@@ -261,7 +261,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d",(int)size.width,(int)size.height] forKey:@"size"];
     [parameters setObject:[NSString stringWithFormat:@"%@",address] forKey:@"location"];
@@ -373,7 +373,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",input] forKey:@"input"];
     [parameters setObject:[LPPrediction getStringFromGooglePlaceType:placeType] forKey:@"types"];
     [parameters setObject:[NSString stringWithFormat:@"%d",offset] forKey:@"offset"];
@@ -443,7 +443,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",reference] forKey:@"reference"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
@@ -497,7 +497,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 {
     [googlePlayer stop];
     
-    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIPlacesAutocompleteURL]];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPITextToSpeechURL]];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"tl"];
@@ -657,7 +657,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [operation start];
 }
 
-- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
     [self loadPlacesAutocompleteForInput:input offset:offset radius:radius location:location placeType:placeType countryRestriction:countryRestriction successfulBlock:^(LPPlacesAutocomplete *placesAutocomplete) {
         
@@ -738,7 +738,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",query] forKey:@"query"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
@@ -800,7 +800,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowerKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
     [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@",reference] forKey:@"photoreference"];
     

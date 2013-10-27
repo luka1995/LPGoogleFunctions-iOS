@@ -27,8 +27,9 @@ The Google Directions API is a service that calculates directions between locati
 * **Avoid Tolls** - Indicates that the calculated route(s) should avoid the indicated features.
 * **Unit** - Specifies the unit system to use when displaying results.
 * **Alternatives** - If set to true, specifies that the Directions service may provide more than one route alternative in the response. Note that providing route alternatives may increase the response time from the server.
-* **Departure time**.
-* **Arrival time**.
+* **Departure time** - Specifies the desired time of departure.
+* **Arrival time** Specifies the desired time of departure.
+* **Waypoints.** - Specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded.
 
 ```objective-c
 - (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination 
@@ -57,7 +58,7 @@ The Google Maps Image APIs make it easy to embed a street view image into your i
 * **Image Size** - Specifies the output size of the image in pixels.
 * **Heading** - Indicates the compass heading of the camera. Accepted values are from 0 to 360 (both values indicating North, with 90 indicating East, and 180 South). If no heading is specified, a value will be calculated that directs the camera towards the specified location, from the point at which the closest photograph was taken.
 * **Fov** - Determines the horizontal field of view of the image. The field of view is expressed in degrees, with a maximum allowed value of 120. When dealing with a fixed-size viewport, as with a Street View image of a set size, field of view in essence represents zoom, with smaller numbers indicating a higher level of zoom.
-* **Pitch** - Specifies the up or down angle of the camera relative to the Street View vehicle. This is often, but not always, flat horizontal. Positive values angle the camera up (with 90 degrees indicating straight up); negative values angle the camera down (with -90 indicating straight down).
+* **Pitch** - Specifies the up or down angle of the camera relative to the Street View vehicle. This is often, but not always, flat horizontal. Positive values angle the camera up (with 90 degrees indicating straight up). Negative values angle the camera down (with -90 indicating straight down).
 
 Method for location:
 ```objective-c
@@ -83,7 +84,8 @@ The Google Maps Image APIs make it easy to embed a static Google Maps image into
 
 * **Location** - The location (such as 40.457375,-80.009353). or **Address** - The address (such as Chagrin Falls, OH). Defines the center of the map.
 * **Zoom** - (required if markers not present) defines the zoom level of the map, which determines the magnification level of the map. This parameter takes a numerical value corresponding to the zoom level of the region desired.
-* **Image Size** - (required) Specifies the output size of the image in pixels.
+* **Image Size** - Specifies the output size of the image in pixels.
+* **Image Scale** - (optional) affects the number of pixels that are returned. scale=2 returns twice as many pixels as scale=1 while retaining the same coverage area and level of detail (i.e. the contents of the map don't change). This is useful when developing for high-resolution displays, or when generating a map for printing. The default value is 1.
 * **Map Type** - (optional) defines the type of map to construct. There are several possible maptype values, including roadmap, satellite, hybrid, and terrain. Use LPGoogleMapType.
 * **Markers Array** - (optional) define one or more markers to attach to the image at specified locations. This parameter takes a single marker definition with parameters separated by the pipe character (|). Multiple markers may be placed within the same markers parameter as long as they exhibit the same style; you may add additional markers of differing styles by adding additional markers parameters. Note that if you supply markers for a map, you do not need to specify the (normally required) center and zoom parameters. Use LPMapImageMarker.
 
@@ -111,12 +113,11 @@ The Google Places Autocomplete API is a web service that returns Place informati
 * **Offset** - The character position in the input term at which the service uses text for predictions. For example, if the input is 'Googl' and the completion point is 3, the service will match on 'Goo'. The offset should generally be set to the position of the text caret. If no offset is supplied, the service will use the entire term.
 * **Radius** - The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
 * **Location** - The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
-* **Place Type - The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
+* **Place Type** - The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
+* **Country Restriction** - The country must be passed as a two character.
 
 ```objective-c
-- (void)loadPlacesAutocompleteForInput:(NSString*)input offset:(int)offset radius:(int)radius 
-	location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType 
-	successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocompleteForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 ```
 
 You can use blocks and delegate methods:
@@ -198,13 +199,13 @@ Place Autocomplete + Place Details
 
 * **Input** - The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
 * **Offset** - The character position in the input term at which the service uses text for predictions. For example, if the input is 'Googl' and the completion point is 3, the service will match on 'Goo'. The offset should generally be set to the position of the text caret. If no offset is supplied, the service will use the entire term.
-* **Location** - The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
 * **Radius** - The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
+* **Location** - The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
 * **Place Type** - The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
+* **Country Restriction**  - The country must be passed as a two character.
 
 ```objective-c
-- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius 
-	placeType:(LPGooglePlaceType)placeType successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 ##Place Text Search service

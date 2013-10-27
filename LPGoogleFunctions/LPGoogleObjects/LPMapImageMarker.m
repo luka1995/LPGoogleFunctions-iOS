@@ -83,7 +83,7 @@
 - (NSString*)getMarkerURLString
 {
     NSString *string = [NSString stringWithFormat:@"size:%@|color:%@|label:%@|%f,%f",[self getSizeString],[self getColorString],self.label,self.location.latitude,self.location.longitude];
-    NSLog(@"%@",string);
+
     return string;
 }
 

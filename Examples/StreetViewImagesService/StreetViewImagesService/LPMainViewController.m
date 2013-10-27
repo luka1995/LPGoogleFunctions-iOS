@@ -14,6 +14,8 @@
 
 @implementation LPMainViewController
 
+NSString *const googleAPIBrowserKey = @"";
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -46,6 +48,7 @@
 - (LPGoogleFunctions*)googleFunctions {
     if(!_googleFunctions) {
         _googleFunctions = [LPGoogleFunctions new];
+        _googleFunctions.googleAPIBrowserKey = googleAPIBrowserKey;
         _googleFunctions.delegate = self;
         _googleFunctions.sensor = YES;
         //_googleFunctions.languageCode = "en" // set language

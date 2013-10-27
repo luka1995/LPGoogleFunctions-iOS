@@ -71,7 +71,7 @@ typedef enum {
 
 @property (nonatomic, assign) BOOL sensor; /** Using GPS location sensor */
 @property (nonatomic, strong) NSString *languageCode; /** Language ISO code (default "en") */
-@property (nonatomic, strong) NSString *googleAPIBrowerKey;
+@property (nonatomic, strong) NSString *googleAPIBrowserKey;
 
 + (NSString*)getMapType:(LPGoogleMapType)maptype;
 + (LPGoogleStatus)getGoogleStatusFromString:(NSString*)status;
@@ -87,6 +87,7 @@ typedef enum {
  * @param If set to true, specifies that the Directions service may provide more than one route alternative in the response. Note that providing route alternatives may increase the response time from the server.
  * @param Departure time.
  * @param Arrival time.
+ * @param Waypoints.
  * @param Successful block with results.
  * @param Failure block with status.
  */
@@ -191,14 +192,14 @@ typedef enum {
  * The Google Places Autocomplete API is a web service that returns Place information based on text search terms, and, optionally, geographic bounds.
  * @param The text string on which to search. The Place service will return candidate matches based on this string and order results based on their perceived relevance.
  * @param The character position in the input term at which the service uses text for predictions. For example, if the input is 'Googl' and the completion point is 3, the service will match on 'Goo'. The offset should generally be set to the position of the text caret. If no offset is supplied, the service will use the entire term.
+* @param The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
  * @param The point around which you wish to retrieve Place information. Must be specified as latitude,longitude.
- * @param The distance (in meters) within which to return Place results. Note that setting a radius biases results to the indicated area, but may not fully restrict results to the specified area.
  * @param The types of Place results to return. If no type is specified, all types will be returned. See LPPrediction.h for types.
  * @param A grouping of places to which you would like to restrict your results. Currently, you can use components to filter by country. The country must be passed as a two character, ISO 3166-1 Alpha-2 compatible country code.
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset location:(LPLocation*)location radius:(int)radius placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Google Places API Text Search Service is a web service that returns information about a set of Places based on a string — for example "pizza in New York" or "shoe stores near Ottawa".
