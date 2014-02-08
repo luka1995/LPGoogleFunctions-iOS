@@ -7,6 +7,12 @@ https://developers.google.com/
 Created by Luka Penger
 http://lukapenger.eu
 
+#Usage
+
+If you'd like to include this component as a pod using CocoaPods, just add the following line to your Podfile:
+
+pod "LPGoogleFunctions"
+
 ##ARC
 
 LPGoogleFunctions uses ARC (Automatic Reference Counting).
