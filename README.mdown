@@ -11,7 +11,7 @@ http://lukapenger.eu
 
 If you'd like to include this component as a pod using CocoaPods, just add the following line to your Podfile:
 
-pod "LPGoogleFunctions"
+`pod "LPGoogleFunctions"`
 
 ##ARC
 
