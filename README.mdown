@@ -7,7 +7,7 @@ https://developers.google.com/
 Created by Luka Penger
 http://lukapenger.eu
 
-#Usage
+##Usage
 
 If you'd like to include this component as a pod using CocoaPods, just add the following line to your Podfile:
 
@@ -252,7 +252,7 @@ The Places Photo service is a read-only API that allows you to easily add high q
 	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 ```
 
-##Uses Frameworks - Libraries:
+##Uses Frameworks - Libraries
 
 * UIKit.framework
 * Foundation.framework
