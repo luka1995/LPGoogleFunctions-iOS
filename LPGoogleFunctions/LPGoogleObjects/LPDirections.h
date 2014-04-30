@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
+
 typedef enum {
     LPGoogleDirectionsAvoidNone,
     LPGoogleDirectionsAvoidTolls,
@@ -19,15 +20,16 @@ typedef enum {
     LPGoogleDirectionsUnitImperial
 } LPGoogleDirectionsUnit;
 
+
 @interface LPDirections : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSMutableArray *routes;
 @property (nonatomic, strong) NSString *statusCode;
 @property (nonatomic, assign) LPGoogleDirectionsTravelMode requestTravelMode;
 
-+ (id)directionsWithObjects:(NSDictionary*)dictionary;
++ (id)directionsWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

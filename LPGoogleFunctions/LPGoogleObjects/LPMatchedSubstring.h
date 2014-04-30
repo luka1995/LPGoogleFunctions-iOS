@@ -7,14 +7,15 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPMatchedSubstring : NSObject <NSCoding>
 
 @property (nonatomic, assign) int length;
 @property (nonatomic, assign) int offset;
 
-+ (id)matchedSubstringWithObjects:(NSDictionary*)dictionary;
++ (id)matchedSubstringWithObjects:(NSDictionar *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

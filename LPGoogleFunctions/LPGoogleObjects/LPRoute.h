@@ -11,6 +11,7 @@
 #import "LPLeg.h"
 #import "LPWaypoint.h"
 
+
 @interface LPRoute : NSObject <NSCoding>
 
 @property (nonatomic, assign) int number;
@@ -22,9 +23,9 @@
 @property (nonatomic, strong) NSArray *waypoints;
 @property (nonatomic, strong) NSArray *warnings;
 
-+ (id)routeWithObjects:(NSDictionary*)dictionary;
++ (id)routeWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

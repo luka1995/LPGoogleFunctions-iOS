@@ -7,15 +7,16 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPAddressComponent : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *longName;
 @property (nonatomic, strong) NSString *shortName;
 @property (nonatomic, strong) NSArray *types;
 
-+ (id)addressComponentWithObjects:(NSDictionary*)dictionary;
++ (id)addressComponentWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

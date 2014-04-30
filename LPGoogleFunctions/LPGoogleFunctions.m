@@ -29,11 +29,6 @@
 
 #import "LPGoogleFunctions.h"
 
-@interface LPGoogleFunctions ()
-
-@end
-
-@implementation LPGoogleFunctions
 
 NSString *const STATUS_OK = @"OK";
 NSString *const STATUS_NOT_FOUND = @"NOT_FOUND";
@@ -54,12 +49,20 @@ NSString *const googleAPIGeocodingURL = @"http://maps.googleapis.com/maps/api/ge
 NSString *const googleAPIPlaceTextSearchURL = @"https://maps.googleapis.com/maps/api/place/textsearch/json?";
 NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/place/photo?";
 
+
+@interface LPGoogleFunctions ()
+
+@end
+
+
+@implementation LPGoogleFunctions
+
 #pragma mark - Lifecycle
 
 - (id)init
 {
-    if (self = [super init])
-    {
+    self = [super init];
+    if (self) {
         self.sensor = YES;
         self.languageCode = @"en";
     }
@@ -68,10 +71,9 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 
 #pragma mark - Functions
 
-+ (NSString*)getMapType:(LPGoogleMapType)maptype
++ (NSString *)getMapType:(LPGoogleMapType)maptype
 {
-    switch (maptype)
-    {
+    switch (maptype) {
         case LPGoogleMapTypeRoadmap:
             return @"roadmap";
         case LPGoogleMapTypeHybrid:
@@ -83,10 +85,9 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     }
 }
 
-+ (LPGoogleStatus)getGoogleStatusFromString:(NSString*)status
++ (LPGoogleStatus)getGoogleStatusFromString:(NSString *)status
 {
-    if([status isEqualToString:STATUS_OK])
-    {
+    if([status isEqualToString:STATUS_OK]) {
         return LPGoogleStatusOK;
     } else if([status isEqualToString:STATUS_NOT_FOUND]) {
         return LPGoogleStatusNotFound;
@@ -128,10 +129,9 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     }
 }
 
-- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate*)departureTime arrivalTime:(NSDate*)arrivalTime waypoints:(NSArray*)waypoints  successfulBlock:(void (^)(LPDirections* directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadDirectionsForOrigin:(LPLocation *)origin forDestination:(LPLocation *)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate *)departureTime arrivalTime:(NSDate *)arrivalTime waypoints:(NSArray *)waypoints successfulBlock:(void (^)(LPDirections *directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDirections:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDirections:)]) {
         [self.delegate googleFunctionsWillLoadDirections:self];
     }
     
@@ -140,10 +140,11 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%f,%f",origin.latitude,origin.longitude] forKey:@"origin"];
-    [parameters setObject:[NSString stringWithFormat:@"%f,%f",destination.latitude,destination.longitude] forKey:@"destination"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", origin.latitude, origin.longitude] forKey:@"origin"];
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", destination.latitude, destination.longitude] forKey:@"destination"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
     //MODE
     [parameters setObject:[LPStep getDirectionsTravelMode:travelMode] forKey:@"mode"];
@@ -155,26 +156,26 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [parameters setObject:[LPDirections getDirectionsUnit:unit] forKey:@"units"];
     
     //ALTERNATIVES
-    [parameters setObject:[NSString stringWithFormat:@"%@",alternatives?@"true":@"false"] forKey:@"alternatives"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", alternatives ? @"true" : @"false"] forKey:@"alternatives"];
 
     //departureTime
-    if(departureTime!=nil)
-        [parameters setObject:[NSString stringWithFormat:@"%.0f",[departureTime timeIntervalSince1970]] forKey:@"departure_time"];
+    if(departureTime) {
+        [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
+    }
     
     //departureTime
-    if(arrivalTime!=nil)
-        [parameters setObject:[NSString stringWithFormat:@"%.0f",[arrivalTime timeIntervalSince1970]] forKey:@"arrival_time"];
+    if(arrivalTime) {
+        [parameters setObject:[NSString stringWithFormat:@"%.0f", [arrivalTime timeIntervalSince1970]] forKey:@"arrival_time"];
+    }
     
-    //WAYPOINTS
-    if(waypoints.count>0)
-    {
-        NSString *waypointsString=@"";
+    //Waypoints
+    if(waypoints.count>0) {
+        NSString *waypointsString = @"";
         
-        for(int i=0;i<waypoints.count;i++)
-        {
-            LPWaypoint *waypoint = (LPWaypoint*)[waypoints objectAtIndex:i];
+        for(int i=0; i<[waypoints count]; i++) {
+            LPWaypoint *waypoint = (LPWaypoint *)[waypoints objectAtIndex:i];
             
-            waypointsString = [waypointsString stringByAppendingFormat:@"%f,%f|",waypoint.location.latitude,waypoint.location.longitude];
+            waypointsString = [waypointsString stringByAppendingFormat:@"%f,%f|", waypoint.location.latitude, waypoint.location.longitude];
         }
         
         [parameters setObject:waypointsString forKey:@"waypoints"];
@@ -191,51 +192,48 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         
         LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:directions.statusCode];
 
-        if(status==LPGoogleStatusOK)
-        {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadDirections:)])
-            {
+        if(status==LPGoogleStatusOK) {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadDirections:)]) {
                 [self.delegate googleFunctions:self didLoadDirections:directions];
             }
             
-            if(successful!=nil)
+            if(successful)
                 successful(directions);
         } else {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)])
-            {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)]) {
                 [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:status];
             }
             
-            if(failure!=nil)
+            if(failure)
                 failure(status);
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
-        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)])
-        {
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)]) {
             [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure!=nil)
+        if(failure)
             failure(LPGoogleStatusUnknownError);
     }];
+    
     [operation start];
 }
 
-- (void)loadStreetViewImageForLocation:(LPLocation*)location imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
+- (void)loadStreetViewImageForLocation:(LPLocation *)location imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
-    
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIStreetViewImageURL]];
     
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%dx%d",(int)size.width,(int)size.height] forKey:@"size"];
-    [parameters setObject:[NSString stringWithFormat:@"%f,%f",location.latitude,location.longitude] forKey:@"location"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",heading] forKey:@"heading"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",fov] forKey:@"fov"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",pitch] forKey:@"pitch"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"location"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f", heading] forKey:@"heading"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f", fov] forKey:@"fov"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f", pitch] forKey:@"pitch"];
 
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
                                                             path:googleAPIStreetViewImageURL
@@ -244,30 +242,31 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
         return image;
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if(successful!=nil)
+        if(successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure!=nil)
+        if(failure)
             failure(error);
     }];
+    
     [operation start];
 }
 
-- (void)loadStreetViewImageForAddress:(NSString*)address imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
+- (void)loadStreetViewImageForAddress:(NSString *)address imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
-    
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIStreetViewImageURL]];
     
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%dx%d",(int)size.width,(int)size.height] forKey:@"size"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",address] forKey:@"location"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",heading] forKey:@"heading"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",fov] forKey:@"fov"];
-    [parameters setObject:[NSString stringWithFormat:@"%.2f",pitch] forKey:@"pitch"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", address] forKey:@"location"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f", heading] forKey:@"heading"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f", fov] forKey:@"fov"];
+    [parameters setObject:[NSString stringWithFormat:@"%.2f", pitch] forKey:@"pitch"];
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
                                                             path:googleAPIStreetViewImageURL
@@ -276,95 +275,92 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
         return image;
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if(successful!=nil)
+        if(successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure!=nil)
+        if(failure)
             failure(error);
     }];
+    
     [operation start];
 }
 
-- (void)loadStaticMapImageForLocation:(LPLocation*)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
+- (void)loadStaticMapImageForLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
-    
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIStaticMapImageURL]];
     
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSString *URL = googleAPIStaticMapImageURL;
     
-    URL = [URL stringByAppendingFormat:@"center=%f,%f&",location.latitude,location.longitude];
-    URL = [URL stringByAppendingFormat:@"sensor=%@&",self.sensor?@"true":@"false"];
-    URL = [URL stringByAppendingFormat:@"zoom=%d&",zoom];
-    URL = [URL stringByAppendingFormat:@"scale=%d&",scale];
-    URL = [URL stringByAppendingFormat:@"size=%dx%d&",(int)size.width,(int)size.height];
-    URL = [URL stringByAppendingFormat:@"maptype=%@&",[LPGoogleFunctions getMapType:maptype]];
+    URL = [URL stringByAppendingFormat:@"center=%f,%f&", location.latitude, location.longitude];
+    URL = [URL stringByAppendingFormat:@"sensor=%@&", self.sensor ? @"true" : @"false"];
+    URL = [URL stringByAppendingFormat:@"zoom=%d&", zoom];
+    URL = [URL stringByAppendingFormat:@"scale=%d&", scale];
+    URL = [URL stringByAppendingFormat:@"size=%dx%d&", (int)size.width, (int)size.height];
+    URL = [URL stringByAppendingFormat:@"maptype=%@&", [LPGoogleFunctions getMapType:maptype]];
     
-    for(int i=0;i<markers.count;i++)
-    {
-        LPMapImageMarker *marker = (LPMapImageMarker*)[markers objectAtIndex:i];
+    for(int i=0; i<[markers count]; i++) {
+        LPMapImageMarker *marker = (LPMapImageMarker *)[markers objectAtIndex:i];
         
-        URL = [URL stringByAppendingFormat:@"markers=%@&",[marker getMarkerURLString]];
+        URL = [URL stringByAppendingFormat:@"markers=%@&", [marker getMarkerURLString]];
     }
 
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
-        return image;
+
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if(successful!=nil)
+        if(successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure!=nil)
+        if(failure)
             failure(error);
     }];
+    
     [operation start];
 }
 
-- (void)loadStaticMapImageForAddress:(NSString*)address zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
+- (void)loadStaticMapImageForAddress:(NSString *)address zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
-    
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIStaticMapImageURL]];
     
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSString *URL = googleAPIStaticMapImageURL;
     
-    URL = [URL stringByAppendingFormat:@"center=%@&",address];
-    URL = [URL stringByAppendingFormat:@"sensor=%@&",self.sensor?@"true":@"false"];
-    URL = [URL stringByAppendingFormat:@"zoom=%d&",zoom];
-    URL = [URL stringByAppendingFormat:@"scale=%d&",scale];
-    URL = [URL stringByAppendingFormat:@"size=%dx%d&",(int)size.width,(int)size.height];
+    URL = [URL stringByAppendingFormat:@"center=%@&", address];
+    URL = [URL stringByAppendingFormat:@"sensor=%@&", self.sensor ? @"true" : @"false"];
+    URL = [URL stringByAppendingFormat:@"zoom=%d&", zoom];
+    URL = [URL stringByAppendingFormat:@"scale=%d&", scale];
+    URL = [URL stringByAppendingFormat:@"size=%dx%d&", (int)size.width, (int)size.height];
     
-    if(markers)
-    {
-        for(int i=0;i<markers.count;i++)
-        {
-            LPMapImageMarker *marker = (LPMapImageMarker*)[markers objectAtIndex:i];
+    if(markers) {
+        for(int i=0; i<[markers count]; i++) {
+            LPMapImageMarker *marker = (LPMapImageMarker *)[markers objectAtIndex:i];
             
-            URL = [URL stringByAppendingFormat:@"markers=%@&",[marker getMarkerURLString]];
+            URL = [URL stringByAppendingFormat:@"markers=%@&", [marker getMarkerURLString]];
         }
     }
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
-        return image;
+
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if(successful!=nil)
+        if(successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure!=nil)
+        if(failure)
             failure(error);
     }];
+    
     [operation start];
 }
 
-- (void)loadPlacesAutocompleteForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlacesAutocompleteForInput:(NSString *)input offset:(int)offset radius:(int)radius location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlacesAutocomplete:forInput:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlacesAutocomplete:forInput:)]) {
         [self.delegate googleFunctionsWillLoadPlacesAutocomplete:self forInput:input];
     }
     
@@ -373,18 +369,18 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",input] forKey:@"input"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", input] forKey:@"input"];
     [parameters setObject:[LPPrediction getStringFromGooglePlaceType:placeType] forKey:@"types"];
-    [parameters setObject:[NSString stringWithFormat:@"%d",offset] forKey:@"offset"];
-    [parameters setObject:[NSString stringWithFormat:@"%d",radius] forKey:@"radius"];
-    [parameters setObject:[NSString stringWithFormat:@"%f,%f",location.latitude,location.longitude] forKey:@"location"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
+    [parameters setObject:[NSString stringWithFormat:@"%d", offset] forKey:@"offset"];
+    [parameters setObject:[NSString stringWithFormat:@"%d", radius] forKey:@"radius"];
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f",location.latitude, location.longitude] forKey:@"location"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
 
-    if(countryRestriction!=nil)
-    {
-        [parameters setObject:[NSString stringWithFormat:@"country:%@",countryRestriction] forKey:@"components"];
+    if(countryRestriction) {
+        [parameters setObject:[NSString stringWithFormat:@"country:%@", countryRestriction] forKey:@"components"];
     }
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
@@ -392,49 +388,42 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                                                       parameters:parameters];
 
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
         LPPlacesAutocomplete *placesAutocomplete = [LPPlacesAutocomplete placesAutocompleteWithObjects:JSON];
         
         NSString *statusCode = placesAutocomplete.statusCode;
         
-        if([statusCode isEqualToString:@"OK"])
-        {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlacesAutocomplete:)])
-            {
+        if([statusCode isEqualToString:@"OK"]) {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlacesAutocomplete:)]) {
                 [self.delegate googleFunctions:self didLoadPlacesAutocomplete:placesAutocomplete];
             }
             
-            if(successful!=nil)
+            if(successful)
                 successful(placesAutocomplete);
-            
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
             
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)])
-            {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)]) {
                 [self.delegate googleFunctions:self errorLoadingPlacesAutocompleteWithStatus:status];
             }
             
-            if(failure!=nil)
+            if(failure)
                 failure(status);
         }
-
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
-        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)])
-        {
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)]) {
             [self.delegate googleFunctions:self errorLoadingPlacesAutocompleteWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure!=nil)
+        if(failure)
             failure(LPGoogleStatusUnknownError);
     }];
+    
     [operation start];
 }
 
-- (void)loadPlaceDetailsForReference:(NSString*)reference successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlaceDetailsForReference:(NSString *)reference successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlaceDetailsResult:forReference:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlaceDetailsResult:forReference:)]) {
         [self.delegate googleFunctionsWillLoadPlaceDetailsResult:self forReference:reference];
     }
     
@@ -443,10 +432,11 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",reference] forKey:@"reference"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", reference] forKey:@"reference"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
     //REQUEST URL
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
@@ -454,54 +444,49 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                                                       parameters:parameters];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
         LPPlaceDetailsResults *placeDetailsResults = [LPPlaceDetailsResults placeDetailsResultsWithObjects:JSON];
 
         NSString *statusCode = placeDetailsResults.statusCode;
         
-        if([statusCode isEqualToString:@"OK"])
-        {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlaceDetailsResult:)])
-            {
+        if([statusCode isEqualToString:@"OK"]) {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlaceDetailsResult:)]) {
                 [self.delegate googleFunctions:self didLoadPlaceDetailsResult:placeDetailsResults];
             }
             
-            if(successful!=nil)
+            if(successful)
                 successful(placeDetailsResults);
-            
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
             
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlaceDetailsResultWithStatus:)])
-            {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlaceDetailsResultWithStatus:)]) {
                 [self.delegate googleFunctions:self errorLoadingPlaceDetailsResultWithStatus:status];
             }
             
-            if(failure!=nil)
+            if(failure)
                 failure(status);
         }
-
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
-        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)])
-        {
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)]) {
             [self.delegate googleFunctions:self errorLoadingPlaceDetailsResultWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure!=nil)
+        if(failure)
             failure(LPGoogleStatusUnknownError);
     }];
+    
     [operation start];
 }
 
-- (void)speakText:(NSString*)text failureBlock:(void (^)(NSError *error))failure
+- (void)speakText:(NSString *)text failureBlock:(void (^)(NSError *error))failure
 {
     [googlePlayer stop];
     
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPITextToSpeechURL]];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"tl"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",text] forKey:@"q"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"tl"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", text] forKey:@"q"];
     
     //REQUEST URL
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
@@ -511,29 +496,27 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSError *error=nil;
+        NSError *error = nil;
         
         googlePlayer = [[AVAudioPlayer alloc] initWithData:responseObject error:&error];
-        googlePlayer.delegate=self;
+        googlePlayer.delegate = self;
         [googlePlayer play];
 
-        if(error)
-        {
-            failure(error);
+        if(error) {
+            if(failure)
+                failure(error);
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(error);
+        if(failure)
+            failure(error);
     }];
     
     [operation start];
 }
 
-- (void)loadGeocodingForAddress:(NSString*)address filterComponents:(NSArray*)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadGeocodingForAddress:(NSString *)address filterComponents:(NSArray *)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadGeocoding:forAddress:filterComponents:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadGeocoding:forAddress:filterComponents:)]) {
         [self.delegate googleFunctionsWillLoadGeocoding:self forAddress:address filterComponents:filterComponents];
     }
     
@@ -542,20 +525,19 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",address] forKey:@"address"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%@", address] forKey:@"address"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
     //COMPONENTS FILTER
-    if(filterComponents.count>0)
-    {
-        NSString *comString=@"components=";
+    if([filterComponents count] > 0) {
+        NSString *comString = @"components=";
         
-        for(int i=0;i<filterComponents.count;i++)
-        {
-            LPGeocodingFilter *filter = (LPGeocodingFilter*)[filterComponents objectAtIndex:i];
+        for(int i=0; i<[filterComponents count]; i++) {
+            LPGeocodingFilter *filter = (LPGeocodingFilter *)[filterComponents objectAtIndex:i];
             
-            comString = [comString stringByAppendingFormat:@"%@:%@|",[LPGeocodingFilter getGeocodingFilter:filter.filter],filter.value];
+            comString = [comString stringByAppendingFormat:@"%@:%@|", [LPGeocodingFilter getGeocodingFilter:filter.filter], filter.value];
         }
     }
     
@@ -565,18 +547,17 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                                                       parameters:parameters];
     
     [self loadGeocodingRequest:request successfulBlock:^(LPGeocodingResults *geocodingResults) {
-        if(successful!=nil)
+        if(successful)
             successful(geocodingResults);
     } failureBlock:^(LPGoogleStatus status) {
-        if(failure!=nil)
+        if(failure)
             failure(status);
     }];
 }
 
-- (void)loadGeocodingForLocation:(LPLocation*)location filterComponents:(NSArray*)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadGeocodingForLocation:(LPLocation *)location filterComponents:(NSArray *)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadGeocoding:forLocation:filterComponents:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadGeocoding:forLocation:filterComponents:)]) {
         [self.delegate googleFunctionsWillLoadGeocoding:self forLocation:location filterComponents:filterComponents];
     }
     
@@ -585,20 +566,19 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%f,%f",location.latitude,location.longitude] forKey:@"latlng"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"latlng"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
     //COMPONENTS FILTER
-    if(filterComponents.count>0)
-    {
-        NSString *comString=@"components=";
+    if([filterComponents count] > 0) {
+        NSString *comString = @"components=";
         
-        for(int i=0;i<filterComponents.count;i++)
-        {
-            LPGeocodingFilter *filter = (LPGeocodingFilter*)[filterComponents objectAtIndex:i];
+        for(int i=0; i<[filterComponents count]; i++) {
+            LPGeocodingFilter *filter = (LPGeocodingFilter *)[filterComponents objectAtIndex:i];
             
-            comString = [comString stringByAppendingFormat:@"%@:%@|",[LPGeocodingFilter getGeocodingFilter:filter.filter],filter.value];
+            comString = [comString stringByAppendingFormat:@"%@:%@|", [LPGeocodingFilter getGeocodingFilter:filter.filter], filter.value];
         }
     }
 
@@ -607,57 +587,52 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                                                       parameters:parameters];
     
     [self loadGeocodingRequest:request successfulBlock:^(LPGeocodingResults *geocodingResults) {
-        if(successful!=nil)
+        if(successful)
             successful(geocodingResults);
     } failureBlock:^(LPGoogleStatus status) {
-        if(failure!=nil)
+        if(failure)
             failure(status);
     }];
 }
 
-- (void)loadGeocodingRequest:(NSMutableURLRequest*)request successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadGeocodingRequest:(NSMutableURLRequest *)request successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-
         LPGeocodingResults *results = [LPGeocodingResults geocodingResultsWithObjects:JSON];
         
         NSString *statusCode = results.statusCode;
         
-        if([statusCode isEqualToString:@"OK"])
-        {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadGeocodingResults:)])
-            {
+        if([statusCode isEqualToString:@"OK"]) {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadGeocodingResults:)]) {
                 [self.delegate googleFunctions:self didLoadGeocodingResults:results];
             }
             
-            if(successful!=nil)
+            if(successful)
                 successful(results);
-            
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
             
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingGeocodingWithStatus:)])
-            {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingGeocodingWithStatus:)]) {
                 [self.delegate googleFunctions:self errorLoadingGeocodingWithStatus:status];
             }
             
-            if(failure!=nil)
+            if(failure)
                 failure(status);
         }
 
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
-        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingGeocodingWithStatus:)])
-        {
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingGeocodingWithStatus:)]) {
             [self.delegate googleFunctions:self errorLoadingGeocodingWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure!=nil)
+        if(failure)
             failure(LPGoogleStatusUnknownError);
     }];
+    
     [operation start];
 }
 
-- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString *)input offset:(int)offset radius:(int)radius location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
     [self loadPlacesAutocompleteForInput:input offset:offset radius:radius location:location placeType:placeType countryRestriction:countryRestriction successfulBlock:^(LPPlacesAutocomplete *placesAutocomplete) {
         
@@ -665,9 +640,8 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         NSMutableArray *array = [NSMutableArray new];
         __block BOOL blockSend = NO;
         
-        for(int i=0;i<[placesAutocomplete.predictions count];i++)
-        {
-            NSString *reference = ((LPPrediction*)[placesAutocomplete.predictions objectAtIndex:i]).reference;
+        for(int i=0; i<[placesAutocomplete.predictions count]; i++) {
+            NSString *reference = ((LPPrediction *)[placesAutocomplete.predictions objectAtIndex:i]).reference;
             
             [self loadPlaceDetailsForReference:reference successfulBlock:^(LPPlaceDetailsResults *placeDetailsResults) {
                 LPPlaceDetails *placeWithDetails = [placeDetailsResults.result copy];
@@ -676,21 +650,19 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 
                 whichLoaded++;
 
-                if(whichLoaded>=[placesAutocomplete.predictions count])
-                {
-                    if([array count]>0)
-                    {
-                        if(blockSend==NO)
-                        {
+                if(whichLoaded >= [placesAutocomplete.predictions count]) {
+                    if([array count] > 0) {
+                        if(!blockSend) {
                             if(successful)
                                 successful(array);
+                            
                             blockSend = YES;
                         }
                     } else {
-                        if(blockSend==NO)
-                        {
+                        if(!blockSend) {
                             if(failure)
                                 failure(LPGoogleStatusZeroResults);
+                            
                             blockSend = YES;
                         }
                     }
@@ -698,21 +670,19 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             } failureBlock:^(LPGoogleStatus status) {
                 whichLoaded++;
 
-                if(whichLoaded>=[placesAutocomplete.predictions count])
-                {
-                    if([array count]>0)
-                    {
-                        if(blockSend==NO)
-                        {
+                if(whichLoaded >= [placesAutocomplete.predictions count]) {
+                    if([array count] > 0) {
+                        if(!blockSend) {
                             if(successful)
                                 successful(array);
+                            
                             blockSend = YES;
                         }
                     } else {
-                        if(blockSend==NO)
-                        {
+                        if(!blockSend) {
                             if(failure)
                                 failure(LPGoogleStatusZeroResults);
+                            
                             blockSend = YES;
                         }
                     }
@@ -726,10 +696,9 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     }];
 }
 
-- (void)loadPlaceTextSearchForQuery:(NSString*)query location:(LPLocation*)location radius:(int)radius successfulBlock:(void (^)(LPPlaceSearchResults *placeResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlaceTextSearchForQuery:(NSString *)query location:(LPLocation *)location radius:(int)radius successfulBlock:(void (^)(LPPlaceSearchResults *placeResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlaceSearch:forQuery:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlaceSearch:forQuery:)]) {
         [self.delegate googleFunctionsWillLoadPlaceSearch:self forQuery:query];
     }
     
@@ -738,14 +707,15 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",query] forKey:@"query"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.languageCode] forKey:@"language"];
     
-    if(location!=nil && radius>0) {
-        [parameters setObject:[NSString stringWithFormat:@"%f,%f",location.latitude,location.longitude] forKey:@"location"];
-        [parameters setObject:[NSString stringWithFormat:@"%d",radius] forKey:@"radius"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", query] forKey:@"query"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
+    
+    if(location && radius > 0) {
+        [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"location"];
+        [parameters setObject:[NSString stringWithFormat:@"%d", radius] forKey:@"radius"];
     }
     
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
@@ -753,63 +723,56 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                                                       parameters:parameters];
     
     AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        
         LPPlaceSearchResults *placeDetailsResults = [LPPlaceSearchResults placeSearchResultsWithObjects:JSON];
         
         NSString *statusCode = placeDetailsResults.statusCode;
         
-        if([statusCode isEqualToString:@"OK"])
-        {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlaceSearch:)])
-            {
+        if([statusCode isEqualToString:@"OK"]) {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlaceSearch:)]) {
                 [self.delegate googleFunctions:self didLoadPlaceSearch:placeDetailsResults];
             }
             
-            if(successful!=nil)
+            if(successful)
                 successful(placeDetailsResults);
-            
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
             
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlaceSearchWithStatus:)])
-            {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlaceSearchWithStatus:)]) {
                 [self.delegate googleFunctions:self errorLoadingPlaceSearchWithStatus:status];
             }
             
-            if(failure!=nil)
+            if(failure)
                 failure(status);
         }
-        
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
-        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlaceSearchWithStatus:)])
-        {
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlaceSearchWithStatus:)]) {
             [self.delegate googleFunctions:self errorLoadingPlaceSearchWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure!=nil)
+        if(failure)
             failure(LPGoogleStatusUnknownError);
     }];
     [operation start];
 }
 
-- (void)loadPlacePhotoForReference:(NSString*)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
+- (void)loadPlacePhotoForReference:(NSString *)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
-    
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:googleAPIPlacePhotoURL]];
     
     [httpClient setParameterEncoding:AFJSONParameterEncoding];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.googleAPIBrowserKey] forKey:@"key"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",self.sensor?@"true":@"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%@",reference] forKey:@"photoreference"];
     
-    if(maxHeight>0 && maxHeight<=1600) {
-        [parameters setObject:[NSString stringWithFormat:@"%d",maxHeight] forKey:@"maxheight"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", reference] forKey:@"photoreference"];
+    
+    if(maxHeight > 0 && maxHeight <= 1600) {
+        [parameters setObject:[NSString stringWithFormat:@"%d", maxHeight] forKey:@"maxheight"];
     }
     
-    if(maxWidth>0 && maxWidth<=1600) {
-        [parameters setObject:[NSString stringWithFormat:@"%d",maxWidth] forKey:@"maxwidth"];
+    if(maxWidth > 0 && maxWidth <= 1600) {
+        [parameters setObject:[NSString stringWithFormat:@"%d", maxWidth] forKey:@"maxwidth"];
     }
 
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
@@ -817,14 +780,15 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                                                       parameters:parameters];
     
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
-        return image;
+
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if(successful!=nil)
+        if(successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure!=nil)
+        if(failure)
             failure(error);
     }];
+    
     [operation start];
 }
 

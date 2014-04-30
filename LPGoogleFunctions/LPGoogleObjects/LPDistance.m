@@ -7,13 +7,13 @@
 
 #import "LPDistance.h"
 
+
 @implementation LPDistance
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPDistance new];
-    if (self != nil)
-	{
+    if (self) {
         self.text = [coder decodeObjectForKey:@"text"];
         self.value = [coder decodeIntegerForKey:@"value"];
 	}
@@ -27,17 +27,16 @@
     [coder encodeInteger:self.value forKey:@"value"];
 }
 
-+ (id)distanceWithObjects:(NSDictionary*)dictionary
++ (id)distanceWithObjects:(NSDictionary *)dictionary
 {
     LPDistance *new = [LPDistance new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"text"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"text"] != nil) {
-            new.text = [NSString stringWithFormat:@"%@",[dictionary objectForKey:@"text"]];
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"text"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"text"]) {
+            new.text = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"text"]];
         }
         
-        if (![[dictionary objectForKey:@"value"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"value"] != nil) {
+        if (![[dictionary objectForKey:@"value"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"value"]) {
             new.value = [[dictionary objectForKey:@"value"] intValue];
         }
     }
@@ -45,14 +44,14 @@
 	return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
-    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"text",@"value", nil]];
+    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"text", @"value", nil]];
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -60,8 +59,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPDistance *new = [LPDistance new];
+    
     [new setText:[self text]];
     [new setValue:[self value]];
+    
     return new;
 }
 

@@ -7,13 +7,13 @@
 
 #import "LPPolyline.h"
 
+
 @implementation LPPolyline
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPPolyline new];
-    if (self != nil)
-	{
+    if (self) {
         self.pointsString = [coder decodeObjectForKey:@"pointsString"];
         self.pointsArray = [coder decodeObjectForKey:@"pointsArray"];
 	}
@@ -27,13 +27,12 @@
     [coder encodeObject:self.pointsArray forKey:@"pointsArray"];
 }
 
-+ (id)polylineWithObjects:(NSDictionary*)dictionary
++ (id)polylineWithObjects:(NSDictionary *)dictionary
 {
     LPPolyline *new = [LPPolyline new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"points"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"points"] != nil) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"points"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"points"]) {
             new.pointsString = [NSString stringWithFormat:@"%@",[dictionary objectForKey:@"points"]];
             new.pointsArray = [self decodePolylineOfGoogleMaps:[dictionary objectForKey:@"points"]];
         }
@@ -44,7 +43,6 @@
 
 + (NSArray *)decodePolylineOfGoogleMaps:(NSString *)encodedPolyline
 {
-    
     NSUInteger length = [encodedPolyline length];
     NSInteger index = 0;
     NSMutableArray *points = [NSMutableArray new];
@@ -52,7 +50,6 @@
     CGFloat lng = 0.0f;
     
     while (index < length) {
-        
         // Temorary variable to hold each ASCII byte.
         int b = 0;
         
@@ -63,22 +60,16 @@
         int result = 0;
         
         do {
-            
             // If index exceded lenght of encoding, finish 'chunk'
             if (index >= length) {
-                
                 b = 0;
-                
             } else {
-                
                 // The '[encodedPolyline characterAtIndex:index++]' statement resturns the ASCII
                 // code for the characted at index. Subtract 63 to get the original
                 // value. (63 was added to ensure proper ASCII characters are displayed
                 // in the encoded plyline string, wich id 'human' readable)
                 b = [encodedPolyline characterAtIndex:index++] - 63;
-                
             }
-            
             // AND the bits of the byte with 0x1f to get the original 5-bit 'chunk'.
             // Then left shift the bits by the required amount, wich increases
             // by 5 bits each time.
@@ -88,7 +79,6 @@
             // summation.
             result |= (b & 0x1f) << shift;
             shift += 5;
-            
         } while (b >= 0x20); // Continue while the read byte is >= 0x20 since the last 'chunk'
         // was nor OR'd with 0x20 during the conversion process. (Signals the end).
         
@@ -103,20 +93,15 @@
         result = 0;
         
         do {
-            
             // If index exceded lenght of encoding, finish 'chunk'
             if (index >= length) {
-                
                 b = 0;
-                
             } else {
-                
                 b = [encodedPolyline characterAtIndex:index++] - 63;
-                
             }
+            
             result |= (b & 0x1f) << shift;
             shift += 5;
-            
         } while (b >= 0x20);
         
         CGFloat dlng = (result & 1) ? ~(result >> 1) : (result >> 1);
@@ -135,19 +120,17 @@
     return points;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.pointsString] forKey:@"pointsString"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.pointsString] forKey:@"pointsString"];
     
-    if(self.pointsArray!=nil && ![self.pointsArray isKindOfClass:[NSNull class]])
-    {
+    if (self.pointsArray && ![self.pointsArray isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
     
-        for(int i=0;i<[self.pointsArray count];i++)
-        {
-            [array addObject:((LPLocation*)[self.pointsArray objectAtIndex:i]).dictionary];
+        for (int i=0; i<[self.pointsArray count]; i++) {
+            [array addObject:((LPLocation *)[self.pointsArray objectAtIndex:i]).dictionary];
         }
 
         [dictionary setObject:array forKey:@"pointsArray"];
@@ -156,7 +139,7 @@
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -164,8 +147,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPPolyline *new = [LPPolyline new];
+    
     [new setPointsString:[self pointsString]];
     [new setPointsArray:[self pointsArray]];
+    
     return new;
 }
 

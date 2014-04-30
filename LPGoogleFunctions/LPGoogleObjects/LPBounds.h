@@ -8,14 +8,15 @@
 #import <Foundation/Foundation.h>
 #import "LPLocation.h"
 
+
 @interface LPBounds : NSObject <NSCoding>
 
 @property (nonatomic, strong) LPLocation *northeast;
 @property (nonatomic, strong) LPLocation *southwest;
 
-+ (id)boundsWithObjects:(NSDictionary*)dictionary;
++ (id)boundsWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

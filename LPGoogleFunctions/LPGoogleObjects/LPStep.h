@@ -12,12 +12,14 @@
 #import "LPPolyline.h"
 #import "LPTransitDetails.h"
 
+
 typedef enum {
     LPGoogleDirectionsTravelModeDriving,
     LPGoogleDirectionsTravelModeWalking,
     LPGoogleDirectionsTravelModeBicycling,
     LPGoogleDirectionsTravelModeTransit
 } LPGoogleDirectionsTravelMode;
+
 
 @interface LPStep : NSObject <NSCoding>
 
@@ -34,12 +36,12 @@ typedef enum {
 @property (nonatomic, assign) BOOL isBicikeLJStationStart;
 @property (nonatomic, assign) BOOL isBicikeLJStationEnd;
 
-+ (LPGoogleDirectionsTravelMode)getDirectionsTravelModeFromString:(NSString*)string;
-+ (NSString*)getDirectionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode;
++ (LPGoogleDirectionsTravelMode)getDirectionsTravelModeFromString:(NSString *)string;
++ (NSString *)getDirectionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode;
 
-+ (id)stepWithObjects:(NSDictionary*)dictionary;
++ (id)stepWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

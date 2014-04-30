@@ -7,14 +7,15 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPTerm : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *value;
 @property (nonatomic, assign) int offset;
 
-+ (id)termWithObjects:(NSDictionary*)dictionary;
++ (id)termWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

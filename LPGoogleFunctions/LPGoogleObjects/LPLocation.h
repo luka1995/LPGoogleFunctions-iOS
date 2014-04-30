@@ -7,16 +7,17 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPLocation : NSObject <NSCoding>
 
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;
 
-+ (id)locationWithObjects:(NSDictionary*)dictionary;
++ (id)locationWithObjects:(NSDictionary *)dictionary;
 
 + (id)locationWithLatitude:(double)latitude longitude:(double)longitude;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

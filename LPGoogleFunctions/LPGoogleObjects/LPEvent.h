@@ -7,15 +7,16 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPEvent : NSObject <NSCopying>
 
 @property (nonatomic, strong) NSString *eventID;
 @property (nonatomic, strong) NSString *summary;
 @property (nonatomic, strong) NSString *URL;
 
-+ (id)eventWithObjects:(NSDictionary*)dictionary;
++ (id)eventWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

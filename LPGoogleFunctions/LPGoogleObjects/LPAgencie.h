@@ -7,14 +7,15 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPAgencie : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *url;
 
-+ (id)agencieWithObjects:(NSDictionary*)dictionary;
++ (id)agencieWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

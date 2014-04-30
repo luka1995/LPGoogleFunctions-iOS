@@ -8,15 +8,16 @@
 #import <Foundation/Foundation.h>
 #import "LPLocation.h"
 
+
 @interface LPWaypoint : NSObject <NSCoding>
 
 @property (nonatomic, strong) LPLocation *location;
 @property (nonatomic, assign) int stepIndex;
 @property (nonatomic, assign) double stepInterpolation;
 
-+ (id)waypointWithObjects:(NSDictionary*)dictionary;
++ (id)waypointWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

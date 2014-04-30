@@ -8,15 +8,16 @@
 #import <Foundation/Foundation.h>
 #import "LPPlaceDetails.h"
 
+
 @interface LPPlaceDetailsResults : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSArray *htmlAttributions;
 @property (nonatomic, strong) LPPlaceDetails *result;
 @property (nonatomic, strong) NSString *statusCode;
 
-+ (id)placeDetailsResultsWithObjects:(NSDictionary*)dictionary;
++ (id)placeDetailsResultsWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

@@ -7,13 +7,13 @@
 
 #import "LPTime.h"
 
+
 @implementation LPTime
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPTime new];
-    if (self != nil)
-	{
+    if (self) {
         self.text = [coder decodeObjectForKey:@"text"];
         self.timeZone = [coder decodeObjectForKey:@"timeZone"];
         self.value = [coder decodeFloatForKey:@"value"];
@@ -35,22 +35,20 @@
 {
     LPTime *new = [LPTime new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"text"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"text"] != nil) {
+    if(![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"text"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"text"]) {
             new.text = [dictionary objectForKey:@"text"];
         }
         
-        if (![[dictionary objectForKey:@"time_zone"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"time_zone"] != nil) {
+        if (![[dictionary objectForKey:@"time_zone"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"time_zone"]) {
             new.timeZone = [dictionary objectForKey:@"time_zone"];
         }
         
-        if (![[dictionary objectForKey:@"value"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"value"] != nil) {
+        if (![[dictionary objectForKey:@"value"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"value"]) {
             new.value = [[dictionary objectForKey:@"value"] floatValue];
         }
         
-        if(new.text!=nil && new.timeZone!=nil)
-        {
+        if(new.text && new.timeZone) {
             new.formattedTime = [NSDate dateWithTimeIntervalSince1970:new.value];
         }
     }
@@ -58,22 +56,19 @@
     return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.text] forKey:@"text"];
-    
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.timeZone] forKey:@"timeZone"];
-    
-    [dictionary setObject:[NSString stringWithFormat:@"%f",self.value] forKey:@"value"];
-    
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.formattedTime.description] forKey:@"formattedTime"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.text] forKey:@"text"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.timeZone] forKey:@"timeZone"];
+    [dictionary setObject:[NSString stringWithFormat:@"%f", self.value] forKey:@"value"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.formattedTime.description] forKey:@"formattedTime"];
         
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -81,10 +76,12 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPTime *new = [LPTime new];
+    
     [new setText:[self text]];
     [new setTimeZone:[self timeZone]];
     [new setValue:[self value]];
     [new setFormattedTime:[self formattedTime]];
+    
     return new;
 }
 

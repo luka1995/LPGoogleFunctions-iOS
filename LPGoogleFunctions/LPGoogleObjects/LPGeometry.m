@@ -7,13 +7,13 @@
 
 #import "LPGeometry.h"
 
+
 @implementation LPGeometry
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPGeometry new];
-    if (self != nil)
-	{
+    if (self) {
         self.location = [coder decodeObjectForKey:@"location"];
         self.viewport = [coder decodeObjectForKey:@"viewport"];
 	}
@@ -31,13 +31,12 @@
 {
     LPGeometry *new = [LPGeometry new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"location"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"location"] != nil) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"location"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"location"]) {
             new.location = [LPLocation locationWithObjects:[dictionary objectForKey:@"location"]];
         }
         
-        if (![[dictionary objectForKey:@"viewport"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"viewport"] != nil) {
+        if (![[dictionary objectForKey:@"viewport"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"viewport"]) {
             new.viewport = [LPBounds boundsWithObjects:[dictionary objectForKey:@"viewport"]];
         }
     }
@@ -45,24 +44,22 @@
     return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    if(self.location!=nil && ![self.location isKindOfClass:[NSNull class]])
-    {
+    if (self.location && ![self.location isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.location.dictionary forKey:@"location"];
     }
     
-    if(self.viewport!=nil && ![self.viewport isKindOfClass:[NSNull class]])
-    {
+    if (self.viewport && ![self.viewport isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.viewport.dictionary forKey:@"viewport"];
     }
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -70,8 +67,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPGeometry *new = [LPGeometry new];
+    
     [new setLocation:[self location]];
     [new setViewport:[self viewport]];
+    
     return new;
 }
 

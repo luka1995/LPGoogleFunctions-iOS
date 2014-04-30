@@ -7,13 +7,13 @@
 
 #import "LPBounds.h"
 
+
 @implementation LPBounds
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPBounds new];
-    if (self != nil)
-	{
+    if (self) {
         self.northeast = [coder decodeObjectForKey:@"northeast"];
         self.southwest = [coder decodeObjectForKey:@"southwest"];
 	}
@@ -27,17 +27,16 @@
     [coder encodeObject:self.southwest forKey:@"southwest"];
 }
 
-+ (id)boundsWithObjects:(NSDictionary*)dictionary
++ (id)boundsWithObjects:(NSDictionary *)dictionary
 {
     LPBounds *new = [LPBounds new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"northeast"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"northeast"] != nil) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"northeast"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"northeast"]) {
             new.northeast=[LPLocation locationWithObjects:[dictionary objectForKey:@"northeast"]];
         }
         
-        if (![[dictionary objectForKey:@"southwest"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"southwest"] != nil) {
+        if (![[dictionary objectForKey:@"southwest"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"southwest"]) {
             new.southwest=[LPLocation locationWithObjects:[dictionary objectForKey:@"southwest"]];
         }
     }
@@ -45,24 +44,22 @@
 	return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    if(self.northeast!=nil && ![self.northeast isKindOfClass:[NSNull class]])
-    {
+    if (self.northeast && ![self.northeast isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.northeast.dictionary forKey:@"northeast"];
     }
     
-    if(self.southwest!=nil && ![self.southwest isKindOfClass:[NSNull class]])
-    {
+    if (self.southwest && ![self.southwest isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.southwest.dictionary forKey:@"southwest"];
     }
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -70,8 +67,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPBounds *new = [LPBounds new];
+    
     [new setNortheast:[self northeast]];
     [new setSouthwest:[self southwest]];
+    
     return new;
 }
 

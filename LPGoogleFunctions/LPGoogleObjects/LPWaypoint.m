@@ -7,13 +7,13 @@
 
 #import "LPWaypoint.h"
 
+
 @implementation LPWaypoint
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPWaypoint new];
-    if (self != nil)
-	{
+    if (self) {
         self.location = [coder decodeObjectForKey:@"location"];
         self.stepIndex = [coder decodeIntegerForKey:@"stepIndex"];
         self.stepInterpolation = [coder decodeDoubleForKey:@"stepInterpolation"];
@@ -33,17 +33,17 @@
 {
     LPWaypoint *new = [LPWaypoint new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
+    if (![dictionary isKindOfClass:[NSNull class]])
     {
-        if (![[dictionary objectForKey:@"location"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"location"] != nil) {
+        if (![[dictionary objectForKey:@"location"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"location"]) {
             new.location=[LPLocation locationWithObjects:[dictionary objectForKey:@"location"]];
         }
         
-        if (![[dictionary objectForKey:@"step_index"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"step_index"] != nil) {
+        if (![[dictionary objectForKey:@"step_index"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"step_index"]) {
             new.stepIndex = [[dictionary objectForKey:@"step_index"] intValue];
         }
         
-        if (![[dictionary objectForKey:@"step_interpolation"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"step_interpolation"] != nil) {
+        if (![[dictionary objectForKey:@"step_interpolation"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"step_interpolation"]) {
             new.stepInterpolation = [[dictionary objectForKey:@"step_interpolation"] doubleValue];
         }
     }
@@ -51,19 +51,18 @@
 	return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"stepIndex",@"stepInterpolation", nil]]];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"stepIndex", @"stepInterpolation", nil]]];
     
-    if(self.location!=nil && ![self.location isKindOfClass:[NSNull class]])
-    {
+    if(self.location && ![self.location isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.location forKey:@"location"];
     }
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -71,9 +70,11 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPWaypoint *new = [LPWaypoint new];
+    
     [new setLocation:[self location]];
     [new setStepIndex:[self stepIndex]];
     [new setStepInterpolation:[self stepInterpolation]];
+    
     return new;
 }
 

@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 typedef enum {
     LPGeocodingFilterRoute,
     LPGeocodingFilterLocality,
@@ -15,16 +16,17 @@ typedef enum {
     LPGeocodingFilterCountry
 } LPGeocodingFilterMode;
 
+
 @interface LPGeocodingFilter : NSObject <NSCoding>
 
 @property (nonatomic, assign) LPGeocodingFilterMode filter;
 @property (nonatomic, strong) NSString *value;
 
-+ (id)filterWithGeocodingFilter:(LPGeocodingFilterMode)filter value:(NSString*)value;
++ (id)filterWithGeocodingFilter:(LPGeocodingFilterMode)filter value:(NSString *)value;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
-+ (NSString*)getGeocodingFilter:(LPGeocodingFilterMode)filter;
++ (NSString *)getGeocodingFilter:(LPGeocodingFilterMode)filter;
 
 - (id)copyWithZone:(NSZone *)zone;
 

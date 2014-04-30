@@ -7,13 +7,13 @@
 
 #import "LPMatchedSubstring.h"
 
+
 @implementation LPMatchedSubstring
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPMatchedSubstring new];
-    if (self != nil)
-	{
+    if (self) {
         self.length = [coder decodeIntegerForKey:@"length"];
         self.offset = [coder decodeIntegerForKey:@"offset"];
 	}
@@ -27,27 +27,26 @@
     [coder encodeInteger:self.offset forKey:@"offset"];
 }
 
-+ (id)matchedSubstringWithObjects:(NSDictionary*)dictionary
++ (id)matchedSubstringWithObjects:(NSDictionary *)dictionary
 {
     LPMatchedSubstring *new = [LPMatchedSubstring new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"length"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"length"] != nil) {
-            new.length=[[dictionary objectForKey:@"length"] intValue];
+    if(![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"length"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"length"]) {
+            new.length = [[dictionary objectForKey:@"length"] intValue];
         }
         
-        if (![[dictionary objectForKey:@"offset"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"offset"] != nil) {
-            new.offset=[[dictionary objectForKey:@"offset"] intValue];
+        if (![[dictionary objectForKey:@"offset"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"offset"]) {
+            new.offset = [[dictionary objectForKey:@"offset"] intValue];
         }
     }
     
     return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"length",@"offset", nil]]];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"length", @"offset", nil]]];
     
     return dictionary;
 }
@@ -60,8 +59,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPMatchedSubstring *new = [LPMatchedSubstring new];
+    
     [new setLength:[self length]];
     [new setOffset:[self offset]];
+    
     return new;
 }
 

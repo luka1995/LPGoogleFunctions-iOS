@@ -42,6 +42,7 @@
 #import "LPGeocodingResults.h"
 #import "LPPlaceSearchResults.h"
 
+
 typedef enum {
     LPGoogleStatusUnknownError,
     LPGoogleStatusOK,
@@ -60,9 +61,10 @@ typedef enum {
     LPGoogleMapTypeTerrain
 } LPGoogleMapType;
 
+
 @protocol LPGoogleFunctionsDelegate;
 
-@interface LPGoogleFunctions : NSObject <CLLocationManagerDelegate,AVAudioPlayerDelegate>
+@interface LPGoogleFunctions : NSObject <CLLocationManagerDelegate, AVAudioPlayerDelegate>
 {
     AVAudioPlayer *googlePlayer;
 }
@@ -73,9 +75,9 @@ typedef enum {
 @property (nonatomic, strong) NSString *languageCode; /** Language ISO code (default "en") */
 @property (nonatomic, strong) NSString *googleAPIBrowserKey;
 
-+ (NSString*)getMapType:(LPGoogleMapType)maptype;
-+ (LPGoogleStatus)getGoogleStatusFromString:(NSString*)status;
-+ (NSString*)getGoogleStatus:(LPGoogleStatus)status;
++ (NSString *)getMapType:(LPGoogleMapType)maptype;
++ (LPGoogleStatus)getGoogleStatusFromString:(NSString *)status;
++ (NSString *)getGoogleStatus:(LPGoogleStatus)status;
 
 /**
  * The Google Directions API is a service that calculates directions between locations using an HTTP request. You can search for directions for several modes of transportation, include transit, driving, walking or cycling. Directions may specify origins, destinations and waypoints either as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia") or as latitude/longitude coordinates. The Directions API can return multi-part directions using a series of waypoints.
@@ -91,7 +93,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate*)departureTime arrivalTime:(NSDate*)arrivalTime waypoints:(NSArray*)waypoints successfulBlock:(void (^)(LPDirections* directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadDirectionsForOrigin:(LPLocation *)origin forDestination:(LPLocation *)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate *)departureTime arrivalTime:(NSDate *)arrivalTime waypoints:(NSArray *)waypoints successfulBlock:(void (^)(LPDirections *directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Google Maps Image APIs make it easy to embed a street view image into your image view.
@@ -103,7 +105,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadStreetViewImageForLocation:(LPLocation*)location imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStreetViewImageForLocation:(LPLocation *)location imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 
 /**
  * The Google Maps Image APIs make it easy to embed a street view image into your image view.
@@ -115,7 +117,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadStreetViewImageForAddress:(NSString*)address imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStreetViewImageForAddress:(NSString *)address imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 
 /**
  * The Google Maps Image APIs make it easy to embed a static Google Maps image into your image view.
@@ -128,7 +130,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadStaticMapImageForLocation:(LPLocation*)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStaticMapImageForLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 
 /**
  * The Google Maps Image APIs make it easy to embed a static Google Maps image into your image view.
@@ -141,7 +143,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadStaticMapImageForAddress:(NSString*)address zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStaticMapImageForAddress:(NSString *)address zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 
 /**
  * The Google Places Autocomplete API is a web service that returns Place information based on text search terms, and, optionally, geographic bounds. The API can be used to provide autocomplete functionality for text-based geographic searches, by returning Places such as businesses, addresses, and points of interest as a user types.
@@ -154,7 +156,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacesAutocompleteForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocompleteForInput:(NSString *)input offset:(int)offset radius:(int)radius location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * Once you have a reference from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. A Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.
@@ -162,13 +164,13 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlaceDetailsForReference:(NSString*)reference successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlaceDetailsForReference:(NSString *)reference successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * Google Speak Text.
  * @param Text for convert.
  */
-- (void)speakText:(NSString*)text failureBlock:(void (^)(NSError *error))failure;
+- (void)speakText:(NSString *)text failureBlock:(void (^)(NSError *error))failure;
 
 /**
  * Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map.
@@ -177,7 +179,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadGeocodingForAddress:(NSString*)address filterComponents:(NSArray*)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadGeocodingForAddress:(NSString *)address filterComponents:(NSArray *)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map.
@@ -186,7 +188,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadGeocodingForLocation:(LPLocation*)location filterComponents:(NSArray*)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadGeocodingForLocation:(LPLocation *)location filterComponents:(NSArray *)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Google Places Autocomplete API is a web service that returns Place information based on text search terms, and, optionally, geographic bounds.
@@ -199,7 +201,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString *)input offset:(int)offset radius:(int)radius location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Google Places API Text Search Service is a web service that returns information about a set of Places based on a string — for example "pizza in New York" or "shoe stores near Ottawa".
@@ -209,7 +211,7 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlaceTextSearchForQuery:(NSString*)query location:(LPLocation*)location radius:(int)radius successfulBlock:(void (^)(LPPlaceSearchResults *placeResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlaceTextSearchForQuery:(NSString *)query location:(LPLocation *)location radius:(int)radius successfulBlock:(void (^)(LPPlaceSearchResults *placeResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 /**
  * The Places Photo service is a read-only API that allows you to easily add high quality photographic content to your application. The Photo service gives you access to the millions of photos stored in the Places and Google+ Local database. When you search for Places using either a Place Search or Place Details request, photo references will be returned for relevant photographic content. The Photo service lets you access the referenced photos, and resize the image to the optimal size for your application.
@@ -219,9 +221,10 @@ typedef enum {
  * @param Successful block with results.
  * @param Failure block with status.
  */
-- (void)loadPlacePhotoForReference:(NSString*)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadPlacePhotoForReference:(NSString *)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 
 @end
+
 
 #pragma mark - Delegate Protocol
 
@@ -230,29 +233,29 @@ typedef enum {
 @optional
 
 #pragma mark - Directions
-- (void)googleFunctionsWillLoadDirections:(LPGoogleFunctions*)googleFunctions;
-- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadDirections:(LPDirections*)directions;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingDirectionsWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctionsWillLoadDirections:(LPGoogleFunctions *)googleFunctions;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadDirections:(LPDirections *)directions;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingDirectionsWithStatus:(LPGoogleStatus)status;
 
 #pragma mark - Places Autocomplete
-- (void)googleFunctionsWillLoadPlacesAutocomplete:(LPGoogleFunctions*)googleFunctions forInput:(NSString*)input;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlacesAutocompleteWithStatus:(LPGoogleStatus)status;
-- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplete:(LPPlacesAutocomplete*)placesAutocomplete;
+- (void)googleFunctionsWillLoadPlacesAutocomplete:(LPGoogleFunctions *)googleFunctions forInput:(NSString *)input;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlacesAutocompleteWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplete:(LPPlacesAutocomplete *)placesAutocomplete;
 
 #pragma mark - Place Details
-- (void)googleFunctionsWillLoadPlaceDetailsResult:(LPGoogleFunctions*)googleFunctions forReference:(NSString*)reference;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlaceDetailsResultWithStatus:(LPGoogleStatus)status;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions didLoadPlaceDetailsResult:(LPPlaceDetailsResults *)placeDetailsResults;
+- (void)googleFunctionsWillLoadPlaceDetailsResult:(LPGoogleFunctions *)googleFunctions forReference:(NSString *)reference;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlaceDetailsResultWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceDetailsResult:(LPPlaceDetailsResults *)placeDetailsResults;
 
 #pragma mark - Geocoding
-- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions*)googleFunctions forAddress:(NSString*)address filterComponents:(NSArray*)filterComponents;
-- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions*)googleFunctions forLocation:(LPLocation*)location filterComponents:(NSArray*)filterComponents;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingGeocodingWithStatus:(LPGoogleStatus)status;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions didLoadGeocodingResults:(LPGeocodingResults*)geocodingResults;
+- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions *)googleFunctions forAddress:(NSString *)address filterComponents:(NSArray *)filterComponents;
+- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions *)googleFunctions forLocation:(LPLocation *)location filterComponents:(NSArray *)filterComponents;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingGeocodingWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadGeocodingResults:(LPGeocodingResults *)geocodingResults;
 
 #pragma mark - Place Search
-- (void)googleFunctionsWillLoadPlaceSearch:(LPGoogleFunctions *)googleFunctions forQuery:(NSString*)guery;
-- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceSearch:(LPPlaceSearchResults*)placeResults;
+- (void)googleFunctionsWillLoadPlaceSearch:(LPGoogleFunctions *)googleFunctions forQuery:(NSString *)guery;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceSearch:(LPPlaceSearchResults *)placeResults;
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlaceSearchWithStatus:(LPGoogleStatus)status;
 
 @end

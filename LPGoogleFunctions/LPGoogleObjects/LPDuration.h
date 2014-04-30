@@ -7,14 +7,15 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPDuration : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) int value;
 
-+ (id)durationWithObjects:(NSDictionary*)dictionary;
++ (id)durationWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

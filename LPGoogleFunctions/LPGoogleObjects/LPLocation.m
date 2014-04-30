@@ -7,13 +7,13 @@
 
 #import "LPLocation.h"
 
+
 @implementation LPLocation
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPLocation new];
-    if (self != nil)
-	{
+    if (self) {
         self.longitude = [coder decodeDoubleForKey:@"longitude"];
         self.latitude = [coder decodeDoubleForKey:@"latitude"];
 	}
@@ -27,17 +27,16 @@
     [coder encodeDouble:self.latitude forKey:@"latitude"];
 }
 
-+ (id)locationWithObjects:(NSDictionary*)dictionary
++ (id)locationWithObjects:(NSDictionary *)dictionary
 {
     LPLocation *new = [LPLocation new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"lat"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"lat"] != nil) {
-            new.latitude=[[dictionary objectForKey:@"lat"] doubleValue];
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"lat"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"lat"]) {
+            new.latitude = [[dictionary objectForKey:@"lat"] doubleValue];
         }
         
-        if (![[dictionary objectForKey:@"lng"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"lng"] != nil) {
+        if (![[dictionary objectForKey:@"lng"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"lng"]) {
             new.longitude = [[dictionary objectForKey:@"lng"] doubleValue];
         }
     }
@@ -49,20 +48,20 @@
 {
     LPLocation *new = [LPLocation new];
     
-    new.latitude=latitude;
-    new.longitude=longitude;
+    new.latitude = latitude;
+    new.longitude = longitude;
     
     return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
-    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"latitude",@"longitude", nil]];
+    NSDictionary *dictionary = [self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"latitude", @"longitude", nil]];
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {  
     return [self dictionary].description;
 }
@@ -70,8 +69,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPLocation *new = [LPLocation new];
+    
     [new setLatitude:[self latitude]];
     [new setLongitude:[self longitude]];
+    
     return new;
 }
 

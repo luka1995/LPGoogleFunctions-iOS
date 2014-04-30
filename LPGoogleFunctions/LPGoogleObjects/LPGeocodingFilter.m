@@ -7,13 +7,13 @@
 
 #import "LPGeocodingFilter.h"
 
+
 @implementation LPGeocodingFilter
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPGeocodingFilter new];
-    if (self != nil)
-	{
+    if (self) {
         self.filter = [coder decodeIntegerForKey:@"filter"];
         self.value = [coder decodeObjectForKey:@"value"];
 	}
@@ -27,41 +27,40 @@
     [coder encodeObject:self.value forKey:@"value"];
 }
 
-+ (id)filterWithGeocodingFilter:(LPGeocodingFilterMode)filter value:(NSString*)value
++ (id)filterWithGeocodingFilter:(LPGeocodingFilterMode)filter value:(NSString *)value
 {
     LPGeocodingFilter *new = [LPGeocodingFilter new];
     
-    new.filter=filter;
-    
-    new.value=value;
+    new.filter = filter;
+    new.value = value;
     
 	return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"value", nil]]];
     
-    [dictionary setObject:[NSString stringWithFormat:@"%@",[LPGeocodingFilter getGeocodingFilter:self.filter]] forKey:@"filter"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", [LPGeocodingFilter getGeocodingFilter:self.filter]] forKey:@"filter"];
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
 
-+ (NSString*)getGeocodingFilter:(LPGeocodingFilterMode)filter
++ (NSString *)getGeocodingFilter:(LPGeocodingFilterMode)filter
 {
-    if(filter==LPGeocodingFilterRoute)
+    if(filter == LPGeocodingFilterRoute)
     {
         return @"route";
-    } else if(filter==LPGeocodingFilterPostal_code) {
+    } else if(filter == LPGeocodingFilterPostal_code) {
         return @"postal_code";
-    } else if(filter==LPGeocodingFilterLocality) {
+    } else if(filter == LPGeocodingFilterLocality) {
         return @"locality";
-    } else if(filter==LPGeocodingFilterAdministrative_area) {
+    } else if(filter == LPGeocodingFilterAdministrative_area) {
         return @"administrative_area";
     } else {
         return @"country";
@@ -71,8 +70,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPGeocodingFilter *new = [LPGeocodingFilter new];
+    
     [new setFilter:[self filter]];
     [new setValue:[self value]];
+    
     return new;
 }
 

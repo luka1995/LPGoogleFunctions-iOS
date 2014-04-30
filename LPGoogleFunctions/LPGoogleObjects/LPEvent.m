@@ -7,13 +7,13 @@
 
 #import "LPEvent.h"
 
+
 @implementation LPEvent
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPEvent new];
-    if (self != nil)
-	{
+    if (self) {
         self.eventID = [coder decodeObjectForKey:@"eventID"];
         self.summary = [coder decodeObjectForKey:@"summary"];
         self.URL = [coder decodeObjectForKey:@"URL"];
@@ -29,36 +29,35 @@
     [coder encodeObject:self.URL forKey:@"URL"];
 }
 
-+ (id)eventWithObjects:(NSDictionary*)dictionary
++ (id)eventWithObjects:(NSDictionary *)dictionary
 {
     LPEvent *new = [LPEvent new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"event_id"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"event_id"] != nil) {
-            new.eventID=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"event_id"]];
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"event_id"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"event_id"]) {
+            new.eventID = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"event_id"]];
         }
 
-        if (![[dictionary objectForKey:@"summary"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"summary"] != nil) {
-            new.summary=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"summary"]];
+        if (![[dictionary objectForKey:@"summary"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"summary"]) {
+            new.summary = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"summary"]];
         }
         
-        if (![[dictionary objectForKey:@"url"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"url"] != nil) {
-            new.URL=[NSString stringWithFormat:@"%@",[dictionary objectForKey:@"url"]];
+        if (![[dictionary objectForKey:@"url"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"url"]) {
+            new.URL = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"url"]];
         }
     }
     
 	return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"eventID",@"summary",@"URL", nil]]];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"eventID", @"summary", @"URL", nil]]];
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -66,9 +65,11 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPEvent *new = [LPEvent new];
+    
     [new setEventID:self.eventID];
     [new setSummary:self.summary];
     [new setURL:self.URL];
+    
     return new;
 }
 

@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPPlacePhoto : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSArray *htmlAttributions;
@@ -14,9 +15,9 @@
 @property (nonatomic, assign) int width;
 @property (nonatomic, strong) NSString *photoReference;
 
-+ (id)placePhotoWithObjects:(NSDictionary*)dictionary;
++ (id)placePhotoWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "LPPlaceDetails.h"
 
+
 @interface LPPlaceSearchResults : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSArray *results;
@@ -15,9 +16,9 @@
 @property (nonatomic, strong) NSArray *htmlAttributions;
 @property (nonatomic, strong) NSString *nextPageToken;
 
-+ (id)placeSearchResultsWithObjects:(NSDictionary*)dictionary;
++ (id)placeSearchResultsWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

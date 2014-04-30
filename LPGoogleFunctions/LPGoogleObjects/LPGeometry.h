@@ -9,14 +9,15 @@
 #import "LPLocation.h"
 #import "LPBounds.h"
 
+
 @interface LPGeometry : NSObject <NSCoding>
 
 @property (nonatomic, strong) LPLocation *location;
 @property (nonatomic, strong) LPBounds *viewport;
 
-+ (id)geometryWithObjects:(NSDictionary*)dictionary;
++ (id)geometryWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

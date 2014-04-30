@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LPTime : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *text;
@@ -14,9 +15,9 @@
 @property (nonatomic, assign) float value;
 @property (nonatomic, strong) NSDate *formattedTime;
 
-+ (id)timeWithObjects:(NSDictionary*)dictionary;
++ (id)timeWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

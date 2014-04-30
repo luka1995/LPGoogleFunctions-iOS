@@ -10,6 +10,7 @@
 #import "LPTime.h"
 #import "LPLine.h"
 
+
 @interface LPTransitDetails : NSObject <NSCoding>
 
 @property (nonatomic, strong) LPStop *arrivalStop;
@@ -20,9 +21,9 @@
 @property (nonatomic, strong) LPLine *line;
 @property (nonatomic, assign) int numStops;
 
-+ (id)transitDetailsWithObjects:(NSDictionary*)dictionary;
++ (id)transitDetailsWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

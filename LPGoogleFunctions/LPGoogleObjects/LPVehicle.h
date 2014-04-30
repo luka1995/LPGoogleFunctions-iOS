@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 typedef enum {
     LPGoogleVehicleTypeRAIL,
     LPGoogleVehicleTypeMETRO_RAIL,
@@ -27,18 +28,19 @@ typedef enum {
     LPGoogleVehicleTypeOTHER
 } LPGoogleVehicleType;
 
+
 @interface LPVehicle : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *icon;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, assign) LPGoogleVehicleType type;
 
-+ (LPGoogleVehicleType)getGoogleVehicleTypeFromString:(NSString*)type;
-+ (NSString*)getGoogleVehicleType:(LPGoogleVehicleType)type;
++ (LPGoogleVehicleType)getGoogleVehicleTypeFromString:(NSString *)type;
++ (NSString *)getGoogleVehicleType:(LPGoogleVehicleType)type;
 
-+ (id)vehicleWithObjects:(NSDictionary*)dictionary;
++ (id)vehicleWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

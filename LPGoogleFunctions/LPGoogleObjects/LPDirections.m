@@ -7,13 +7,13 @@
 
 #import "LPDirections.h"
 
+
 @implementation LPDirections
 
-- (id)initWithCoder:(NSCoder*)coder
+- (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPDirections new];
-    if (self != nil)
-	{
+    if (self) {
         self.routes = [coder decodeObjectForKey:@"routes"];
         self.statusCode = [coder decodeObjectForKey:@"statusCode"];
         self.requestTravelMode = [coder decodeIntegerForKey:@"requestTravelMode"];
@@ -22,64 +22,60 @@
 	return self;
 }
 
-- (void)encodeWithCoder:(NSCoder*)coder
+- (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.routes forKey:@"routes"];
     [coder encodeObject:self.statusCode forKey:@"statusCode"];
     [coder encodeInteger:self.requestTravelMode forKey:@"requestTravelMode"];
 }
 
-+ (id)directionsWithObjects:(NSDictionary*)dictionary
++ (id)directionsWithObjects:(NSDictionary *)dictionary
 {
     LPDirections *new = [LPDirections new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"routes"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"routes"] != nil) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"routes"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"routes"]) {
             NSMutableArray *array=[NSMutableArray new];
 
-            for(int i=0;i<[[dictionary objectForKey:@"routes"] count];i++)
-            {
+            for (int i=0; i<[[dictionary objectForKey:@"routes"] count]; i++) {
                 LPRoute *route = [LPRoute routeWithObjects:[[dictionary objectForKey:@"routes"] objectAtIndex:i]];
                 route.number=i;
+                
                 [array addObject:route];
             }
             
             new.routes=array;
         }
         
-        if (![[dictionary objectForKey:@"status"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"status"] != nil) {
-            new.statusCode = [NSString stringWithFormat:@"%@",[dictionary objectForKey:@"status"]];
+        if (![[dictionary objectForKey:@"status"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"status"]) {
+            new.statusCode = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"status"]];
         }
     }
     
 	return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
 
-    if(self.routes!=nil && ![self.routes isKindOfClass:[NSNull class]])
-    {
+    if (self.routes && ![self.routes isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0;i<[self.routes count];i++)
-        {
-            [array addObject:((LPRoute*)[self.routes objectAtIndex:i]).dictionary];
+        for (int i=0; i<[self.routes count]; i++) {
+            [array addObject:((LPRoute *)[self.routes objectAtIndex:i]).dictionary];
         }
         
         [dictionary setObject:array forKey:@"routes"];
     }
 
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.statusCode] forKey:@"statusCode"];
-    
-    [dictionary setObject:[NSString stringWithFormat:@"%@",[LPStep getDirectionsTravelMode:self.requestTravelMode]] forKey:@"requestTravelMode"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.statusCode] forKey:@"statusCode"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", [LPStep getDirectionsTravelMode:self.requestTravelMode]] forKey:@"requestTravelMode"];
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -87,14 +83,16 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPDirections *new = [LPDirections new];
+    
     [new setRoutes:[self routes]];
     [new setStatusCode:[self statusCode]];
     [new setRequestTravelMode:self.requestTravelMode];
+    
     return new;
 }
 
-+ (NSString*)getDirectionsAvoid:(LPGoogleDirectionsAvoid)avoid {
-    
++ (NSString *)getDirectionsAvoid:(LPGoogleDirectionsAvoid)avoid
+{
     switch (avoid) {
         case LPGoogleDirectionsAvoidHighways:
             return @"highways";
@@ -105,7 +103,8 @@
     }
 }
 
-+ (NSString*)getDirectionsUnit:(LPGoogleDirectionsUnit)unit {
++ (NSString *)getDirectionsUnit:(LPGoogleDirectionsUnit)unit
+{
     switch (unit) {
         case LPGoogleDirectionsUnitImperial:
             return @"imperial";

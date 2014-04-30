@@ -7,13 +7,13 @@
 
 #import "LPPlaceDetailsResults.h"
 
+
 @implementation LPPlaceDetailsResults
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPPlaceDetailsResults new];
-    if (self != nil)
-	{
+    if (self) {
         self.htmlAttributions = [coder decodeObjectForKey:@"htmlAttributions"];
         self.result = [coder decodeObjectForKey:@"result"];
         self.statusCode = [coder decodeObjectForKey:@"statusCode"];
@@ -33,13 +33,11 @@
 {
     LPPlaceDetailsResults *new = [LPPlaceDetailsResults new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"html_attributions"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"html_attributions"] != nil) {
             NSMutableArray *array = [NSMutableArray new];
             
-            for(int i=0;i<[[dictionary objectForKey:@"html_attributions"] count];i++)
-            {
+            for(int i=0; i<[[dictionary objectForKey:@"html_attributions"] count]; i++) {
                 NSString *string = [[dictionary objectForKey:@"html_attributions"] objectAtIndex:i];
                 
                 [array addObject:string];
@@ -53,7 +51,7 @@
         }
         
         if (![[dictionary objectForKey:@"status"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"status"] != nil) {
-            new.statusCode = [NSString stringWithFormat:@"%@",[dictionary objectForKey:@"status"]];
+            new.statusCode = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"status"]];
         }
     }
     
@@ -64,13 +62,11 @@
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    if(self.htmlAttributions!=nil && ![self.htmlAttributions isKindOfClass:[NSNull class]])
-    {
+    if(self.htmlAttributions && ![self.htmlAttributions isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0;i<[self.htmlAttributions count];i++)
-        {
-            NSString *string = (NSString*)[self.htmlAttributions objectAtIndex:i];
+        for(int i=0; i<[self.htmlAttributions count]; i++) {
+            NSString *string = (NSString *)[self.htmlAttributions objectAtIndex:i];
             
             [array addObject:string.description];
         }
@@ -78,17 +74,16 @@
         [dictionary setObject:array forKey:@"htmlAttributions"];
     }
     
-    if(self.result!=nil && ![self.result isKindOfClass:[NSNull class]])
-    {
+    if(self.result && ![self.result isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.result.dictionary forKey:@"result"];
     }
     
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.statusCode] forKey:@"statusCode"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.statusCode] forKey:@"statusCode"];
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -96,9 +91,11 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPPlaceDetailsResults *new = [LPPlaceDetailsResults new];
+    
     [new setResult:[self result]];
     [new setStatusCode:[self statusCode]];
     [new setHtmlAttributions:self.htmlAttributions];
+    
     return new;
 }
 

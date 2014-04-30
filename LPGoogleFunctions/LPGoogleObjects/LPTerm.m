@@ -7,13 +7,13 @@
 
 #import "LPTerm.h"
 
+
 @implementation LPTerm
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPTerm new];
-    if (self != nil)
-	{
+    if (self) {
         self.value = [coder decodeObjectForKey:@"value"];
         self.offset = [coder decodeIntegerForKey:@"offset"];
 	}
@@ -27,17 +27,16 @@
     [coder encodeInteger:self.offset forKey:@"offset"];
 }
 
-+ (id)termWithObjects:(NSDictionary*)dictionary
++ (id)termWithObjects:(NSDictionary *)dictionary
 {
     LPTerm *new = [LPTerm new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"value"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"value"] != nil) {
+    if(![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"value"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"value"]) {
             new.value=[dictionary objectForKey:@"value"];
         }
         
-        if (![[dictionary objectForKey:@"offset"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"offset"] != nil) {
+        if (![[dictionary objectForKey:@"offset"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"offset"]) {
             new.offset=[[dictionary objectForKey:@"offset"] intValue];
         }
     }
@@ -45,14 +44,14 @@
     return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"value",@"offset", nil]]];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"value", @"offset", nil]]];
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -60,8 +59,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPTerm *new = [LPTerm new];
+    
     [new setValue:[self value]];
     [new setOffset:[self offset]];
+    
     return new;
 }
 

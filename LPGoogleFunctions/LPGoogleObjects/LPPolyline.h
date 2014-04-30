@@ -8,16 +8,17 @@
 #import <Foundation/Foundation.h>
 #import "LPLocation.h"
 
+
 @interface LPPolyline : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *pointsString;
 @property (nonatomic, strong) NSArray *pointsArray;
 
-+ (id)polylineWithObjects:(NSDictionary*)dictionary;
++ (id)polylineWithObjects:(NSDictionary *)dictionary;
 
 + (NSArray *)decodePolylineOfGoogleMaps:(NSString *)encodedPolyline;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

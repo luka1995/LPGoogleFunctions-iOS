@@ -7,13 +7,13 @@
 
 #import "LPAgencie.h"
 
+
 @implementation LPAgencie
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPAgencie new];
-    if (self != nil)
-	{
+    if (self) {
         self.name = [coder decodeObjectForKey:@"name"];
         self.url = [coder decodeObjectForKey:@"url"];
 	}
@@ -31,13 +31,12 @@
 {
     LPAgencie *new = [LPAgencie new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"name"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"name"] != nil) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"name"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"name"]) {
             new.name = [dictionary objectForKey:@"name"];
         }
         
-        if (![[dictionary objectForKey:@"url"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"url"] != nil) {
+        if (![[dictionary objectForKey:@"url"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"url"]) {
             new.url = [dictionary objectForKey:@"url"];
         }
     }
@@ -45,18 +44,17 @@
     return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
 
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.name] forKey:@"name"];
-    
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.url] forKey:@"url"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.name] forKey:@"name"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.url] forKey:@"url"];
     
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -64,8 +62,10 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPAgencie *new = [LPAgencie new];
+    
     [new setName:[self name]];
     [new setUrl:[self url]];
+    
     return new;
 }
 

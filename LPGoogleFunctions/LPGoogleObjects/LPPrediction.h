@@ -9,6 +9,7 @@
 #import "LPMatchedSubstring.h"
 #import "LPTerm.h"
 
+
 typedef enum {
     LPGooglePlaceTypeGeocode,
     LPGooglePlaceTypeEstablishment,
@@ -22,6 +23,7 @@ typedef enum {
     LPGooglePlaceTypeUnknown
 } LPGooglePlaceType;
 
+
 @interface LPPrediction : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *name;
@@ -32,12 +34,12 @@ typedef enum {
 @property (nonatomic, strong) NSArray *terms;
 @property (nonatomic, strong) NSArray *matchedSubstrings;
 
-+ (id)predicationWithObjects:(NSDictionary*)dictionary;
++ (id)predicationWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
-+ (LPGooglePlaceType)getGooglePlaceTypeFromString:(NSString*)type;
-+ (NSString*)getStringFromGooglePlaceType:(LPGooglePlaceType)type;
++ (LPGooglePlaceType)getGooglePlaceTypeFromString:(NSString *)type;
++ (NSString *)getStringFromGooglePlaceType:(LPGooglePlaceType)type;
 
 - (id)copyWithZone:(NSZone *)zone;
 

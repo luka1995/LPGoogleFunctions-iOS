@@ -12,6 +12,7 @@
 #import "LPStep.h"
 #import "LPTime.h"
 
+
 @interface LPLeg : NSObject <NSCoding>
 
 @property (nonatomic, strong) LPTime *arrivalTime;
@@ -24,9 +25,9 @@
 @property (nonatomic, strong) LPLocation *startLocation;
 @property (nonatomic, strong) NSArray *steps;
 
-+ (id)legWithObjects:(NSDictionary*)dictionary;
++ (id)legWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

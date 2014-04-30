@@ -7,13 +7,13 @@
 
 #import "LPAddressComponent.h"
 
+
 @implementation LPAddressComponent
 
 - (id)initWithCoder:(NSCoder *)coder
 {
 	self = [LPAddressComponent new];
-    if (self != nil)
-	{
+    if (self) {
         self.longName = [coder decodeObjectForKey:@"longName"];
         self.shortName = [coder decodeObjectForKey:@"shortName"];
         self.types = [coder decodeObjectForKey:@"types"];
@@ -33,45 +33,40 @@
 {
     LPAddressComponent *new = [LPAddressComponent new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
-    {
-        if (![[dictionary objectForKey:@"long_name"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"long_name"] != nil) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
+        if (![[dictionary objectForKey:@"long_name"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"long_name"]) {
             new.longName = [dictionary objectForKey:@"long_name"];
         }
         
-        if (![[dictionary objectForKey:@"short_name"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"short_name"] != nil) {
+        if (![[dictionary objectForKey:@"short_name"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"short_name"]) {
             new.shortName = [dictionary objectForKey:@"short_name"];
         }
         
-        if (![[dictionary objectForKey:@"types"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"types"] != nil) {
+        if (![[dictionary objectForKey:@"types"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"types"]) {
             NSMutableArray *array = [NSMutableArray new];
             
-            for(int i=0;i<[[dictionary objectForKey:@"types"] count];i++)
-            {
+            for (int i=0; i<[[dictionary objectForKey:@"types"] count]; i++) {
                 [array addObject:[[dictionary objectForKey:@"types"] objectAtIndex:i]];
             }
             
-            new.types=[NSArray arrayWithArray:array];
+            new.types = [NSArray arrayWithArray:array];
         }
     }
     
     return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
     [dictionary setObject:self.longName forKey:@"longName"];
-    
     [dictionary setObject:self.shortName forKey:@"shortName"];
     
-    if(self.types!=nil && ![self.types isKindOfClass:[NSNull class]])
-    {
+    if (self.types && ![self.types isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0;i<[self.types count];i++)
-        {
+        for (int i=0; i<[self.types count]; i++) {
             [array addObject:[self.types objectAtIndex:i]];
         }
         
@@ -81,7 +76,7 @@
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }
@@ -89,9 +84,11 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     LPAddressComponent *new = [LPAddressComponent new];
+    
     [new setLongName:[self longName]];
     [new setShortName:[self shortName]];
     [new setTypes:[self types]];
+    
     return new;
 }
 
