@@ -180,7 +180,7 @@
         [dictionary setObject:array forKey:@"types"];
     }
     
-    if(self.photos && ![self.photos isKindOfClass:[NSNull class]]) {
+    if (self.photos && ![self.photos isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
         for (int i=0; i<[self.photos count]; i++) {

@@ -35,7 +35,7 @@
 {
     LPTime *new = [LPTime new];
     
-    if(![dictionary isKindOfClass:[NSNull class]]) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"text"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"text"]) {
             new.text = [dictionary objectForKey:@"text"];
         }
@@ -48,7 +48,7 @@
             new.value = [[dictionary objectForKey:@"value"] floatValue];
         }
         
-        if(new.text && new.timeZone) {
+        if (new.text && new.timeZone) {
             new.formattedTime = [NSDate dateWithTimeIntervalSince1970:new.value];
         }
     }

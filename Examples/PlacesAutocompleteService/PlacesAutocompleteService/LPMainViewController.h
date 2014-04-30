@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LPGoogleFunctions.h"
 
+
 @interface LPMainViewController : UIViewController <LPGoogleFunctionsDelegate>
 
 @property (nonatomic, strong) LPGoogleFunctions *googleFunctions;
-    
 @property (nonatomic, strong) IBOutlet UITextView *textView;
     
 @end

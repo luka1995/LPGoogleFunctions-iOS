@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LPGoogleFunctions.h"
 
+
 @interface LPMainViewController : UIViewController <LPGoogleFunctionsDelegate>
 
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
-
 @property (nonatomic, strong) LPGoogleFunctions *googleFunctions;
 
 @end

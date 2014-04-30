@@ -37,7 +37,7 @@
         if (![[dictionary objectForKey:@"html_attributions"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"html_attributions"] != nil) {
             NSMutableArray *array = [NSMutableArray new];
             
-            for(int i=0; i<[[dictionary objectForKey:@"html_attributions"] count]; i++) {
+            for (int i=0; i<[[dictionary objectForKey:@"html_attributions"] count]; i++) {
                 NSString *string = [[dictionary objectForKey:@"html_attributions"] objectAtIndex:i];
                 
                 [array addObject:string];
@@ -62,10 +62,10 @@
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    if(self.htmlAttributions && ![self.htmlAttributions isKindOfClass:[NSNull class]]) {
+    if (self.htmlAttributions && ![self.htmlAttributions isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0; i<[self.htmlAttributions count]; i++) {
+        for (int i=0; i<[self.htmlAttributions count]; i++) {
             NSString *string = (NSString *)[self.htmlAttributions objectAtIndex:i];
             
             [array addObject:string.description];
@@ -74,7 +74,7 @@
         [dictionary setObject:array forKey:@"htmlAttributions"];
     }
     
-    if(self.result && ![self.result isKindOfClass:[NSNull class]]) {
+    if (self.result && ![self.result isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.result.dictionary forKey:@"result"];
     }
     

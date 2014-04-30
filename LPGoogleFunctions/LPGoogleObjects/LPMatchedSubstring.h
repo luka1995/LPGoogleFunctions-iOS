@@ -13,7 +13,7 @@
 @property (nonatomic, assign) int length;
 @property (nonatomic, assign) int offset;
 
-+ (id)matchedSubstringWithObjects:(NSDictionar *)dictionary;
++ (id)matchedSubstringWithObjects:(NSDictionary *)dictionary;
 
 - (NSDictionary *)dictionary;
 

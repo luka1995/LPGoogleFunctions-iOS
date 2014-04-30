@@ -87,19 +87,19 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 
 + (LPGoogleStatus)getGoogleStatusFromString:(NSString *)status
 {
-    if([status isEqualToString:STATUS_OK]) {
+    if ([status isEqualToString:STATUS_OK]) {
         return LPGoogleStatusOK;
-    } else if([status isEqualToString:STATUS_NOT_FOUND]) {
+    } else if ([status isEqualToString:STATUS_NOT_FOUND]) {
         return LPGoogleStatusNotFound;
-    } else if([status isEqualToString:STATUS_ZERO_RESULTS]) {
+    } else if ([status isEqualToString:STATUS_ZERO_RESULTS]) {
         return LPGoogleStatusZeroResults;
-    } else if([status isEqualToString:STATUS_MAX_WAYPOINTS_EXCEEDED]) {
+    } else if ([status isEqualToString:STATUS_MAX_WAYPOINTS_EXCEEDED]) {
         return LPGoogleStatusMaxWaypointsExceeded;
-    } else if([status isEqualToString:STATUS_INVALID_REQUEST]) {
+    } else if ([status isEqualToString:STATUS_INVALID_REQUEST]) {
         return LPGoogleStatusInvalidRequest;
-    } else if([status isEqualToString:STATUS_OVER_QUERY_LIMIT]) {
+    } else if ([status isEqualToString:STATUS_OVER_QUERY_LIMIT]) {
         return LPGoogleStatusOverQueryLimit;
-    } else if([status isEqualToString:STATUS_REQUEST_DENIED]) {
+    } else if ([status isEqualToString:STATUS_REQUEST_DENIED]) {
         return LPGoogleStatusRequestDenied;
     } else {
         return LPGoogleStatusUnknownError;
@@ -108,8 +108,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 
 + (NSString*)getGoogleStatus:(LPGoogleStatus)status
 {
-    switch (status)
-    {
+    switch (status) {
         case LPGoogleStatusOK:
             return STATUS_OK;
         case LPGoogleStatusInvalidRequest:
@@ -145,34 +144,23 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [parameters setObject:[NSString stringWithFormat:@"%f,%f", destination.latitude, destination.longitude] forKey:@"destination"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
-    
-    //MODE
     [parameters setObject:[LPStep getDirectionsTravelMode:travelMode] forKey:@"mode"];
-    
-    //AVOID
     [parameters setObject:[LPDirections getDirectionsAvoid:avoid] forKey:@"avoid"];
-    
-    //UNIT
     [parameters setObject:[LPDirections getDirectionsUnit:unit] forKey:@"units"];
-    
-    //ALTERNATIVES
     [parameters setObject:[NSString stringWithFormat:@"%@", alternatives ? @"true" : @"false"] forKey:@"alternatives"];
 
-    //departureTime
-    if(departureTime) {
+    if (departureTime) {
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
     }
-    
-    //departureTime
-    if(arrivalTime) {
+
+    if (arrivalTime) {
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [arrivalTime timeIntervalSince1970]] forKey:@"arrival_time"];
     }
     
-    //Waypoints
-    if(waypoints.count>0) {
+    if (waypoints.count>0) {
         NSString *waypointsString = @"";
         
-        for(int i=0; i<[waypoints count]; i++) {
+        for (int i=0; i<[waypoints count]; i++) {
             LPWaypoint *waypoint = (LPWaypoint *)[waypoints objectAtIndex:i];
             
             waypointsString = [waypointsString stringByAppendingFormat:@"%f,%f|", waypoint.location.latitude, waypoint.location.longitude];
@@ -192,19 +180,19 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         
         LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:directions.statusCode];
 
-        if(status==LPGoogleStatusOK) {
+        if (status == LPGoogleStatusOK) {
             if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadDirections:)]) {
                 [self.delegate googleFunctions:self didLoadDirections:directions];
             }
             
-            if(successful)
+            if (successful)
                 successful(directions);
         } else {
             if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)]) {
                 [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:status];
             }
             
-            if(failure)
+            if (failure)
                 failure(status);
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
@@ -212,7 +200,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure)
+        if (failure)
             failure(LPGoogleStatusUnknownError);
     }];
     
@@ -242,10 +230,10 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
         return image;
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if(successful)
+        if (successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure)
+        if (failure)
             failure(error);
     }];
     
@@ -275,10 +263,10 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
         return image;
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if(successful)
+        if (successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure)
+        if (failure)
             failure(error);
     }];
     
@@ -300,7 +288,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     URL = [URL stringByAppendingFormat:@"size=%dx%d&", (int)size.width, (int)size.height];
     URL = [URL stringByAppendingFormat:@"maptype=%@&", [LPGoogleFunctions getMapType:maptype]];
     
-    for(int i=0; i<[markers count]; i++) {
+    for (int i=0; i<[markers count]; i++) {
         LPMapImageMarker *marker = (LPMapImageMarker *)[markers objectAtIndex:i];
         
         URL = [URL stringByAppendingFormat:@"markers=%@&", [marker getMarkerURLString]];
@@ -309,7 +297,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
 
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
-
+        return image;
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         if(successful)
             successful(image);
@@ -335,8 +323,8 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     URL = [URL stringByAppendingFormat:@"scale=%d&", scale];
     URL = [URL stringByAppendingFormat:@"size=%dx%d&", (int)size.width, (int)size.height];
     
-    if(markers) {
-        for(int i=0; i<[markers count]; i++) {
+    if (markers) {
+        for (int i=0; i<[markers count]; i++) {
             LPMapImageMarker *marker = (LPMapImageMarker *)[markers objectAtIndex:i];
             
             URL = [URL stringByAppendingFormat:@"markers=%@&", [marker getMarkerURLString]];
@@ -346,12 +334,12 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
-
+        return image;
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        if(successful)
+        if (successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure)
+        if (failure)
             failure(error);
     }];
     
@@ -392,12 +380,12 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         
         NSString *statusCode = placesAutocomplete.statusCode;
         
-        if([statusCode isEqualToString:@"OK"]) {
+        if ([statusCode isEqualToString:@"OK"]) {
             if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlacesAutocomplete:)]) {
                 [self.delegate googleFunctions:self didLoadPlacesAutocomplete:placesAutocomplete];
             }
             
-            if(successful)
+            if (successful)
                 successful(placesAutocomplete);
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
@@ -406,7 +394,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                 [self.delegate googleFunctions:self errorLoadingPlacesAutocompleteWithStatus:status];
             }
             
-            if(failure)
+            if (failure)
                 failure(status);
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
@@ -414,7 +402,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             [self.delegate googleFunctions:self errorLoadingPlacesAutocompleteWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure)
+        if (failure)
             failure(LPGoogleStatusUnknownError);
     }];
     
@@ -438,7 +426,6 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
-    //REQUEST URL
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
                                                             path:googleAPIPlaceDetailsURL
                                                       parameters:parameters];
@@ -448,12 +435,12 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 
         NSString *statusCode = placeDetailsResults.statusCode;
         
-        if([statusCode isEqualToString:@"OK"]) {
+        if ([statusCode isEqualToString:@"OK"]) {
             if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlaceDetailsResult:)]) {
                 [self.delegate googleFunctions:self didLoadPlaceDetailsResult:placeDetailsResults];
             }
             
-            if(successful)
+            if (successful)
                 successful(placeDetailsResults);
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
@@ -462,7 +449,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                 [self.delegate googleFunctions:self errorLoadingPlaceDetailsResultWithStatus:status];
             }
             
-            if(failure)
+            if (failure)
                 failure(status);
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
@@ -470,7 +457,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             [self.delegate googleFunctions:self errorLoadingPlaceDetailsResultWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure)
+        if (failure)
             failure(LPGoogleStatusUnknownError);
     }];
     
@@ -487,8 +474,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"tl"];
     [parameters setObject:[NSString stringWithFormat:@"%@", text] forKey:@"q"];
-    
-    //REQUEST URL
+
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
                                                             path:googleAPITextToSpeechURL
                                                       parameters:parameters];
@@ -529,28 +515,26 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [parameters setObject:[NSString stringWithFormat:@"%@", address] forKey:@"address"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
-    
-    //COMPONENTS FILTER
-    if([filterComponents count] > 0) {
+
+    if ([filterComponents count] > 0) {
         NSString *comString = @"components=";
         
-        for(int i=0; i<[filterComponents count]; i++) {
+        for (int i=0; i<[filterComponents count]; i++) {
             LPGeocodingFilter *filter = (LPGeocodingFilter *)[filterComponents objectAtIndex:i];
             
             comString = [comString stringByAppendingFormat:@"%@:%@|", [LPGeocodingFilter getGeocodingFilter:filter.filter], filter.value];
         }
     }
-    
-    //REQUEST URL
+
     NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
                                                             path:googleAPIGeocodingURL
                                                       parameters:parameters];
     
     [self loadGeocodingRequest:request successfulBlock:^(LPGeocodingResults *geocodingResults) {
-        if(successful)
+        if (successful)
             successful(geocodingResults);
     } failureBlock:^(LPGoogleStatus status) {
-        if(failure)
+        if (failure)
             failure(status);
     }];
 }
@@ -571,11 +555,10 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
-    //COMPONENTS FILTER
-    if([filterComponents count] > 0) {
+    if ([filterComponents count] > 0) {
         NSString *comString = @"components=";
         
-        for(int i=0; i<[filterComponents count]; i++) {
+        for (int i=0; i<[filterComponents count]; i++) {
             LPGeocodingFilter *filter = (LPGeocodingFilter *)[filterComponents objectAtIndex:i];
             
             comString = [comString stringByAppendingFormat:@"%@:%@|", [LPGeocodingFilter getGeocodingFilter:filter.filter], filter.value];
@@ -587,10 +570,10 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                                                       parameters:parameters];
     
     [self loadGeocodingRequest:request successfulBlock:^(LPGeocodingResults *geocodingResults) {
-        if(successful)
+        if (successful)
             successful(geocodingResults);
     } failureBlock:^(LPGoogleStatus status) {
-        if(failure)
+        if (failure)
             failure(status);
     }];
 }
@@ -602,12 +585,12 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         
         NSString *statusCode = results.statusCode;
         
-        if([statusCode isEqualToString:@"OK"]) {
+        if ([statusCode isEqualToString:@"OK"]) {
             if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadGeocodingResults:)]) {
                 [self.delegate googleFunctions:self didLoadGeocodingResults:results];
             }
             
-            if(successful)
+            if (successful)
                 successful(results);
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
@@ -616,7 +599,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                 [self.delegate googleFunctions:self errorLoadingGeocodingWithStatus:status];
             }
             
-            if(failure)
+            if (failure)
                 failure(status);
         }
 
@@ -625,7 +608,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             [self.delegate googleFunctions:self errorLoadingGeocodingWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure)
+        if (failure)
             failure(LPGoogleStatusUnknownError);
     }];
     
@@ -640,7 +623,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         NSMutableArray *array = [NSMutableArray new];
         __block BOOL blockSend = NO;
         
-        for(int i=0; i<[placesAutocomplete.predictions count]; i++) {
+        for (int i=0; i<[placesAutocomplete.predictions count]; i++) {
             NSString *reference = ((LPPrediction *)[placesAutocomplete.predictions objectAtIndex:i]).reference;
             
             [self loadPlaceDetailsForReference:reference successfulBlock:^(LPPlaceDetailsResults *placeDetailsResults) {
@@ -650,17 +633,17 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 
                 whichLoaded++;
 
-                if(whichLoaded >= [placesAutocomplete.predictions count]) {
-                    if([array count] > 0) {
-                        if(!blockSend) {
-                            if(successful)
+                if (whichLoaded >= [placesAutocomplete.predictions count]) {
+                    if ([array count] > 0) {
+                        if (!blockSend) {
+                            if (successful)
                                 successful(array);
                             
                             blockSend = YES;
                         }
                     } else {
-                        if(!blockSend) {
-                            if(failure)
+                        if (!blockSend) {
+                            if (failure)
                                 failure(LPGoogleStatusZeroResults);
                             
                             blockSend = YES;
@@ -670,17 +653,17 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             } failureBlock:^(LPGoogleStatus status) {
                 whichLoaded++;
 
-                if(whichLoaded >= [placesAutocomplete.predictions count]) {
-                    if([array count] > 0) {
-                        if(!blockSend) {
-                            if(successful)
+                if (whichLoaded >= [placesAutocomplete.predictions count]) {
+                    if ([array count] > 0) {
+                        if (!blockSend) {
+                            if (successful)
                                 successful(array);
                             
                             blockSend = YES;
                         }
                     } else {
-                        if(!blockSend) {
-                            if(failure)
+                        if (!blockSend) {
+                            if (failure)
                                 failure(LPGoogleStatusZeroResults);
                             
                             blockSend = YES;
@@ -691,7 +674,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         }
         
     } failureBlock:^(LPGoogleStatus status) {
-        if(failure)
+        if (failure)
             failure(status);
     }];
 }
@@ -713,7 +696,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
-    if(location && radius > 0) {
+    if (location && radius > 0) {
         [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"location"];
         [parameters setObject:[NSString stringWithFormat:@"%d", radius] forKey:@"radius"];
     }
@@ -727,12 +710,12 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         
         NSString *statusCode = placeDetailsResults.statusCode;
         
-        if([statusCode isEqualToString:@"OK"]) {
+        if ([statusCode isEqualToString:@"OK"]) {
             if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlaceSearch:)]) {
                 [self.delegate googleFunctions:self didLoadPlaceSearch:placeDetailsResults];
             }
             
-            if(successful)
+            if (successful)
                 successful(placeDetailsResults);
         } else {
             LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
@@ -741,7 +724,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                 [self.delegate googleFunctions:self errorLoadingPlaceSearchWithStatus:status];
             }
             
-            if(failure)
+            if (failure)
                 failure(status);
         }
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id data) {
@@ -749,7 +732,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
             [self.delegate googleFunctions:self errorLoadingPlaceSearchWithStatus:LPGoogleStatusUnknownError];
         }
         
-        if(failure)
+        if (failure)
             failure(LPGoogleStatusUnknownError);
     }];
     [operation start];
@@ -767,11 +750,11 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", reference] forKey:@"photoreference"];
     
-    if(maxHeight > 0 && maxHeight <= 1600) {
+    if (maxHeight > 0 && maxHeight <= 1600) {
         [parameters setObject:[NSString stringWithFormat:@"%d", maxHeight] forKey:@"maxheight"];
     }
     
-    if(maxWidth > 0 && maxWidth <= 1600) {
+    if (maxWidth > 0 && maxWidth <= 1600) {
         [parameters setObject:[NSString stringWithFormat:@"%d", maxWidth] forKey:@"maxwidth"];
     }
 
@@ -780,12 +763,12 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
                                                       parameters:parameters];
     
     AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request imageProcessingBlock:^UIImage *(UIImage *image) {
-
+        return image;
     } success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
         if(successful)
             successful(image);
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        if(failure)
+        if (failure)
             failure(error);
     }];
     

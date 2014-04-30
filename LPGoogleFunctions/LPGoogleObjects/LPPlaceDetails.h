@@ -11,6 +11,7 @@
 #import "LPPlacePhoto.h"
 #import "LPEvent.h"
 
+
 typedef enum {
     LPGooglePriceLevelFree,
     LPGooglePriceLevelInexpensive,
@@ -18,6 +19,7 @@ typedef enum {
     LPGooglePriceLevelExpensive,
     LPGooglePriceLevelVeryExpensive
 } LPGooglePriceLevel;
+
 
 @interface LPPlaceDetails : NSObject <NSCoding>
 
@@ -37,9 +39,9 @@ typedef enum {
 @property (nonatomic, assign) float rating;
 @property (nonatomic, strong) NSArray *events;
 
-+ (id)placeDetailsWithObjects:(NSDictionary*)dictionary;
++ (id)placeDetailsWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

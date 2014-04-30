@@ -102,46 +102,42 @@
     
     [dictionary setObject:[NSNumber numberWithInteger:self.number] forKey:@"number"];
     
-    if(self.bounds!=nil && ![self.bounds isKindOfClass:[NSNull class]])
-    {
+    if (self.bounds && ![self.bounds isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.bounds.dictionary forKey:@"bounds"];
     }
     
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.copyrights] forKey:@"copyrights"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.copyrights] forKey:@"copyrights"];
     
-    if(self.legs!=nil && ![self.legs isKindOfClass:[NSNull class]])
-    {
+    if (self.legs && ![self.legs isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0;i<[self.legs count];i++)
-        {
+        for (int i=0; i<[self.legs count]; i++) {
             [array addObject:((LPLeg*)[self.legs objectAtIndex:i]).dictionary];
         }
         
         [dictionary setObject:array forKey:@"legs"];
     }
     
-    if(self.overviewPolyline!=nil && ![self.overviewPolyline isKindOfClass:[NSNull class]])
-    {
+    if (self.overviewPolyline && ![self.overviewPolyline isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.overviewPolyline.dictionary forKey:@"overviewPolyline"];
     }
     
-    [dictionary setObject:[NSString stringWithFormat:@"%@",self.summary] forKey:@"summary"];
+    [dictionary setObject:[NSString stringWithFormat:@"%@", self.summary] forKey:@"summary"];
     
-    if(self.waypoints && ![self.waypoints isKindOfClass:[NSNull class]]) {
+    if (self.waypoints && ![self.waypoints isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0; i<[self.waypoints count]; i++) {
+        for (int i=0; i<[self.waypoints count]; i++) {
             [array addObject:((LPWaypoint *)[self.waypoints objectAtIndex:i]).dictionary];
         }
         
         [dictionary setObject:array forKey:@"waypoints"];
     }
     
-    if(self.warnings && ![self.warnings isKindOfClass:[NSNull class]]) {
+    if (self.warnings && ![self.warnings isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0; i<[self.warnings count]; i++) {
+        for (int i=0; i<[self.warnings count]; i++) {
             [array addObject:[self.warnings objectAtIndex:i]];
         }
         

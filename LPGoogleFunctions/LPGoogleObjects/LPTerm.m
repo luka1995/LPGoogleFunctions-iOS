@@ -31,7 +31,7 @@
 {
     LPTerm *new = [LPTerm new];
     
-    if(![dictionary isKindOfClass:[NSNull class]]) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"value"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"value"]) {
             new.value=[dictionary objectForKey:@"value"];
         }

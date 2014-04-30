@@ -8,13 +8,16 @@
 
 #import "LPMainViewController.h"
 
+
+NSString *const googleAPIBrowserKey = @"";
+
+
 @interface LPMainViewController ()
 
 @end
 
-@implementation LPMainViewController
 
-NSString *const googleAPIBrowserKey = @"";
+@implementation LPMainViewController
 
 - (void)viewDidLoad
 {
@@ -24,8 +27,7 @@ NSString *const googleAPIBrowserKey = @"";
         
         self.textView.text = placesAutocomplete.description;
         
-        if(placesAutocomplete.predictions.count>0)
-        {
+        if (placesAutocomplete.predictions.count > 0) {
             LPPrediction *prediction = (LPPrediction*)[placesAutocomplete.predictions objectAtIndex:0];
             
             NSString *reference = prediction.reference;
@@ -51,7 +53,7 @@ NSString *const googleAPIBrowserKey = @"";
 }
 
 - (LPGoogleFunctions*)googleFunctions {
-    if(!_googleFunctions) {
+    if (!_googleFunctions) {
         _googleFunctions = [LPGoogleFunctions new];
         _googleFunctions.googleAPIBrowserKey = googleAPIBrowserKey;
         _googleFunctions.delegate = self;

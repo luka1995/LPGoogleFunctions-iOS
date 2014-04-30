@@ -35,8 +35,7 @@
         if (![[dictionary objectForKey:@"predictions"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"predictions"]) {
             NSMutableArray *array = [NSMutableArray new];
             
-            for (int i=0; i<[[dictionary objectForKey:@"predictions"] count]; i++)
-            {
+            for (int i=0; i<[[dictionary objectForKey:@"predictions"] count]; i++) {
                 LPPrediction *predictions = [LPPrediction predicationWithObjects:[[dictionary objectForKey:@"predictions"] objectAtIndex:i]];
                 predictions.number = i;
                 

@@ -41,7 +41,7 @@
 {
     LPTransitDetails *new = [LPTransitDetails new];
     
-    if(![dictionary isKindOfClass:[NSNull class]]) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"arrival_stop"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"arrival_stop"]) {
             new.arrivalStop = [LPStop stopWithObjects:[dictionary objectForKey:@"arrival_stop"]];
         }
@@ -78,25 +78,25 @@
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
 
-    if(self.arrivalStop && ![self.arrivalStop isKindOfClass:[NSNull class]]) {
+    if (self.arrivalStop && ![self.arrivalStop isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.arrivalStop.dictionary forKey:@"arrivalStop"];
     }
     
-    if(self.arrivalTime && ![self.arrivalTime isKindOfClass:[NSNull class]]) {
+    if (self.arrivalTime && ![self.arrivalTime isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.arrivalTime.dictionary forKey:@"arrivalTime"];
     }
     
-    if(self.departureStop && ![self.departureStop isKindOfClass:[NSNull class]]) {
+    if (self.departureStop && ![self.departureStop isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.departureStop.dictionary forKey:@"departureStop"];
     }
     
-    if(self.departureTime && ![self.departureTime isKindOfClass:[NSNull class]]) {
+    if (self.departureTime && ![self.departureTime isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.departureTime.dictionary forKey:@"departureTime"];
     }
     
     [dictionary setObject:[NSString stringWithFormat:@"%@", self.headsign] forKey:@"headsign"];
     
-    if(self.line && ![self.line isKindOfClass:[NSNull class]]) {
+    if (self.line && ![self.line isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.line.dictionary forKey:@"line"];
     }
 

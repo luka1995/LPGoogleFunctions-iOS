@@ -31,7 +31,7 @@
 {
     LPStop *new = [LPStop new];
     
-    if(![dictionary isKindOfClass:[NSNull class]]) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"location"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"location"]) {
             new.location = [LPLocation locationWithObjects:[dictionary objectForKey:@"location"]];
         }
@@ -48,7 +48,7 @@
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    if(self.location && ![self.location isKindOfClass:[NSNull class]]) {
+    if (self.location && ![self.location isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.location.dictionary forKey:@"location"];
     }
     

@@ -37,7 +37,6 @@
     
     if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"results"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"results"]) {
-            
             NSMutableArray *array = [NSMutableArray new];
             
             for (int i=0; i<[[dictionary objectForKey:@"results"] count]; i++) {

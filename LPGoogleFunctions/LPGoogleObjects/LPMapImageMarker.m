@@ -37,7 +37,7 @@
     
     [dictionary setObject:[self getColorString] forKey:@"color"];
     
-    if(self.location && ![self.location isKindOfClass:[NSNull class]]) {
+    if (self.location && ![self.location isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.location.dictionary forKey:@"location"];
     }
     

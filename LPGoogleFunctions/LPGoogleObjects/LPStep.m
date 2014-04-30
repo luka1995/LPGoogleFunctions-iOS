@@ -85,7 +85,7 @@ NSString *const googleTravelModeWalking = @"walking";
 {
     LPStep *new = [LPStep new];
     
-    if(![dictionary isKindOfClass:[NSNull class]])
+    if (![dictionary isKindOfClass:[NSNull class]])
     {
         if (![[dictionary objectForKey:@"maneuver"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"maneuver"]) {
             new.maneuver = [dictionary objectForKey:@"maneuver"];
@@ -122,7 +122,7 @@ NSString *const googleTravelModeWalking = @"walking";
         if (![[dictionary objectForKey:@"steps"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"steps"]) {
             NSMutableArray *array = [NSMutableArray new];
         
-            for(int i=0; i<[[dictionary objectForKey:@"steps"] count]; i++) {
+            for (int i=0; i<[[dictionary objectForKey:@"steps"] count]; i++) {
                 [array addObject:[LPStep stepWithObjects:[[dictionary objectForKey:@"steps"] objectAtIndex:i]]];
             }
         
@@ -141,43 +141,42 @@ NSString *const googleTravelModeWalking = @"walking";
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
     
-    if(self.maneuver && ![self.maneuver isKindOfClass:[NSNull class]]) {
+    if (self.maneuver && ![self.maneuver isKindOfClass:[NSNull class]]) {
         [dictionary setObject:[NSString stringWithFormat:@"%@",self.maneuver] forKey:@"maneuver"];
     }
     
-    if(self.distance && ![self.distance isKindOfClass:[NSNull class]]) {
+    if (self.distance && ![self.distance isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.distance.dictionary forKey:@"distance"];
     }
     
-    if(self.duration && ![self.duration isKindOfClass:[NSNull class]]) {
+    if (self.duration && ![self.duration isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.duration.dictionary forKey:@"duration"];
     }
 
-    if(self.endLocation && ![self.endLocation isKindOfClass:[NSNull class]]) {
+    if (self.endLocation && ![self.endLocation isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.endLocation.dictionary forKey:@"endLocation"];
     }
         
     [dictionary setObject:[NSString stringWithFormat:@"%@", self.htmlInstructions] forKey:@"htmlInstructions"];
     [dictionary setObject:self.polyline.dictionary forKey:@"polyline"];
     
-    if(self.startLocation && ![self.startLocation isKindOfClass:[NSNull class]]) {
+    if (self.startLocation && ![self.startLocation isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.startLocation.dictionary forKey:@"startLocation"];
     }
     
     [dictionary setObject:[NSString stringWithFormat:@"%@", [[LPStep getDirectionsTravelMode:self.travelMode] uppercaseString]] forKey:@"travelMode"];
     
-    if(self.subSteps && ![self.subSteps isKindOfClass:[NSNull class]]) {
+    if (self.subSteps && ![self.subSteps isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0; i<[self.subSteps count]; i++)
-        {
+        for (int i=0; i<[self.subSteps count]; i++) {
             [array addObject:((LPStep *)[self.subSteps objectAtIndex:i]).dictionary];
         }
         
         [dictionary setObject:array forKey:@"subSteps"];
     }
     
-    if(self.transitDetails && ![self.transitDetails isKindOfClass:[NSNull class]]) {
+    if (self.transitDetails && ![self.transitDetails isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.transitDetails.dictionary forKey:@"transitDetails"];
     }
     

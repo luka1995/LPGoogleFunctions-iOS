@@ -33,8 +33,7 @@
 {
     LPWaypoint *new = [LPWaypoint new];
     
-    if (![dictionary isKindOfClass:[NSNull class]])
-    {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"location"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"location"]) {
             new.location=[LPLocation locationWithObjects:[dictionary objectForKey:@"location"]];
         }

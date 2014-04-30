@@ -9,6 +9,7 @@
 #import "LPAgencie.h"
 #import "LPVehicle.h"
 
+
 @interface LPLine : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSArray *agencies;
@@ -17,9 +18,9 @@
 @property (nonatomic, strong) NSString *shortName;
 @property (nonatomic, strong) LPVehicle *vehicle;
 
-+ (id)lineWithObjects:(NSDictionary*)dictionary;
++ (id)lineWithObjects:(NSDictionary *)dictionary;
 
-- (NSDictionary*)dictionary;
+- (NSDictionary *)dictionary;
 
 - (id)copyWithZone:(NSZone *)zone;
 

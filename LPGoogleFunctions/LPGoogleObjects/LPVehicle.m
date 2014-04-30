@@ -52,7 +52,7 @@ NSString *const VEHICLE_TYPE_OTHER = @"OTHER";
 {
     LPVehicle *new = [LPVehicle new];
     
-    if(![dictionary isKindOfClass:[NSNull class]]) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"icon"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"icon"]) {
             if([[dictionary objectForKey:@"icon"] hasPrefix:@"//"]) {
                 new.icon = [NSString stringWithFormat:@"http:%@", [dictionary objectForKey:@"icon"]];

@@ -31,7 +31,7 @@
 {
     LPMatchedSubstring *new = [LPMatchedSubstring new];
     
-    if(![dictionary isKindOfClass:[NSNull class]]) {
+    if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"length"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"length"]) {
             new.length = [[dictionary objectForKey:@"length"] intValue];
         }
@@ -51,7 +51,7 @@
     return dictionary;
 }
 
-- (NSString*)description
+- (NSString *)description
 {
     return [self dictionary].description;
 }

@@ -33,8 +33,8 @@ typedef enum {
 
 - (id)copyWithZone:(NSZone *)zone;
 
-+ (NSString*)getDirectionsAvoid:(LPGoogleDirectionsAvoid)avoid;
-+ (NSString*)getDirectionsUnit:(LPGoogleDirectionsUnit)unit;
++ (NSString *)getDirectionsAvoid:(LPGoogleDirectionsAvoid)avoid;
++ (NSString *)getDirectionsUnit:(LPGoogleDirectionsUnit)unit;
 
 @end
 

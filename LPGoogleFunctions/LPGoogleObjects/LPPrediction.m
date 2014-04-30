@@ -108,40 +108,34 @@ NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA3 = @"administrative_area3";
     return new;
 }
 
-- (NSDictionary*)dictionary
+- (NSDictionary *)dictionary
 {
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"name",@"ID",@"number",@"reference", nil]]];
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[self dictionaryWithValuesForKeys:[NSArray arrayWithObjects:@"name", @"ID", @"number", @"reference", nil]]];
     
-    if(self.types!=nil && ![self.types isKindOfClass:[NSNull class]])
-    {
+    if (self.types && ![self.types isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0;i<[self.types count];i++)
-        {
+        for (int i=0; i<[self.types count]; i++) {
             [array addObject:[self.types objectAtIndex:i]];
         }
         
         [dictionary setObject:array forKey:@"types"];
     }
     
-    if(self.matchedSubstrings!=nil && ![self.matchedSubstrings isKindOfClass:[NSNull class]])
-    {
+    if (self.matchedSubstrings && ![self.matchedSubstrings isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0;i<[self.matchedSubstrings count];i++)
-        {
-            [array addObject:((LPMatchedSubstring*)[self.matchedSubstrings objectAtIndex:i]).dictionary];
+        for (int i=0; i<[self.matchedSubstrings count]; i++)  {
+            [array addObject:((LPMatchedSubstring *)[self.matchedSubstrings objectAtIndex:i]).dictionary];
         }
         
         [dictionary setObject:array forKey:@"matchedSubstrings"];
     }
     
-    if(self.terms && ![self.terms isKindOfClass:[NSNull class]])
-    {
+    if (self.terms && ![self.terms isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
-        for(int i=0; i<[self.terms count]; i++)
-        {
+        for(int i=0; i<[self.terms count]; i++) {
             [array addObject:((LPTerm*)[self.terms objectAtIndex:i]).dictionary];
         }
         
