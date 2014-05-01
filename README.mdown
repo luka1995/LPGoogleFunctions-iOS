@@ -7,6 +7,18 @@ https://developers.google.com/
 Created by Luka Penger
 http://lukapenger.eu
 
+##Examples
+
+* LPPlacesAutocompleteService
+* LPStaticMapImagesService
+* LPStreetViewImagesService
+* LPSpeakService
+
+![ScreenShots](ScreenShots/img1.png)
+![ScreenShots](ScreenShots/img2.png)
+![ScreenShots](ScreenShots/img3.png)
+![ScreenShots](ScreenShots/img4.png)
+
 ##Usage
 
 If you'd like to include this component as a pod using CocoaPods, just add the following line to your Podfile:
