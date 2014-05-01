@@ -15,7 +15,7 @@
 	self = [LPWaypoint new];
     if (self) {
         self.location = [coder decodeObjectForKey:@"location"];
-        self.stepIndex = [coder decodeIntegerForKey:@"stepIndex"];
+        self.stepIndex = [coder decodeIntForKey:@"stepIndex"];
         self.stepInterpolation = [coder decodeDoubleForKey:@"stepInterpolation"];
 	}
 	
@@ -25,7 +25,7 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.location forKey:@"location"];
-    [coder encodeInteger:self.stepIndex forKey:@"stepIndex"];
+    [coder encodeInt:self.stepIndex forKey:@"stepIndex"];
     [coder encodeDouble:self.stepInterpolation forKey:@"stepInterpolation"];
 }
 

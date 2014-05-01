@@ -27,7 +27,7 @@ NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA3 = @"administrative_area3";
     if (self) {
         self.name = [coder decodeObjectForKey:@"name"];
         self.ID = [coder decodeObjectForKey:@"ID"];
-        self.number = [coder decodeIntegerForKey:@"number"];
+        self.number = [coder decodeIntForKey:@"number"];
         self.reference = [coder decodeObjectForKey:@"reference"];
         self.types = [coder decodeObjectForKey:@"types"];
         self.terms = [coder decodeObjectForKey:@"terms"];
@@ -41,7 +41,7 @@ NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA3 = @"administrative_area3";
 {
     [coder encodeObject:self.name forKey:@"name"];
     [coder encodeObject:self.ID forKey:@"ID"];
-    [coder encodeInteger:self.number forKey:@"number"];
+    [coder encodeInt:self.number forKey:@"number"];
     [coder encodeObject:self.reference forKey:@"reference"];
     [coder encodeObject:self.types forKey:@"types"];
     [coder encodeObject:self.terms forKey:@"terms"];

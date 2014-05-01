@@ -14,7 +14,7 @@
 {
 	self = [LPRoute new];
     if (self) {
-        self.number = [coder decodeIntegerForKey:@"number"];
+        self.number = [coder decodeIntForKey:@"number"];
         self.bounds = [coder decodeObjectForKey:@"bounds"];
         self.copyrights = [coder decodeObjectForKey:@"copyrights"];
         self.legs = [coder decodeObjectForKey:@"legs"];
@@ -28,7 +28,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeInteger:self.number forKey:@"number"];
+    [coder encodeInt:self.number forKey:@"number"];
     [coder encodeObject:self.bounds forKey:@"bounds"];
     [coder encodeObject:self.copyrights forKey:@"copyrights"];
     [coder encodeObject:self.legs forKey:@"legs"];

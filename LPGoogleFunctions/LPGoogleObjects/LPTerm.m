@@ -15,7 +15,7 @@
 	self = [LPTerm new];
     if (self) {
         self.value = [coder decodeObjectForKey:@"value"];
-        self.offset = [coder decodeIntegerForKey:@"offset"];
+        self.offset = [coder decodeIntForKey:@"offset"];
 	}
 	
 	return self;
@@ -24,7 +24,7 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.value forKey:@"value"];
-    [coder encodeInteger:self.offset forKey:@"offset"];
+    [coder encodeInt:self.offset forKey:@"offset"];
 }
 
 + (id)termWithObjects:(NSDictionary *)dictionary

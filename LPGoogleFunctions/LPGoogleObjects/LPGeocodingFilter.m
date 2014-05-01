@@ -14,7 +14,7 @@
 {
 	self = [LPGeocodingFilter new];
     if (self) {
-        self.filter = [coder decodeIntegerForKey:@"filter"];
+        self.filter = [coder decodeIntForKey:@"filter"];
         self.value = [coder decodeObjectForKey:@"value"];
 	}
 	
@@ -23,7 +23,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeInteger:self.filter forKey:@"filter"];
+    [coder encodeInt:self.filter forKey:@"filter"];
     [coder encodeObject:self.value forKey:@"value"];
 }
 

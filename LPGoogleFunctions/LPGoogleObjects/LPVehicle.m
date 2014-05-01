@@ -35,7 +35,7 @@ NSString *const VEHICLE_TYPE_OTHER = @"OTHER";
     if (self) {
         self.icon = [coder decodeObjectForKey:@"icon"];
         self.name = [coder decodeObjectForKey:@"name"];
-        self.type = [coder decodeIntegerForKey:@"type"];
+        self.type = [coder decodeIntForKey:@"type"];
 	}
 	
 	return self;

@@ -61,6 +61,8 @@
 		0C4C5DD9181D4E3E00D9625D /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DD0181D4E3E00D9625D /* UIImageView+AFNetworking.m */; };
 		0C4C5DDD181D553500D9625D /* LPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C4C5DDB181D553500D9625D /* LPMainViewController.m */; };
 		0C4C5DDE181D553500D9625D /* LPMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0C4C5DDC181D553500D9625D /* LPMainViewController.xib */; };
+		0CCB5D9E1911C26800648FCC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB5D9D1911C26800648FCC /* SystemConfiguration.framework */; };
+		0CCB5DA01911C26E00648FCC /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB5D9F1911C26E00648FCC /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -174,6 +176,8 @@
 		0C4C5DDA181D553500D9625D /* LPMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMainViewController.h; sourceTree = "<group>"; };
 		0C4C5DDB181D553500D9625D /* LPMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMainViewController.m; sourceTree = "<group>"; };
 		0C4C5DDC181D553500D9625D /* LPMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPMainViewController.xib; sourceTree = "<group>"; };
+		0CCB5D9D1911C26800648FCC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0CCB5D9F1911C26E00648FCC /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +185,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CCB5DA01911C26E00648FCC /* MobileCoreServices.framework in Frameworks */,
+				0CCB5D9E1911C26800648FCC /* SystemConfiguration.framework in Frameworks */,
 				0C4C5BB8181D4C5000D9625D /* CoreGraphics.framework in Frameworks */,
 				0C4C5BBA181D4C5000D9625D /* UIKit.framework in Frameworks */,
 				0C4C5BB6181D4C5000D9625D /* Foundation.framework in Frameworks */,
@@ -223,6 +229,8 @@
 		0C4C5BB4181D4C5000D9625D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0CCB5D9F1911C26E00648FCC /* MobileCoreServices.framework */,
+				0CCB5D9D1911C26800648FCC /* SystemConfiguration.framework */,
 				0C4C5BB5181D4C5000D9625D /* Foundation.framework */,
 				0C4C5BB7181D4C5000D9625D /* CoreGraphics.framework */,
 				0C4C5BB9181D4C5000D9625D /* UIKit.framework */,
@@ -425,7 +433,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = LP;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Luka Penger";
 				TargetAttributes = {
 					0C4C5BB1181D4C5000D9625D = {
@@ -568,7 +576,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -607,7 +614,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -639,7 +645,6 @@
 		0C4C5BDF181D4C5000D9625D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -659,7 +664,6 @@
 		0C4C5BE0181D4C5000D9625D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -679,7 +683,6 @@
 		0C4C5BE2181D4C5000D9625D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PlacesAutocompleteService.app/PlacesAutocompleteService";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -702,7 +705,6 @@
 		0C4C5BE3181D4C5000D9625D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PlacesAutocompleteService.app/PlacesAutocompleteService";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

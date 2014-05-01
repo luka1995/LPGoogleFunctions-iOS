@@ -16,7 +16,7 @@
     if (self) {
         self.routes = [coder decodeObjectForKey:@"routes"];
         self.statusCode = [coder decodeObjectForKey:@"statusCode"];
-        self.requestTravelMode = [coder decodeIntegerForKey:@"requestTravelMode"];
+        self.requestTravelMode = [coder decodeIntForKey:@"requestTravelMode"];
 	}
 	
 	return self;

@@ -14,8 +14,8 @@
 {
 	self = [LPMatchedSubstring new];
     if (self) {
-        self.length = [coder decodeIntegerForKey:@"length"];
-        self.offset = [coder decodeIntegerForKey:@"offset"];
+        self.length = [coder decodeIntForKey:@"length"];
+        self.offset = [coder decodeIntForKey:@"offset"];
 	}
 	
 	return self;
@@ -23,8 +23,8 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeInteger:self.length forKey:@"length"];
-    [coder encodeInteger:self.offset forKey:@"offset"];
+    [coder encodeInt:self.length forKey:@"length"];
+    [coder encodeInt:self.offset forKey:@"offset"];
 }
 
 + (id)matchedSubstringWithObjects:(NSDictionary *)dictionary

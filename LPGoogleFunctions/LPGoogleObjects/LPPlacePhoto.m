@@ -15,8 +15,8 @@
 	self = [LPPlacePhoto new];
     if (self) {
         self.htmlAttributions = [coder decodeObjectForKey:@"htmlAttributions"];
-        self.height = [coder decodeIntegerForKey:@"height"];
-        self.width = [coder decodeIntegerForKey:@"width"];
+        self.height = [coder decodeIntForKey:@"height"];
+        self.width = [coder decodeIntForKey:@"width"];
         self.photoReference = [coder decodeObjectForKey:@"photoReference"];
 	}
 	
@@ -26,8 +26,8 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.htmlAttributions forKey:@"htmlAttributions"];
-    [coder encodeInteger:self.height forKey:@"height"];
-    [coder encodeInteger:self.width forKey:@"width"];
+    [coder encodeInt:self.height forKey:@"height"];
+    [coder encodeInt:self.width forKey:@"width"];
     [coder encodeObject:self.photoReference forKey:@"photoReference"];
 }
 

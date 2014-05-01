@@ -14,7 +14,7 @@
 {
 	self = [LPMapImageMarker new];
     if (self) {
-        self.size = [coder decodeIntegerForKey:@"size"];
+        self.size = [coder decodeIntForKey:@"size"];
         self.color = [coder decodeObjectForKey:@"color"];
         self.label = [coder decodeObjectForKey:@"label"];
         self.location = [coder decodeObjectForKey:@"location"];
@@ -25,7 +25,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
-    [coder encodeInteger:self.size forKey:@"size"];
+    [coder encodeInt:self.size forKey:@"size"];
     [coder encodeObject:self.color forKey:@"color"];
     [coder encodeObject:self.label forKey:@"label"];
     [coder encodeObject:self.location forKey:@"location"];

@@ -20,7 +20,7 @@
         self.departureTime = [coder decodeObjectForKey:@"departureTime"];
         self.headsign = [coder decodeObjectForKey:@"headsign"];
         self.line = [coder decodeObjectForKey:@"line"];
-        self.numStops = [coder decodeIntegerForKey:@"numStops"];
+        self.numStops = [coder decodeIntForKey:@"numStops"];
 	}
 	
 	return self;
@@ -34,7 +34,7 @@
     [coder encodeObject:self.departureTime forKey:@"departureTime"];
     [coder encodeObject:self.headsign forKey:@"headsign"];
     [coder encodeObject:self.line forKey:@"line"];
-    [coder encodeInteger:self.numStops forKey:@"numStops"];
+    [coder encodeInt:self.numStops forKey:@"numStops"];
 }
 
 + (id)transitDetailsWithObjects:(NSDictionary *)dictionary

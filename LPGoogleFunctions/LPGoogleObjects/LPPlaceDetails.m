@@ -26,7 +26,7 @@
         self.url = [coder decodeObjectForKey:@"url"];
         self.vicinity = [coder decodeObjectForKey:@"vicinity"];
         self.photos = [coder decodeObjectForKey:@"photos"];
-        self.priceLevel = [coder decodeIntegerForKey:@"priceLevel"];
+        self.priceLevel = [coder decodeIntForKey:@"priceLevel"];
         self.rating = [coder decodeFloatForKey:@"rating"];
         self.events = [coder decodeObjectForKey:@"events"];
 	}

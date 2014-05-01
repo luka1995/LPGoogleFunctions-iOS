@@ -16,7 +16,7 @@
     if (self)
 	{
         self.text = [coder decodeObjectForKey:@"text"];
-        self.value = [coder decodeIntegerForKey:@"value"];
+        self.value = [coder decodeIntForKey:@"value"];
 	}
 	
 	return self;
@@ -25,7 +25,7 @@
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [coder encodeObject:self.text forKey:@"text"];
-    [coder encodeInteger:self.value forKey:@"value"];
+    [coder encodeInt:self.value forKey:@"value"];
 }
 
 + (id)durationWithObjects:(NSDictionary *)dictionary
