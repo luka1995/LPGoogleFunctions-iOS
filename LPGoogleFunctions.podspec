@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.source_files = 'LPGoogleFunctions/**/*.{h,m}'
   s.frameworks    = "CoreLocation","AVFoundation"
   s.requires_arc = true
-  s.dependency 'AFNetworking', '~> 1.3.2'
+  s.dependency 'AFNetworking', '~> 2.0'
 end
