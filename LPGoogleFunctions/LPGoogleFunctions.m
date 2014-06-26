@@ -69,6 +69,16 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
     return self;
 }
 
++ (instancetype)sharedInstance
+{
+    static LPGoogleFunctions *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[self alloc] init];
+    });
+    return sharedInstance;
+}
+
 #pragma mark - Functions
 
 + (NSString *)getMapType:(LPGoogleMapType)maptype

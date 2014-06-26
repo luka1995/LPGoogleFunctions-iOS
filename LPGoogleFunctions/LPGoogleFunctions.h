@@ -75,6 +75,8 @@ typedef enum {
 @property (nonatomic, strong) NSString *languageCode; /** Language ISO code (default "en") */
 @property (nonatomic, strong) NSString *googleAPIBrowserKey;
 
++ (instancetype)sharedInstance;
+
 + (NSString *)getMapType:(LPGoogleMapType)maptype;
 + (LPGoogleStatus)getGoogleStatusFromString:(NSString *)status;
 + (NSString *)getGoogleStatus:(LPGoogleStatus)status;
