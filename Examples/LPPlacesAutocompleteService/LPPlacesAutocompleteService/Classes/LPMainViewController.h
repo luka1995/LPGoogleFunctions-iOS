@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+AFNetworking.h"
 #import "LPGoogleFunctions.h"
 #import "LPImage.h"
 #import "LPCell.h"

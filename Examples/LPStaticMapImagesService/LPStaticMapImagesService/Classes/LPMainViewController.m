@@ -64,7 +64,9 @@ NSString *const googleAPIBrowserKey = @"";
         [self.imageView setImage:image];
         
     } failureBlock:^(NSError *error) {
+ 
         NSLog(@"Error: %@",error);
+ 
     }];
 }
 
