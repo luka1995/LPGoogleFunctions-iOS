@@ -14,10 +14,10 @@ http://lukapenger.eu
 * LPStreetViewImagesService
 * LPSpeakService
 
-[![ScreenShots](ScreenShots/img1-thumb.png)](ScreenShots/img1.png)
-[![ScreenShots](ScreenShots/img2-thumb.png)](ScreenShots/img2.png)
-[![ScreenShots](ScreenShots/img3-thumb.png)](ScreenShots/img3.png)
-[![ScreenShots](ScreenShots/img4-thumb.png)](ScreenShots/img4.png)
+![ScreenShots](ScreenShots/img1.png)
+![ScreenShots](ScreenShots/img2.png)
+![ScreenShots](ScreenShots/img3.png)
+![ScreenShots](ScreenShots/img4.png)
 
 ##Usage
 

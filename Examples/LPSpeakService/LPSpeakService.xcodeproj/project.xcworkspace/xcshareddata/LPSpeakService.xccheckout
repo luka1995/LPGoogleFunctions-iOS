@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>C48A7F61-94D5-430C-B02C-64241F1A7ADE</string>
+	<string>E073857E-FA28-4E4B-A4AA-B5B57AF618F3</string>
 	<key>IDESourceControlProjectName</key>
 	<string>LPSpeakService</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>BFA998ED-5F7C-4E3A-98C6-2751BAFC2F33</key>
-		<string>https://github.com/ndleon09/LPGoogleFunctions.git</string>
+		<key>F615906C-95CF-4753-8548-24349C562668</key>
+		<string>ssh://github.com/luka1995/LPGoogleFunctions.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Examples/LPSpeakService/LPSpeakService.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>BFA998ED-5F7C-4E3A-98C6-2751BAFC2F33</key>
+		<key>F615906C-95CF-4753-8548-24349C562668</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/ndleon09/LPGoogleFunctions.git</string>
+	<string>ssh://github.com/luka1995/LPGoogleFunctions.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>BFA998ED-5F7C-4E3A-98C6-2751BAFC2F33</string>
+	<string>F615906C-95CF-4753-8548-24349C562668</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>BFA998ED-5F7C-4E3A-98C6-2751BAFC2F33</string>
+			<string>F615906C-95CF-4753-8548-24349C562668</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LPGoogleFunctions</string>
 		</dict>

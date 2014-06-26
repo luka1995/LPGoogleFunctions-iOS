@@ -8,7 +8,6 @@
 
 #import "LPMainViewController.h"
 
-#import "UIImageView+AFNetworking.h"
 
 NSString *const googleAPIBrowserKey = @"";
 
@@ -153,14 +152,11 @@ NSString *const googleAPIBrowserKey = @"";
 - (void)setImageForCell:(LPCell *)cell fromURL:(NSString *)URL withColor:(UIColor *)color
 {
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[URL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    AFImageRequestOperation *operation = [AFImageRequestOperation imageRequestOperationWithRequest:request success:^(UIImage *image) {
+        cell.leftImageView.image = [[image imageTintedWithColor:color] changeImageSize:CGSizeMake(24.0f, 24.0f)];
+    }];
     
-    __weak LPCell *weakCell = cell;
-    
-    [cell.leftImageView setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        
-        weakCell.leftImageView.image = [[image imageTintedWithColor:color] changeImageSize:CGSizeMake(24.0f, 24.0f)];
-        
-    } failure:nil];
+    [operation start];
 }
 
 @end
