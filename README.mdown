@@ -23,7 +23,17 @@ http://lukapenger.eu
 
 If you'd like to include this component as a pod using CocoaPods, just add the following line to your Podfile:
 
-`pod "LPGoogleFunctions"`
+`pod "LPGoogleFunctions"` and run `pod install`
+
+Configure global variables in
+
+```objective-c
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+	[[LPGoogleFunctions sharedInstance] setGoogleAPIBrowserKey:@"GOOGLE_API_KEY"];
+	[[LPGoogleFunctions sharedInstance] setLanguageCode:@"en"];
+}
+```
 
 ##ARC
 
