@@ -233,6 +233,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 - (void)loadStreetViewImageForAddress:(NSString *)address imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFImageResponseSerializer serializer];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
@@ -260,24 +261,26 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 - (void)loadStaticMapImageForLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFImageResponseSerializer serializer];
     
-    NSString *URL = googleAPIStaticMapImageURL;
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
     
-    URL = [URL stringByAppendingFormat:@"center=%f,%f&", location.latitude, location.longitude];
-    URL = [URL stringByAppendingFormat:@"sensor=%@&", self.sensor ? @"true" : @"false"];
-    URL = [URL stringByAppendingFormat:@"zoom=%d&", zoom];
-    URL = [URL stringByAppendingFormat:@"scale=%d&", scale];
-    URL = [URL stringByAppendingFormat:@"size=%dx%d&", (int)size.width, (int)size.height];
-    URL = [URL stringByAppendingFormat:@"maptype=%@&", [LPGoogleFunctions getMapType:maptype]];
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"center"];
+    [parameters setObject:(self.sensor ? @"true" : @"false") forKey:@"sensor"];
+    [parameters setObject:[NSNumber numberWithInt:zoom] forKey:@"zoom"];
+    [parameters setObject:[NSNumber numberWithInt:scale] forKey:@"scale"];
+    [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
+    [parameters setObject:[LPGoogleFunctions getMapType:maptype] forKey:@"maptype"];
     
+    NSMutableSet *parametersMarkers = [[NSMutableSet alloc] init];
     for (int i=0; i<[markers count]; i++) {
         LPMapImageMarker *marker = (LPMapImageMarker *)[markers objectAtIndex:i];
-        
-        URL = [URL stringByAppendingFormat:@"markers=%@&", [marker getMarkerURLString]];
+        [parametersMarkers addObject:[marker getMarkerURLString]];
     }
-
-    [manager GET:URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [parameters setObject:parametersMarkers forKey:@"markers"];
+    
+    [manager GET:googleAPIStaticMapImageURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(successful)
             successful(responseObject);
@@ -435,14 +438,15 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
 - (void)speakText:(NSString *)text failureBlock:(void (^)(NSError *error))failure
 {
     [googlePlayer stop];
-    
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"tl"];
     [parameters setObject:[NSString stringWithFormat:@"%@", text] forKey:@"q"];
-
+    
     [manager GET:googleAPITextToSpeechURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSError *error = nil;
