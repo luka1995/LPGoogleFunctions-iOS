@@ -8,10 +8,10 @@
 #import "LPStep.h"
 
 
-NSString *const googleTravelModeDriving = @"driving";
-NSString *const googleTravelModeBicycling = @"bicycling";
-NSString *const googleTravelModeTransit = @"transit";
-NSString *const googleTravelModeWalking = @"walking";
+NSString *const googleDirectionsTravelModeDriving = @"driving";
+NSString *const googleDirectionsTravelModeBicycling = @"bicycling";
+NSString *const googleDirectionsTravelModeTransit = @"transit";
+NSString *const googleDirectionsTravelModeWalking = @"walking";
 
 
 @implementation LPStep
@@ -56,11 +56,11 @@ NSString *const googleTravelModeWalking = @"walking";
 
 + (LPGoogleDirectionsTravelMode)getDirectionsTravelModeFromString:(NSString *)string
 {
-    if ([string isEqualToString:googleTravelModeDriving] || [string isEqualToString:[googleTravelModeDriving uppercaseString]]) {
+    if ([string isEqualToString:googleDirectionsTravelModeDriving] || [string isEqualToString:[googleDirectionsTravelModeDriving uppercaseString]]) {
         return LPGoogleDirectionsTravelModeDriving;
-    } else if ([string isEqualToString:googleTravelModeBicycling] || [string isEqualToString:[googleTravelModeBicycling uppercaseString]]) {
+    } else if ([string isEqualToString:googleDirectionsTravelModeBicycling] || [string isEqualToString:[googleDirectionsTravelModeBicycling uppercaseString]]) {
         return LPGoogleDirectionsTravelModeBicycling;
-    } else if ([string isEqualToString:googleTravelModeTransit] || [string isEqualToString:[googleTravelModeTransit uppercaseString]]) {
+    } else if ([string isEqualToString:googleDirectionsTravelModeTransit] || [string isEqualToString:[googleDirectionsTravelModeTransit uppercaseString]]) {
         return LPGoogleDirectionsTravelModeTransit;
     } else {
         return LPGoogleDirectionsTravelModeWalking;
@@ -71,13 +71,13 @@ NSString *const googleTravelModeWalking = @"walking";
 {
     switch (travelMode) {
         case LPGoogleDirectionsTravelModeDriving:
-            return googleTravelModeDriving;
+            return googleDirectionsTravelModeDriving;
         case LPGoogleDirectionsTravelModeBicycling:
-            return googleTravelModeBicycling;
+            return googleDirectionsTravelModeBicycling;
         case LPGoogleDirectionsTravelModeTransit:
-            return googleTravelModeTransit;
+            return googleDirectionsTravelModeTransit;
         default:
-            return googleTravelModeWalking;
+            return googleDirectionsTravelModeWalking;
     }
 }
 
