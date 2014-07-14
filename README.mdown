@@ -283,6 +283,14 @@ The Google Distance Matrix API is a service that provides travel distance and ti
 - (void)loadDistanceMatrixForOrigins:(NSArray *)origins forDestinations:(NSArray *)destinations directionsTravelMode:(LPGoogleDistanceMatrixTravelMode)travelMode directionsAvoidTolls:(LPGoogleDistanceMatrixAvoid)avoid directionsUnit:(LPGoogleDistanceMatrixUnit)unit departureTime:(NSDate *)departureTime successfulBlock:(void (^)(LPDistanceMatrix *distanceMatrix))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
+You can use blocks and delegate methods:
+
+```objective-c
+- (void)googleFunctionsWillLoadDistanceMatrix:(LPGoogleFunctions *)googleFunctions;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadDistanceMatrix:(LPDistanceMatrix *)distanceMatrix;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingDistanceMatrixWithStatus:(LPGoogleStatus)status;
+```
+
 ##Uses Frameworks - Libraries
 
 * UIKit.framework
