@@ -13,11 +13,13 @@ http://lukapenger.eu
 * LPStaticMapImagesService
 * LPStreetViewImagesService
 * LPSpeakService
+* LPDistanceMatrixService
 
 [![ScreenShots](ScreenShots/img1-thumb.png)](ScreenShots/img1.png)
 [![ScreenShots](ScreenShots/img2-thumb.png)](ScreenShots/img2.png)
 [![ScreenShots](ScreenShots/img3-thumb.png)](ScreenShots/img3.png)
 [![ScreenShots](ScreenShots/img4-thumb.png)](ScreenShots/img4.png)
+[![ScreenShots](ScreenShots/img5-thumb.png)](ScreenShots/img5.png)
 
 ##Usage
 
@@ -262,6 +264,23 @@ The Places Photo service is a read-only API that allows you to easily add high q
 ```objective-c
 - (void)loadPlacePhotoForReference:(NSString*)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth 
 	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+```
+
+##Distance Matrix service
+
+The Google Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. The information returned is based on the recommended route between start and end points, as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
+
+**Parameters:**
+
+* **Origins** - Array of LPLocation - The latitude/longitude value from which you wish to calculate directions.
+* **Destinations** - Array of LPLocation - The latitude/longitude value from which you wish to calculate directions.
+* **Travel Mode** - Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure time or an arrival time.
+* **Avoid Tolls** - Indicates that the calculated route(s) should avoid the indicated features.
+* **Unit** - Specifies the unit system to use when displaying results.
+* **Departure time** - Specifies the desired time of departure.
+
+```objective-c
+- (void)loadDistanceMatrixForOrigins:(NSArray *)origins forDestinations:(NSArray *)destinations directionsTravelMode:(LPGoogleDistanceMatrixTravelMode)travelMode directionsAvoidTolls:(LPGoogleDistanceMatrixAvoid)avoid directionsUnit:(LPGoogleDistanceMatrixUnit)unit departureTime:(NSDate *)departureTime successfulBlock:(void (^)(LPDistanceMatrix *distanceMatrix))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 ##Uses Frameworks - Libraries

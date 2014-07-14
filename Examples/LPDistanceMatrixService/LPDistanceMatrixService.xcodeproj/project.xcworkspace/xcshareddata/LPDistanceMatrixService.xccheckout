@@ -5,16 +5,16 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>6FE89485-E04B-4348-9CB6-3A86BEE6C2B7</string>
+	<string>DFDDBBDA-C527-4E53-80F4-588E5403211D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>LPPlacesAutocompleteService</string>
+	<string>LPDistanceMatrixService</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>5B442C85-26B9-45B4-B17B-3F8E46063F74</key>
 		<string>ssh://github.com/luka1995/LPGoogleFunctions.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Examples/LPPlacesAutocompleteService/LPPlacesAutocompleteService.xcodeproj/project.xcworkspace</string>
+	<string>Examples/LPDistanceMatrixService/LPDistanceMatrixService.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>5B442C85-26B9-45B4-B17B-3F8E46063F74</key>

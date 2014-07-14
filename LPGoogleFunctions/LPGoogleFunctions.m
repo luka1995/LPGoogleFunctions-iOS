@@ -48,7 +48,7 @@ NSString *const googleAPIPlaceDetailsURL = @"https://maps.googleapis.com/maps/ap
 NSString *const googleAPIGeocodingURL = @"http://maps.googleapis.com/maps/api/geocode/json?";
 NSString *const googleAPIPlaceTextSearchURL = @"https://maps.googleapis.com/maps/api/place/textsearch/json?";
 NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/place/photo?";
-
+NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/api/distancematrix/json?";
 
 @interface LPGoogleFunctions ()
 
@@ -156,7 +156,7 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [arrivalTime timeIntervalSince1970]] forKey:@"arrival_time"];
     }
     
-    if (waypoints.count>0) {
+    if (waypoints.count > 0) {
         NSString *waypointsString = @"";
         
         for (int i=0; i<[waypoints count]; i++) {
@@ -743,6 +743,90 @@ NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/
         
         if (failure)
             failure(error);
+        
+    }];
+}
+
+- (void)loadDistanceMatrixForOrigins:(NSArray *)origins forDestinations:(NSArray *)destinations directionsTravelMode:(LPGoogleDistanceMatrixTravelMode)travelMode directionsAvoidTolls:(LPGoogleDistanceMatrixAvoid)avoid directionsUnit:(LPGoogleDistanceMatrixUnit)unit departureTime:(NSDate *)departureTime successfulBlock:(void (^)(LPDistanceMatrix *distanceMatrix))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+{
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDistanceMatrix:)]) {
+        [self.delegate googleFunctionsWillLoadDistanceMatrix:self];
+    }
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new]; 
+    
+    NSMutableString *originsString = [NSMutableString new];
+    for (int i=0; i<[origins count]; i++) {
+        LPLocation *location = (LPLocation *)[origins objectAtIndex:i];
+        
+        NSString *coordinate = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
+        
+        [originsString appendString:coordinate];
+        
+        if ([origins count] > 1 && i<([origins count]-1)) {
+            [originsString appendString:@"|"];
+        }
+    }
+    [parameters setObject:[NSString stringWithFormat:@"%@", originsString] forKey:@"origins"];
+    
+    NSMutableString *destinationsString = [NSMutableString new];
+    for (int i=0; i<[destinations count]; i++) {
+        LPLocation *location = (LPLocation *)[destinations objectAtIndex:i];
+        
+        NSString *coordinate = [NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude];
+        
+        [destinationsString appendString:coordinate];
+        
+        if ([destinations count] > 1 && i<([destinations count]-1)) {
+            [destinationsString appendString:@"|"];
+        }
+    }
+    [parameters setObject:[NSString stringWithFormat:@"%@", destinationsString] forKey:@"destinations"];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
+    [parameters setObject:[LPDistanceMatrix getDistanceMatrixTravelMode:travelMode] forKey:@"mode"];
+    [parameters setObject:[LPDistanceMatrix getDistanceMatrixAvoid:avoid] forKey:@"avoid"];
+    [parameters setObject:[LPDistanceMatrix getDistanceMatrixUnit:unit] forKey:@"units"];
+    
+    if (departureTime) {
+        [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
+    }
+    
+    [manager GET:googleAPIDistanceMatrixURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        LPDistanceMatrix *distanceMatrix = [LPDistanceMatrix distanceMatrixWithObjects:responseObject];
+        distanceMatrix.requestTravelMode = travelMode;
+        
+        LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:distanceMatrix.statusCode];
+        
+        if (status == LPGoogleStatusOK) {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadDistanceMatrix:)]) {
+                [self.delegate googleFunctions:self didLoadDistanceMatrix:distanceMatrix];
+            }
+            
+            if (successful)
+                successful(distanceMatrix);
+        } else {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDistanceMatrixWithStatus:)]) {
+                [self.delegate googleFunctions:self errorLoadingDistanceMatrixWithStatus:status];
+            }
+            
+            if (failure)
+                failure(status);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDistanceMatrixWithStatus:)]) {
+            [self.delegate googleFunctions:self errorLoadingDistanceMatrixWithStatus:LPGoogleStatusUnknownError];
+        }
+        
+        if (failure)
+            failure(LPGoogleStatusUnknownError);
         
     }];
 }

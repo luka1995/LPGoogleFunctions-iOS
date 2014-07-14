@@ -47,12 +47,12 @@ NSString *const googleAPIBrowserKey = @"";
 
 #pragma mark - UITableView DataSource
 
-- (int)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
-- (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.placesList count];
 }
@@ -100,7 +100,7 @@ NSString *const googleAPIBrowserKey = @"";
 {
     self.searchDisplayController.searchBar.text = input;
     
-    [self.googleFunctions loadPlacesAutocompleteWithDetailsForInput:input offset:[input length] radius:0 location:nil placeType:LPGooglePlaceTypeGeocode countryRestriction:nil successfulBlock:^(NSArray *placesWithDetails) {
+    [self.googleFunctions loadPlacesAutocompleteWithDetailsForInput:input offset:(int)[input length] radius:0 location:nil placeType:LPGooglePlaceTypeGeocode countryRestriction:nil successfulBlock:^(NSArray *placesWithDetails) {
         NSLog(@"successful");
         
         self.placesList = [NSMutableArray arrayWithArray:placesWithDetails];

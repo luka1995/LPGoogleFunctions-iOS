@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>7D055C86-7635-4CD7-BDC2-0C8F3449EFC9</string>
+	<string>9987D63B-6DE7-4C22-B712-86BA52BBF4DA</string>
 	<key>IDESourceControlProjectName</key>
 	<string>LPStaticMapImagesService</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>BFA998ED-5F7C-4E3A-98C6-2751BAFC2F33</key>
-		<string>https://github.com/ndleon09/LPGoogleFunctions.git</string>
+		<key>5B442C85-26B9-45B4-B17B-3F8E46063F74</key>
+		<string>ssh://github.com/luka1995/LPGoogleFunctions.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Examples/LPStaticMapImagesService/LPStaticMapImagesService.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>BFA998ED-5F7C-4E3A-98C6-2751BAFC2F33</key>
+		<key>5B442C85-26B9-45B4-B17B-3F8E46063F74</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/ndleon09/LPGoogleFunctions.git</string>
+	<string>ssh://github.com/luka1995/LPGoogleFunctions.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>BFA998ED-5F7C-4E3A-98C6-2751BAFC2F33</string>
+	<string>5B442C85-26B9-45B4-B17B-3F8E46063F74</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>BFA998ED-5F7C-4E3A-98C6-2751BAFC2F33</string>
+			<string>5B442C85-26B9-45B4-B17B-3F8E46063F74</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LPGoogleFunctions</string>
 		</dict>

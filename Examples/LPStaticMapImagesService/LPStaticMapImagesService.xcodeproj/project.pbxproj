@@ -7,15 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C22085D19740E0A00835C45 /* LPDistanceMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22085A19740E0A00835C45 /* LPDistanceMatrix.m */; };
+		0C22085E19740E0A00835C45 /* LPDistanceMatrixElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22085C19740E0A00835C45 /* LPDistanceMatrixElement.m */; };
 		0CCB5F411912C1AB00648FCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB5F401912C1AB00648FCC /* Foundation.framework */; };
 		0CCB5F431912C1AB00648FCC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB5F421912C1AB00648FCC /* CoreGraphics.framework */; };
 		0CCB5F451912C1AB00648FCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB5F441912C1AB00648FCC /* UIKit.framework */; };
 		0CCB5F4B1912C1AB00648FCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CCB5F491912C1AB00648FCC /* InfoPlist.strings */; };
 		0CCB5F4D1912C1AB00648FCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB5F4C1912C1AB00648FCC /* main.m */; };
 		0CCB5F531912C1AB00648FCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CCB5F521912C1AB00648FCC /* Images.xcassets */; };
-		0CCB5F5A1912C1AB00648FCC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB5F591912C1AB00648FCC /* XCTest.framework */; };
-		0CCB5F5B1912C1AC00648FCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB5F401912C1AB00648FCC /* Foundation.framework */; };
-		0CCB5F5C1912C1AC00648FCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB5F441912C1AB00648FCC /* UIKit.framework */; };
 		0CCB5F771912C20800648FCC /* LPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB5F711912C20800648FCC /* LPAppDelegate.m */; };
 		0CCB5F781912C20800648FCC /* LPMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB5F741912C20800648FCC /* LPMainViewController.m */; };
 		0CCB5F791912C20800648FCC /* LPMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CCB5F761912C20800648FCC /* LPMainViewController.xib */; };
@@ -71,17 +70,11 @@
 		FFBF83D5195B1181006A0E0F /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBF83C4195B1181006A0E0F /* UIWebView+AFNetworking.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0CCB5F5D1912C1AC00648FCC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0CCB5F351912C1AB00648FCC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0CCB5F3C1912C1AB00648FCC;
-			remoteInfo = LPStaticMapImagesService;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		0C22085919740E0A00835C45 /* LPDistanceMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDistanceMatrix.h; sourceTree = "<group>"; };
+		0C22085A19740E0A00835C45 /* LPDistanceMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDistanceMatrix.m; sourceTree = "<group>"; };
+		0C22085B19740E0A00835C45 /* LPDistanceMatrixElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDistanceMatrixElement.h; sourceTree = "<group>"; };
+		0C22085C19740E0A00835C45 /* LPDistanceMatrixElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDistanceMatrixElement.m; sourceTree = "<group>"; };
 		0CCB5F3D1912C1AB00648FCC /* LPStaticMapImagesService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPStaticMapImagesService.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CCB5F401912C1AB00648FCC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0CCB5F421912C1AB00648FCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,7 +84,6 @@
 		0CCB5F4C1912C1AB00648FCC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0CCB5F4E1912C1AB00648FCC /* LPStaticMapImagesService-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LPStaticMapImagesService-Prefix.pch"; sourceTree = "<group>"; };
 		0CCB5F521912C1AB00648FCC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0CCB5F581912C1AB00648FCC /* LPStaticMapImagesServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LPStaticMapImagesServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CCB5F591912C1AB00648FCC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0CCB5F701912C20800648FCC /* LPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAppDelegate.h; sourceTree = "<group>"; };
 		0CCB5F711912C20800648FCC /* LPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAppDelegate.m; sourceTree = "<group>"; };
@@ -213,16 +205,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0CCB5F551912C1AB00648FCC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CCB5F5A1912C1AB00648FCC /* XCTest.framework in Frameworks */,
-				0CCB5F5C1912C1AC00648FCC /* UIKit.framework in Frameworks */,
-				0CCB5F5B1912C1AC00648FCC /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -239,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				0CCB5F3D1912C1AB00648FCC /* LPStaticMapImagesService.app */,
-				0CCB5F581912C1AB00648FCC /* LPStaticMapImagesServiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -330,6 +311,10 @@
 		0CCB5F7E1912C21A00648FCC /* LPGoogleObjects */ = {
 			isa = PBXGroup;
 			children = (
+				0C22085919740E0A00835C45 /* LPDistanceMatrix.h */,
+				0C22085A19740E0A00835C45 /* LPDistanceMatrix.m */,
+				0C22085B19740E0A00835C45 /* LPDistanceMatrixElement.h */,
+				0C22085C19740E0A00835C45 /* LPDistanceMatrixElement.m */,
 				0CCB5F7F1912C21A00648FCC /* LPAddressComponent.h */,
 				0CCB5F801912C21A00648FCC /* LPAddressComponent.m */,
 				0CCB5F811912C21A00648FCC /* LPAgencie.h */,
@@ -474,24 +459,6 @@
 			productReference = 0CCB5F3D1912C1AB00648FCC /* LPStaticMapImagesService.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0CCB5F571912C1AB00648FCC /* LPStaticMapImagesServiceTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0CCB5F6C1912C1AC00648FCC /* Build configuration list for PBXNativeTarget "LPStaticMapImagesServiceTests" */;
-			buildPhases = (
-				0CCB5F541912C1AB00648FCC /* Sources */,
-				0CCB5F551912C1AB00648FCC /* Frameworks */,
-				0CCB5F561912C1AB00648FCC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0CCB5F5E1912C1AC00648FCC /* PBXTargetDependency */,
-			);
-			name = LPStaticMapImagesServiceTests;
-			productName = LPStaticMapImagesServiceTests;
-			productReference = 0CCB5F581912C1AB00648FCC /* LPStaticMapImagesServiceTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -504,9 +471,6 @@
 				TargetAttributes = {
 					0CCB5F3C1912C1AB00648FCC = {
 						DevelopmentTeam = VD448M8BPE;
-					};
-					0CCB5F571912C1AB00648FCC = {
-						TestTargetID = 0CCB5F3C1912C1AB00648FCC;
 					};
 				};
 			};
@@ -523,7 +487,6 @@
 			projectRoot = "";
 			targets = (
 				0CCB5F3C1912C1AB00648FCC /* LPStaticMapImagesService */,
-				0CCB5F571912C1AB00648FCC /* LPStaticMapImagesServiceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -536,13 +499,6 @@
 				0CCB5F4B1912C1AB00648FCC /* InfoPlist.strings in Resources */,
 				0CCB5F791912C20800648FCC /* LPMainViewController.xib in Resources */,
 				0CCB5F531912C1AB00648FCC /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CCB5F561912C1AB00648FCC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,8 +516,10 @@
 				FFBF83CE195B1181006A0E0F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0CCB5FD81912C21A00648FCC /* LPVehicle.m in Sources */,
 				FFBF83CF195B1181006A0E0F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				0C22085E19740E0A00835C45 /* LPDistanceMatrixElement.m in Sources */,
 				FFBF83D3195B1181006A0E0F /* UIProgressView+AFNetworking.m in Sources */,
 				0CCB5FBD1912C21A00648FCC /* LPAgencie.m in Sources */,
+				0C22085D19740E0A00835C45 /* LPDistanceMatrix.m in Sources */,
 				0CCB5FD31912C21A00648FCC /* LPStep.m in Sources */,
 				0CCB5FBF1912C21A00648FCC /* LPDirections.m in Sources */,
 				0CCB5FCB1912C21A00648FCC /* LPPlaceDetails.m in Sources */,
@@ -607,22 +565,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0CCB5F541912C1AB00648FCC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0CCB5F5E1912C1AC00648FCC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0CCB5F3C1912C1AB00648FCC /* LPStaticMapImagesService */;
-			targetProxy = 0CCB5F5D1912C1AC00648FCC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0CCB5F491912C1AB00648FCC /* InfoPlist.strings */ = {
@@ -734,46 +677,6 @@
 			};
 			name = Release;
 		};
-		0CCB5F6D1912C1AC00648FCC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LPStaticMapImagesService.app/LPStaticMapImagesService";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LPStaticMapImagesService/LPStaticMapImagesService-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "LPStaticMapImagesServiceTests/LPStaticMapImagesServiceTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		0CCB5F6E1912C1AC00648FCC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LPStaticMapImagesService.app/LPStaticMapImagesService";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LPStaticMapImagesService/LPStaticMapImagesService-Prefix.pch";
-				INFOPLIST_FILE = "LPStaticMapImagesServiceTests/LPStaticMapImagesServiceTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -791,15 +694,6 @@
 			buildConfigurations = (
 				0CCB5F6A1912C1AC00648FCC /* Debug */,
 				0CCB5F6B1912C1AC00648FCC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0CCB5F6C1912C1AC00648FCC /* Build configuration list for PBXNativeTarget "LPStaticMapImagesServiceTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0CCB5F6D1912C1AC00648FCC /* Debug */,
-				0CCB5F6E1912C1AC00648FCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
