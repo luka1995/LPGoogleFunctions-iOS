@@ -31,8 +31,6 @@ NSString *const googleDirectionsTravelModeWalking = @"walking";
         self.travelMode = [coder decodeIntForKey:@"travelMode"];
         self.subSteps = [coder decodeObjectForKey:@"subSteps"];
         self.transitDetails = [coder decodeObjectForKey:@"transitDetails"];
-        self.isBicikeLJStationStart = [coder decodeBoolForKey:@"isBicikeLJStationStart"];
-        self.isBicikeLJStationEnd = [coder decodeBoolForKey:@"isBicikeLJStationEnd"];
 	}
 	
 	return self;
@@ -50,8 +48,6 @@ NSString *const googleDirectionsTravelModeWalking = @"walking";
     [coder encodeInteger:self.travelMode forKey:@"travelMode"];
     [coder encodeObject:self.subSteps forKey:@"subSteps"];
     [coder encodeObject:self.transitDetails forKey:@"transitDetails"];
-    [coder encodeBool:self.isBicikeLJStationStart forKey:@"isBicikeLJStationStart"];
-    [coder encodeBool:self.isBicikeLJStationEnd forKey:@"isBicikeLJStationEnd"];
 }
 
 + (LPGoogleDirectionsTravelMode)getDirectionsTravelModeFromString:(NSString *)string
@@ -179,10 +175,7 @@ NSString *const googleDirectionsTravelModeWalking = @"walking";
     if (self.transitDetails && ![self.transitDetails isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.transitDetails.dictionary forKey:@"transitDetails"];
     }
-    
-    [dictionary setObject:[NSString stringWithFormat:@"%d", self.isBicikeLJStationStart] forKey:@"isBicikeLJStationStart"];
-    [dictionary setObject:[NSString stringWithFormat:@"%d", self.isBicikeLJStationEnd] forKey:@"isBicikeLJStationEnd"];
-    
+
     return dictionary;
 }
 
@@ -205,9 +198,7 @@ NSString *const googleDirectionsTravelModeWalking = @"walking";
     [new setTravelMode:[self travelMode]];
     [new setSubSteps:[self subSteps]];
     [new setTransitDetails:[self transitDetails]];
-    [new setIsBicikeLJStationStart:self.isBicikeLJStationStart];
-    [new setIsBicikeLJStationEnd:self.isBicikeLJStationEnd];
-    
+
     return new;
 }
 

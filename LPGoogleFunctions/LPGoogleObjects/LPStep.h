@@ -33,8 +33,6 @@ typedef enum {
 @property (nonatomic, assign) LPGoogleDirectionsTravelMode travelMode;
 @property (nonatomic, strong) NSArray *subSteps;
 @property (nonatomic, strong) LPTransitDetails *transitDetails;
-@property (nonatomic, assign) BOOL isBicikeLJStationStart;
-@property (nonatomic, assign) BOOL isBicikeLJStationEnd;
 
 + (LPGoogleDirectionsTravelMode)getDirectionsTravelModeFromString:(NSString *)string;
 + (NSString *)getDirectionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode;
