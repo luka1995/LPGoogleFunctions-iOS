@@ -13,11 +13,13 @@ http://lukapenger.eu
 * LPStaticMapImagesService
 * LPStreetViewImagesService
 * LPSpeakService
+* LPDistanceMatrixService
 
 [![ScreenShots](ScreenShots/img1-thumb.png)](ScreenShots/img1.png)
 [![ScreenShots](ScreenShots/img2-thumb.png)](ScreenShots/img2.png)
 [![ScreenShots](ScreenShots/img3-thumb.png)](ScreenShots/img3.png)
 [![ScreenShots](ScreenShots/img4-thumb.png)](ScreenShots/img4.png)
+[![ScreenShots](ScreenShots/img5-thumb.png)](ScreenShots/img5.png)
 
 ##Usage
 
@@ -60,20 +62,15 @@ The Google Directions API is a service that calculates directions between locati
 * **Waypoints.** - Specifies an array of waypoints. Waypoints alter a route by routing it through the specified location(s). A waypoint is specified as either a latitude/longitude coordinate or as an address which will be geocoded.
 
 ```objective-c
-- (void)loadDirectionsForOrigin:(LPLocation*)origin forDestination:(LPLocation*)destination 
-	directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid 
-	directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives 
-	departureTime:(NSDate*)departureTime arrivalTime:(NSDate*)arrivalTime 
-	waypoints:(NSArray*)waypoints successfulBlock:(void (^)(LPDirections* directions))successful
-	failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadDirectionsForOrigin:(LPLocation *)origin forDestination:(LPLocation *)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate *)departureTime arrivalTime:(NSDate *)arrivalTime waypoints:(NSArray *)waypoints successfulBlock:(void (^)(LPDirections *directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 You can use blocks and delegate methods:
 
 ```objective-c
-- (void)googleFunctionsWillLoadDirections:(LPGoogleFunctions*)googleFunctions;
-- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadDirections:(LPDirections*)directions;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingDirectionsWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctionsWillLoadDirections:(LPGoogleFunctions *)googleFunctions;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadDirections:(LPDirections *)directions;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingDirectionsWithStatus:(LPGoogleStatus)status;
 ```
 
 ##Street View Images service
@@ -90,16 +87,12 @@ The Google Maps Image APIs make it easy to embed a street view image into your i
 
 Method for location:
 ```objective-c
-- (void)loadStreetViewImageForLocation:(LPLocation*)location imageSize:(CGSize)size 
-	heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful 
-	failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStreetViewImageForLocation:(LPLocation *)location imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 ```
 
 Method for address:
 ```objective-c
-- (void)loadStreetViewImageForAddress:(NSString*)address imageSize:(CGSize)size heading:(float)heading 
-	fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful 
-	failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStreetViewImageForAddress:(NSString *)address imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 ```
 
 Successful block will return UIImage.
@@ -119,16 +112,12 @@ The Google Maps Image APIs make it easy to embed a static Google Maps image into
 
 Method for location:
 ```objective-c
-- (void)loadStaticMapImageForLocation:(LPLocation*)location zoomLevel:(int)zoom imageSize:(CGSize)size 
-	imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers 
-	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStaticMapImageForLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 ```
 
 Method for address:
 ```objective-c
-- (void)loadStaticMapImageForAddress:(NSString*)address zoomLevel:(int)zoom imageSize:(CGSize)size 
-	imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers 
-	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadStaticMapImageForAddress:(NSString *)address zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray*)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 ```
 
 Successful block will return UIImage.
@@ -145,15 +134,15 @@ The Google Places Autocomplete API is a web service that returns Place informati
 * **Country Restriction** - The country must be passed as a two character.
 
 ```objective-c
-- (void)loadPlacesAutocompleteForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadPlacesAutocompleteForInput:(NSString *)input offset:(int)offset radius:(int)radius location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction successfulBlock:(void (^)(LPPlacesAutocomplete *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 You can use blocks and delegate methods:
 
 ```objective-c
-- (void)googleFunctionsWillLoadPlacesAutocomplete:(LPGoogleFunctions*)googleFunctions forInput:(NSString*)input;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlacesAutocompleteWithStatus:(LPGoogleStatus)status;
-- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplete:(LPPlacesAutocomplete*)placesAutocomplete;
+- (void)googleFunctionsWillLoadPlacesAutocomplete:(LPGoogleFunctions *)googleFunctions forInput:(NSString *)input;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlacesAutocompleteWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplete:(LPPlacesAutocomplete *)placesAutocomplete;
 ```
 
 ##Place Details For Reference service
@@ -165,16 +154,15 @@ Once you have a reference from a Place Search, you can request more details abou
 * **Reference** - A textual identifier that uniquely identifies a place, returned from a Place search.
 
 ```objective-c
-- (void)loadPlaceDetailsForReference:(NSString*)reference successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful 
-	failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlaceDetailsForReference:(NSString *)reference successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 You can use blocks and delegate methods:
 
 ```objective-c
-- (void)googleFunctionsWillLoadPlaceDetailsResult:(LPGoogleFunctions*)googleFunctions forReference:(NSString*)reference;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingPlaceDetailsResultWithStatus:(LPGoogleStatus)status;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions didLoadPlaceDetailsResult:(LPPlaceDetailsResults *)placeDetailsResults;
+- (void)googleFunctionsWillLoadPlaceDetailsResult:(LPGoogleFunctions *)googleFunctions forReference:(NSString *)reference;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlaceDetailsResultWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceDetailsResult:(LPPlaceDetailsResults *)placeDetailsResults;
 ```
 
 ##Google Text to Speech service
@@ -186,7 +174,7 @@ Google Speak Text.
 * **Text** - Text for convert.
 
 ```objective-c
-- (void)speakText:(NSString*)text failureBlock:(void (^)(NSError *error))failure;
+- (void)speakText:(NSString *)text failureBlock:(void (^)(NSError *error))failure;
 ```
 
 ##Geocoding service
@@ -200,23 +188,21 @@ Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkwa
 
 Method for location:
 ```objective-c
-- (void)loadGeocodingForLocation:(LPLocation*)location filterComponents:(NSArray*)filterComponents 
-	successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadGeocodingForLocation:(LPLocation *)location filterComponents:(NSArray *)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 Method for address:
 ```objective-c
-- (void)loadGeocodingForAddress:(NSString*)address filterComponents:(NSArray*)filterComponents 
-	successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadGeocodingForAddress:(NSString *)address filterComponents:(NSArray *)filterComponents successfulBlock:(void (^)(LPGeocodingResults *geocodingResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 You can use blocks and delegate methods:
 
 ```objective-c
-- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions*)googleFunctions forAddress:(NSString*)address filterComponents:(NSArray*)filterComponents;
-- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions*)googleFunctions forLocation:(LPLocation*)location filterComponents:(NSArray*)filterComponents;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions errorLoadingGeocodingWithStatus:(LPGoogleStatus)status;
-- (void)googleFunctions:(LPGoogleFunctions*)googleFunctions didLoadGeocodingResults:(LPGeocodingResults*)geocodingResults;
+- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions *)googleFunctions forAddress:(NSString *)address filterComponents:(NSArray *)filterComponents;
+- (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions *)googleFunctions forLocation:(LPLocation *)location filterComponents:(NSArray *)filterComponents;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingGeocodingWithStatus:(LPGoogleStatus)status;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadGeocodingResults:(LPGeocodingResults *)geocodingResults;
 ```
 
 ##Place Autocomplete with Details service
@@ -233,7 +219,7 @@ Place Autocomplete + Place Details
 * **Country Restriction**  - The country must be passed as a two character.
 
 ```objective-c
-- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString*)input offset:(int)offset radius:(int)radius location:(LPLocation*)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString*)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlacesAutocompleteWithDetailsForInput:(NSString *)input offset:(int)offset radius:(int)radius location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 ##Place Text Search service
@@ -247,15 +233,14 @@ The Google Places API Text Search Service is a web service that returns informat
 * **Radius** - Defines the distance (in meters) within which to bias Place results. The maximum allowed radius is 50 000 meters. Results inside of this region will be ranked higher than results outside of the search circle; however, prominent results from outside of the search radius may be included.
 
 ```objective-c
-- (void)loadPlaceTextSearchForQuery:(NSString*)query location:(LPLocation*)location radius:(int)radius 
-	successfulBlock:(void (^)(LPPlaceSearchResults *placeResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+- (void)loadPlaceTextSearchForQuery:(NSString *)query location:(LPLocation *)location radius:(int)radius successfulBlock:(void (^)(LPPlaceSearchResults *placeResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
 You can use blocks and delegate methods:
 
 ```objective-c
-- (void)googleFunctionsWillLoadPlaceSearch:(LPGoogleFunctions *)googleFunctions forQuery:(NSString*)guery;
-- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceSearch:(LPPlaceSearchResults*)placeResults;
+- (void)googleFunctionsWillLoadPlaceSearch:(LPGoogleFunctions *)googleFunctions forQuery:(NSString *)guery;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceSearch:(LPPlaceSearchResults *)placeResults;
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlaceSearchWithStatus:(LPGoogleStatus)status;
 ```
 
@@ -270,8 +255,32 @@ The Places Photo service is a read-only API that allows you to easily add high q
 * **Max Width** - Min image height (accept an integer between 1 and 1600).
 
 ```objective-c
-- (void)loadPlacePhotoForReference:(NSString*)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth 
-	successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+- (void)loadPlacePhotoForReference:(NSString *)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+```
+
+##Distance Matrix service
+
+The Google Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. The information returned is based on the recommended route between start and end points, as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
+
+**Parameters:**
+
+* **Origins** - Array of LPLocation - The latitude/longitude value from which you wish to calculate directions.
+* **Destinations** - Array of LPLocation - The latitude/longitude value from which you wish to calculate directions.
+* **Travel Mode** - Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure time or an arrival time.
+* **Avoid Tolls** - Indicates that the calculated route(s) should avoid the indicated features.
+* **Unit** - Specifies the unit system to use when displaying results.
+* **Departure time** - Specifies the desired time of departure.
+
+```objective-c
+- (void)loadDistanceMatrixForOrigins:(NSArray *)origins forDestinations:(NSArray *)destinations directionsTravelMode:(LPGoogleDistanceMatrixTravelMode)travelMode directionsAvoidTolls:(LPGoogleDistanceMatrixAvoid)avoid directionsUnit:(LPGoogleDistanceMatrixUnit)unit departureTime:(NSDate *)departureTime successfulBlock:(void (^)(LPDistanceMatrix *distanceMatrix))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+```
+
+You can use blocks and delegate methods:
+
+```objective-c
+- (void)googleFunctionsWillLoadDistanceMatrix:(LPGoogleFunctions *)googleFunctions;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadDistanceMatrix:(LPDistanceMatrix *)distanceMatrix;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingDistanceMatrixWithStatus:(LPGoogleStatus)status;
 ```
 
 ##Uses Frameworks - Libraries

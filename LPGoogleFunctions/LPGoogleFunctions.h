@@ -41,6 +41,7 @@
 #import "LPGeocodingFilter.h"
 #import "LPGeocodingResults.h"
 #import "LPPlaceSearchResults.h"
+#import "LPDistanceMatrix.h"
 
 
 typedef enum {
@@ -225,6 +226,19 @@ typedef enum {
  */
 - (void)loadPlacePhotoForReference:(NSString *)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 
+/**
+ * The Google Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. The information returned is based on the recommended route between start and end points, as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
+ * @param Array of LPLocation - The latitude/longitude value from which you wish to calculate directions.
+ * @param Array of LPLocation - The latitude/longitude value from which you wish to calculate directions.
+ * @param Specifies the mode of transport to use when calculating directions. If you set the mode to "transit" you must also specify either a departure time or an arrival time.
+ * @param Indicates that the calculated route(s) should avoid the indicated features.
+ * @param Specifies the unit system to use when displaying results.
+ * @param Departure time.
+ * @param Successful block with results.
+ * @param Failure block with status.
+ */
+- (void)loadDistanceMatrixForOrigins:(NSArray *)origins forDestinations:(NSArray *)destinations directionsTravelMode:(LPGoogleDistanceMatrixTravelMode)travelMode directionsAvoidTolls:(LPGoogleDistanceMatrixAvoid)avoid directionsUnit:(LPGoogleDistanceMatrixUnit)unit departureTime:(NSDate *)departureTime successfulBlock:(void (^)(LPDistanceMatrix *distanceMatrix))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+
 @end
 
 
@@ -259,5 +273,10 @@ typedef enum {
 - (void)googleFunctionsWillLoadPlaceSearch:(LPGoogleFunctions *)googleFunctions forQuery:(NSString *)guery;
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceSearch:(LPPlaceSearchResults *)placeResults;
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlaceSearchWithStatus:(LPGoogleStatus)status;
+
+#pragma mark - Distance Matrix
+- (void)googleFunctionsWillLoadDistanceMatrix:(LPGoogleFunctions *)googleFunctions;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadDistanceMatrix:(LPDistanceMatrix *)distanceMatrix;
+- (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingDistanceMatrixWithStatus:(LPGoogleStatus)status;
 
 @end

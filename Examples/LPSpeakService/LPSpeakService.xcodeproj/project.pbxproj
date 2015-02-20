@@ -7,15 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C22085719740DAF00835C45 /* LPDistanceMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22085419740DAF00835C45 /* LPDistanceMatrix.m */; };
+		0C22085819740DAF00835C45 /* LPDistanceMatrixElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C22085619740DAF00835C45 /* LPDistanceMatrixElement.m */; };
 		0CCB61801912C9C900648FCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB617F1912C9C900648FCC /* Foundation.framework */; };
 		0CCB61821912C9C900648FCC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB61811912C9C900648FCC /* CoreGraphics.framework */; };
 		0CCB61841912C9C900648FCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB61831912C9C900648FCC /* UIKit.framework */; };
 		0CCB618A1912C9C900648FCC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0CCB61881912C9C900648FCC /* InfoPlist.strings */; };
 		0CCB618C1912C9C900648FCC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB618B1912C9C900648FCC /* main.m */; };
 		0CCB61921912C9C900648FCC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CCB61911912C9C900648FCC /* Images.xcassets */; };
-		0CCB61991912C9C900648FCC /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB61981912C9C900648FCC /* XCTest.framework */; };
-		0CCB619A1912C9C900648FCC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB617F1912C9C900648FCC /* Foundation.framework */; };
-		0CCB619B1912C9C900648FCC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CCB61831912C9C900648FCC /* UIKit.framework */; };
 		0CCB61B11912C9F200648FCC /* LPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB61B01912C9F200648FCC /* LPAppDelegate.m */; };
 		0CCB61F31912CA0000648FCC /* LPGoogleFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB61B51912CA0000648FCC /* LPGoogleFunctions.m */; };
 		0CCB61F41912CA0000648FCC /* LPAddressComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB61B81912CA0000648FCC /* LPAddressComponent.m */; };
@@ -71,17 +70,11 @@
 		FFBF839D195B115B006A0E0F /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBF838C195B115B006A0E0F /* UIWebView+AFNetworking.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0CCB619C1912C9C900648FCC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0CCB61741912C9C900648FCC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0CCB617B1912C9C900648FCC;
-			remoteInfo = LPSpeakService;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		0C22085319740DAF00835C45 /* LPDistanceMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDistanceMatrix.h; sourceTree = "<group>"; };
+		0C22085419740DAF00835C45 /* LPDistanceMatrix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDistanceMatrix.m; sourceTree = "<group>"; };
+		0C22085519740DAF00835C45 /* LPDistanceMatrixElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDistanceMatrixElement.h; sourceTree = "<group>"; };
+		0C22085619740DAF00835C45 /* LPDistanceMatrixElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDistanceMatrixElement.m; sourceTree = "<group>"; };
 		0CCB617C1912C9C900648FCC /* LPSpeakService.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPSpeakService.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CCB617F1912C9C900648FCC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0CCB61811912C9C900648FCC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -91,7 +84,6 @@
 		0CCB618B1912C9C900648FCC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0CCB618D1912C9C900648FCC /* LPSpeakService-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LPSpeakService-Prefix.pch"; sourceTree = "<group>"; };
 		0CCB61911912C9C900648FCC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0CCB61971912C9C900648FCC /* LPSpeakServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LPSpeakServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CCB61981912C9C900648FCC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		0CCB61AF1912C9F200648FCC /* LPAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAppDelegate.h; sourceTree = "<group>"; };
 		0CCB61B01912C9F200648FCC /* LPAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAppDelegate.m; sourceTree = "<group>"; };
@@ -213,16 +205,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0CCB61941912C9C900648FCC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0CCB61991912C9C900648FCC /* XCTest.framework in Frameworks */,
-				0CCB619B1912C9C900648FCC /* UIKit.framework in Frameworks */,
-				0CCB619A1912C9C900648FCC /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -239,7 +221,6 @@
 			isa = PBXGroup;
 			children = (
 				0CCB617C1912C9C900648FCC /* LPSpeakService.app */,
-				0CCB61971912C9C900648FCC /* LPSpeakServiceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -313,6 +294,10 @@
 		0CCB61B61912CA0000648FCC /* LPGoogleObjects */ = {
 			isa = PBXGroup;
 			children = (
+				0C22085319740DAF00835C45 /* LPDistanceMatrix.h */,
+				0C22085419740DAF00835C45 /* LPDistanceMatrix.m */,
+				0C22085519740DAF00835C45 /* LPDistanceMatrixElement.h */,
+				0C22085619740DAF00835C45 /* LPDistanceMatrixElement.m */,
 				0CCB61B71912CA0000648FCC /* LPAddressComponent.h */,
 				0CCB61B81912CA0000648FCC /* LPAddressComponent.m */,
 				0CCB61B91912CA0000648FCC /* LPAgencie.h */,
@@ -474,24 +459,6 @@
 			productReference = 0CCB617C1912C9C900648FCC /* LPSpeakService.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0CCB61961912C9C900648FCC /* LPSpeakServiceTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0CCB61AB1912C9C900648FCC /* Build configuration list for PBXNativeTarget "LPSpeakServiceTests" */;
-			buildPhases = (
-				0CCB61931912C9C900648FCC /* Sources */,
-				0CCB61941912C9C900648FCC /* Frameworks */,
-				0CCB61951912C9C900648FCC /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				0CCB619D1912C9C900648FCC /* PBXTargetDependency */,
-			);
-			name = LPSpeakServiceTests;
-			productName = LPSpeakServiceTests;
-			productReference = 0CCB61971912C9C900648FCC /* LPSpeakServiceTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -504,9 +471,6 @@
 				TargetAttributes = {
 					0CCB617B1912C9C900648FCC = {
 						DevelopmentTeam = VD448M8BPE;
-					};
-					0CCB61961912C9C900648FCC = {
-						TestTargetID = 0CCB617B1912C9C900648FCC;
 					};
 				};
 			};
@@ -523,7 +487,6 @@
 			projectRoot = "";
 			targets = (
 				0CCB617B1912C9C900648FCC /* LPSpeakService */,
-				0CCB61961912C9C900648FCC /* LPSpeakServiceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -536,13 +499,6 @@
 				0CCB618A1912C9C900648FCC /* InfoPlist.strings in Resources */,
 				0CCB62351912CA4900648FCC /* LPMainViewController.xib in Resources */,
 				0CCB61921912C9C900648FCC /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		0CCB61951912C9C900648FCC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,8 +516,10 @@
 				FFBF8396195B115B006A0E0F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0CCB62031912CA0000648FCC /* LPPlaceDetails.m in Sources */,
 				FFBF8397195B115B006A0E0F /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				0C22085819740DAF00835C45 /* LPDistanceMatrixElement.m in Sources */,
 				FFBF839B195B115B006A0E0F /* UIProgressView+AFNetworking.m in Sources */,
 				0CCB61F71912CA0000648FCC /* LPDirections.m in Sources */,
+				0C22085719740DAF00835C45 /* LPDistanceMatrix.m in Sources */,
 				0CCB62071912CA0000648FCC /* LPPlaceSearchResults.m in Sources */,
 				0CCB61F41912CA0000648FCC /* LPAddressComponent.m in Sources */,
 				0CCB62111912CA0000648FCC /* LPWaypoint.m in Sources */,
@@ -607,22 +565,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0CCB61931912C9C900648FCC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0CCB619D1912C9C900648FCC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0CCB617B1912C9C900648FCC /* LPSpeakService */;
-			targetProxy = 0CCB619C1912C9C900648FCC /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0CCB61881912C9C900648FCC /* InfoPlist.strings */ = {
@@ -734,46 +677,6 @@
 			};
 			name = Release;
 		};
-		0CCB61AC1912C9C900648FCC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LPSpeakService.app/LPSpeakService";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LPSpeakService/LPSpeakService-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "LPSpeakServiceTests/LPSpeakServiceTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		0CCB61AD1912C9C900648FCC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LPSpeakService.app/LPSpeakService";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LPSpeakService/LPSpeakService-Prefix.pch";
-				INFOPLIST_FILE = "LPSpeakServiceTests/LPSpeakServiceTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -791,15 +694,6 @@
 			buildConfigurations = (
 				0CCB61A91912C9C900648FCC /* Debug */,
 				0CCB61AA1912C9C900648FCC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		0CCB61AB1912C9C900648FCC /* Build configuration list for PBXNativeTarget "LPSpeakServiceTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0CCB61AC1912C9C900648FCC /* Debug */,
-				0CCB61AD1912C9C900648FCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

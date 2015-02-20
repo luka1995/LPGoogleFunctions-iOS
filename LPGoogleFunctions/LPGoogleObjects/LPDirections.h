@@ -23,7 +23,7 @@ typedef enum {
 
 @interface LPDirections : NSObject <NSCoding>
 
-@property (nonatomic, strong) NSMutableArray *routes;
+@property (nonatomic, strong) NSArray *routes;
 @property (nonatomic, strong) NSString *statusCode;
 @property (nonatomic, assign) LPGoogleDirectionsTravelMode requestTravelMode;
 

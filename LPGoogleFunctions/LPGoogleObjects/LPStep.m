@@ -8,10 +8,10 @@
 #import "LPStep.h"
 
 
-NSString *const googleTravelModeDriving = @"driving";
-NSString *const googleTravelModeBicycling = @"bicycling";
-NSString *const googleTravelModeTransit = @"transit";
-NSString *const googleTravelModeWalking = @"walking";
+NSString *const googleDirectionsTravelModeDriving = @"driving";
+NSString *const googleDirectionsTravelModeBicycling = @"bicycling";
+NSString *const googleDirectionsTravelModeTransit = @"transit";
+NSString *const googleDirectionsTravelModeWalking = @"walking";
 
 
 @implementation LPStep
@@ -31,8 +31,6 @@ NSString *const googleTravelModeWalking = @"walking";
         self.travelMode = [coder decodeIntForKey:@"travelMode"];
         self.subSteps = [coder decodeObjectForKey:@"subSteps"];
         self.transitDetails = [coder decodeObjectForKey:@"transitDetails"];
-        self.isBicikeLJStationStart = [coder decodeBoolForKey:@"isBicikeLJStationStart"];
-        self.isBicikeLJStationEnd = [coder decodeBoolForKey:@"isBicikeLJStationEnd"];
 	}
 	
 	return self;
@@ -50,17 +48,15 @@ NSString *const googleTravelModeWalking = @"walking";
     [coder encodeInteger:self.travelMode forKey:@"travelMode"];
     [coder encodeObject:self.subSteps forKey:@"subSteps"];
     [coder encodeObject:self.transitDetails forKey:@"transitDetails"];
-    [coder encodeBool:self.isBicikeLJStationStart forKey:@"isBicikeLJStationStart"];
-    [coder encodeBool:self.isBicikeLJStationEnd forKey:@"isBicikeLJStationEnd"];
 }
 
 + (LPGoogleDirectionsTravelMode)getDirectionsTravelModeFromString:(NSString *)string
 {
-    if ([string isEqualToString:googleTravelModeDriving] || [string isEqualToString:[googleTravelModeDriving uppercaseString]]) {
+    if ([string isEqualToString:googleDirectionsTravelModeDriving] || [string isEqualToString:[googleDirectionsTravelModeDriving uppercaseString]]) {
         return LPGoogleDirectionsTravelModeDriving;
-    } else if ([string isEqualToString:googleTravelModeBicycling] || [string isEqualToString:[googleTravelModeBicycling uppercaseString]]) {
+    } else if ([string isEqualToString:googleDirectionsTravelModeBicycling] || [string isEqualToString:[googleDirectionsTravelModeBicycling uppercaseString]]) {
         return LPGoogleDirectionsTravelModeBicycling;
-    } else if ([string isEqualToString:googleTravelModeTransit] || [string isEqualToString:[googleTravelModeTransit uppercaseString]]) {
+    } else if ([string isEqualToString:googleDirectionsTravelModeTransit] || [string isEqualToString:[googleDirectionsTravelModeTransit uppercaseString]]) {
         return LPGoogleDirectionsTravelModeTransit;
     } else {
         return LPGoogleDirectionsTravelModeWalking;
@@ -71,13 +67,13 @@ NSString *const googleTravelModeWalking = @"walking";
 {
     switch (travelMode) {
         case LPGoogleDirectionsTravelModeDriving:
-            return googleTravelModeDriving;
+            return googleDirectionsTravelModeDriving;
         case LPGoogleDirectionsTravelModeBicycling:
-            return googleTravelModeBicycling;
+            return googleDirectionsTravelModeBicycling;
         case LPGoogleDirectionsTravelModeTransit:
-            return googleTravelModeTransit;
+            return googleDirectionsTravelModeTransit;
         default:
-            return googleTravelModeWalking;
+            return googleDirectionsTravelModeWalking;
     }
 }
 
@@ -179,10 +175,7 @@ NSString *const googleTravelModeWalking = @"walking";
     if (self.transitDetails && ![self.transitDetails isKindOfClass:[NSNull class]]) {
         [dictionary setObject:self.transitDetails.dictionary forKey:@"transitDetails"];
     }
-    
-    [dictionary setObject:[NSString stringWithFormat:@"%d", self.isBicikeLJStationStart] forKey:@"isBicikeLJStationStart"];
-    [dictionary setObject:[NSString stringWithFormat:@"%d", self.isBicikeLJStationEnd] forKey:@"isBicikeLJStationEnd"];
-    
+
     return dictionary;
 }
 
@@ -205,9 +198,7 @@ NSString *const googleTravelModeWalking = @"walking";
     [new setTravelMode:[self travelMode]];
     [new setSubSteps:[self subSteps]];
     [new setTransitDetails:[self transitDetails]];
-    [new setIsBicikeLJStationStart:self.isBicikeLJStationStart];
-    [new setIsBicikeLJStationEnd:self.isBicikeLJStationEnd];
-    
+
     return new;
 }
 

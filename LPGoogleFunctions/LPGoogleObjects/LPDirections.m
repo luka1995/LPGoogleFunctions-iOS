@@ -35,7 +35,7 @@
     
     if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"routes"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"routes"]) {
-            NSMutableArray *array=[NSMutableArray new];
+            NSMutableArray *array = [NSMutableArray new];
 
             for (int i=0; i<[[dictionary objectForKey:@"routes"] count]; i++) {
                 LPRoute *route = [LPRoute routeWithObjects:[[dictionary objectForKey:@"routes"] objectAtIndex:i]];
@@ -44,7 +44,7 @@
                 [array addObject:route];
             }
             
-            new.routes=array;
+            new.routes = array;
         }
         
         if (![[dictionary objectForKey:@"status"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"status"]) {
