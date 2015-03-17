@@ -38,7 +38,7 @@
 {
     [coder encodeObject:self.addressComponents forKey:@"addressComponents"];
     [coder encodeObject:self.adrAddress forKey:@"adrAddress"];
-    [coder encodeObject:self.formattedAddress forKey:@"formattedAddresss"];
+    [coder encodeObject:self.formattedAddress forKey:@"formattedAddress"];
     [coder encodeObject:self.geometry forKey:@"geometry"];
     [coder encodeObject:self.icon forKey:@"icon"];
     [coder encodeObject:self.ID forKey:@"ID"];
