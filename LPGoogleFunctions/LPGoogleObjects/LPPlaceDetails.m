@@ -219,6 +219,7 @@
 {
     LPPlaceDetails *new = [LPPlaceDetails new];
     
+    [new setAddressComponents:[self addressComponents]];
     [new setAdrAddress:[self adrAddress]];
     [new setFormattedAddress:[self formattedAddress]];
     [new setGeometry:[self geometry]];
