@@ -10,29 +10,29 @@
 	<string>LPStreetViewImagesService</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5B442C85-26B9-45B4-B17B-3F8E46063F74</key>
-		<string>ssh://github.com/luka1995/LPGoogleFunctions.git</string>
+		<key>BF3D61F066F1A152220DB57815C43C3C5FB4EC0E</key>
+		<string>https://github.com/ndleon09/LPGoogleFunctions</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Examples/LPStreetViewImagesService/LPStreetViewImagesService.xcodeproj/project.xcworkspace</string>
+	<string>Examples/LPStreetViewImagesService/LPStreetViewImagesService.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5B442C85-26B9-45B4-B17B-3F8E46063F74</key>
+		<key>BF3D61F066F1A152220DB57815C43C3C5FB4EC0E</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/luka1995/LPGoogleFunctions.git</string>
+	<string>https://github.com/ndleon09/LPGoogleFunctions</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5B442C85-26B9-45B4-B17B-3F8E46063F74</string>
+	<string>BF3D61F066F1A152220DB57815C43C3C5FB4EC0E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5B442C85-26B9-45B4-B17B-3F8E46063F74</string>
+			<string>BF3D61F066F1A152220DB57815C43C3C5FB4EC0E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LPGoogleFunctions</string>
 		</dict>
