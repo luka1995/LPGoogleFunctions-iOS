@@ -14,9 +14,9 @@ NSString *const PLACE_TYPE_LOCALITY = @"locality";
 NSString *const PLACE_TYPE_SUBLOCALITY = @"sublocality";
 NSString *const PLACE_TYPE_POSTAL_CODE = @"postal_code";
 NSString *const PLACE_TYPE_COUNTRY = @"country";
-NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA1 = @"administrative_area1";
-NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA2 = @"administrative_area2";
-NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA3 = @"administrative_area3";
+NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA1 = @"administrative_area_level_1";
+NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA2 = @"administrative_area_level_2";
+NSString *const PLACE_TYPE_ADMINISTRATIVE_AREA3 = @"administrative_area_level_3";
 
 
 @implementation LPPrediction
