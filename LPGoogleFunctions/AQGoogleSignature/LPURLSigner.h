@@ -10,7 +10,7 @@
 
 @interface LPURLSigner : NSObject
 
-+ (MOUtility *)sharedManager;
++ (LPURLSigner *)sharedManager;
 
 - (NSString *)createSignatureWithHMAC_SHA1:(NSString *)url key:(NSString *)key;
 
