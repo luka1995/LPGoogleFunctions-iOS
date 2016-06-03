@@ -865,6 +865,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         NSString *newUrlStr = [urlStr substringToIndex:[urlStr length]-1];
         NSURL* url = [NSURL URLWithString:newUrlStr];
         
+        NSLog(@"url to sign: %@", url);
         NSString* signature = [[LPURLSigner sharedManager] createSignatureWithHMAC_SHA1:[NSString stringWithFormat:@"%@?%@", [url path], [url query]] key:self.googleAPICryptoKey];
 
         [parameters setObject:[NSString stringWithFormat:@"%@", signature] forKey:@"signature"];
