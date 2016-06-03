@@ -847,7 +847,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
     }
     
-    NSLog("loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURL);
+    NSLog(@"loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURL);
     
     [manager GET:googleAPIDistanceMatrixURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
