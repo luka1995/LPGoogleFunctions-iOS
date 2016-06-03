@@ -29,6 +29,8 @@
 
 #import "LPGoogleFunctions.h"
 
+#import "LPURLSigner.h"
+
 
 NSString *const STATUS_OK = @"OK";
 NSString *const STATUS_NOT_FOUND = @"NOT_FOUND";
@@ -39,16 +41,18 @@ NSString *const STATUS_OVER_QUERY_LIMIT = @"OVER_QUERY_LIMIT";
 NSString *const STATUS_REQUEST_DENIED = @"REQUEST_DENIED";
 NSString *const STATUS_UNKNOWN_ERROR = @"UNKNOWN_ERROR";
 
-NSString *const googleAPIDirectionsURL = @"https://maps.googleapis.com/maps/api/directions/json?";
-NSString *const googleAPIStaticMapImageURL = @"https://maps.googleapis.com/maps/api/staticmap?";
-NSString *const googleAPIStreetViewImageURL = @"https://maps.googleapis.com/maps/api/streetview?";
-NSString *const googleAPIPlacesAutocompleteURL = @"httpss://maps.googleapis.com/maps/api/place/autocomplete/json?";
+NSString *const googleAPIUri           = @"https://maps.googleapis.com"
+NSString *const googleAPIDirectionsURLPath = @"maps/api/directions/json?";
+NSString *const googleAPIStaticMapImageURLPath = @"maps/api/staticmap?";
+NSString *const googleAPIStreetViewImageURLPath = @"maps/api/streetview?";
+NSString *const googleAPIPlacesAutocompleteURLPath = @"maps/api/place/autocomplete/json?";
+NSString *const googleAPIPlaceDetailsURLPath = @"maps/api/place/details/json?";
+NSString *const googleAPIGeocodingURLPath = @"maps/api/geocode/json?";
+NSString *const googleAPIPlaceTextSearchURLPath = @"maps/api/place/textsearch/json?";
+NSString *const googleAPIPlacePhotoURLPath = @"maps/api/place/photo?";
+NSString *const googleAPIDistanceMatrixURLPath = @"maps/api/distancematrix/json?";
+
 NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/translate_tts?";
-NSString *const googleAPIPlaceDetailsURL = @"https://maps.googleapis.com/maps/api/place/details/json?";
-NSString *const googleAPIGeocodingURL = @"https://maps.googleapis.com/maps/api/geocode/json?";
-NSString *const googleAPIPlaceTextSearchURL = @"https://maps.googleapis.com/maps/api/place/textsearch/json?";
-NSString *const googleAPIPlacePhotoURL = @"https://maps.googleapis.com/maps/api/place/photo?";
-NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/api/distancematrix/json?";
 
 @interface LPGoogleFunctions ()
 
@@ -178,7 +182,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
         [parameters setObject:waypointsString forKey:@"waypoints"];
     }
 
-    [manager GET:googleAPIDirectionsURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIDirectionsURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPDirections *directions = [LPDirections directionsWithObjects:responseObject];
         directions.requestTravelMode = travelMode;
@@ -234,7 +238,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     [parameters setObject:[NSString stringWithFormat:@"%.2f", fov] forKey:@"fov"];
     [parameters setObject:[NSString stringWithFormat:@"%.2f", pitch] forKey:@"pitch"];
 
-    [manager GET:googleAPIStreetViewImageURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIStreetViewImageURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (successful)
             successful(responseObject);
@@ -269,7 +273,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     [parameters setObject:[NSString stringWithFormat:@"%.2f", fov] forKey:@"fov"];
     [parameters setObject:[NSString stringWithFormat:@"%.2f", pitch] forKey:@"pitch"];
     
-    [manager GET:googleAPIStreetViewImageURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIStreetViewImageURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (successful)
             successful(responseObject);
@@ -304,7 +308,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     }
     [parameters setObject:parametersMarkers forKey:@"markers"];
     
-    [manager GET:googleAPIStaticMapImageURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIStaticMapImageURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(successful)
             successful(responseObject);
@@ -339,7 +343,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     }
     [parameters setObject:parametersMarkers forKey:@"markers"];
     
-    [manager GET:googleAPIStaticMapImageURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIStaticMapImageURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(successful)
             successful(responseObject);
@@ -382,7 +386,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
         [parameters setObject:[NSString stringWithFormat:@"country:%@", countryRestriction] forKey:@"components"];
     }
     
-    [manager GET:googleAPIPlacesAutocompleteURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIPlacesAutocompleteURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPPlacesAutocomplete *placesAutocomplete = [LPPlacesAutocomplete placesAutocompleteWithObjects:responseObject];
         
@@ -439,7 +443,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
-    [manager GET:googleAPIPlaceDetailsURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIPlaceDetailsURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPPlaceDetailsResults *placeDetailsResults = [LPPlaceDetailsResults placeDetailsResultsWithObjects:responseObject];
         
@@ -530,7 +534,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
         }
     }
 
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:googleAPIGeocodingURL parameters:parameters error:nil];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:googleAPIGeocodingURLPath parameters:parameters error:nil];
     
     [self loadGeocodingRequest:request successfulBlock:^(LPGeocodingResults *geocodingResults) {
         
@@ -567,7 +571,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
         }
     }
 
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:googleAPIGeocodingURL parameters:parameters error:nil];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:googleAPIGeocodingURLPath parameters:parameters error:nil];
     
     [self loadGeocodingRequest:request successfulBlock:^(LPGeocodingResults *geocodingResults) {
         
@@ -717,7 +721,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     }
     
     
-    [manager GET:googleAPIPlaceTextSearchURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIPlaceTextSearchURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPPlaceSearchResults *placeDetailsResults = [LPPlaceSearchResults placeSearchResultsWithObjects:responseObject];
         
@@ -779,7 +783,7 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
         [parameters setObject:[NSString stringWithFormat:@"%d", maxWidth] forKey:@"maxwidth"];
     }
     
-    [manager GET:googleAPIPlacePhotoURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:googleAPIPlacePhotoURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(successful)
             successful(responseObject);
@@ -831,13 +835,6 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     }
     [parameters setObject:[NSString stringWithFormat:@"%@", destinationsString] forKey:@"destinations"];
     
-    if (self.googleAPIBrowserKey) {
-        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
-    }
-    else {
-        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
-    }
-
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixTravelMode:travelMode] forKey:@"mode"];
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixAvoid:avoid] forKey:@"avoid"];
@@ -847,9 +844,36 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
     }
     
-    NSLog(@"loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURL);
+    NSLog(@"Before: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
     
-    [manager GET:googleAPIDistanceMatrixURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    
+    
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+        
+        
+        
+        NSMutableString* urlStr = [NSString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDirectionsURLPath];
+        for (NSDictionary* parameter in parameters) {
+            [urlStr appendString:[NSString stringWithFormat:@"%@,&", parameter]];
+        }
+        
+        NSString *newUrlStr = [urlStr substringToIndex:[urlStr length]-1];
+        NSURL* url = [NSURL URLWithString:newUrlStr];
+        
+        NSString* signature = [[LPURLSigner sharedManager] createSignatureWithHMAC_SHA1:[NSString stringWithFormat:@"%@?%@", [url path], [url query]] key:googleAPICryptoKey];
+
+        [parameters setObject:[NSString stringWithFormat:@"%@", signature] forKey:@"signature"];
+    }
+
+    NSLog(@"After: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
+
+    
+    [manager GET:googleAPIDistanceMatrixURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPDistanceMatrix *distanceMatrix = [LPDistanceMatrix distanceMatrixWithObjects:responseObject];
         distanceMatrix.requestTravelMode = travelMode;
