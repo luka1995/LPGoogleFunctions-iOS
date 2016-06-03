@@ -182,7 +182,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         [parameters setObject:waypointsString forKey:@"waypoints"];
     }
 
-    [manager GET:googleAPIDirectionsURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIDirectionsURLPath]  parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPDirections *directions = [LPDirections directionsWithObjects:responseObject];
         directions.requestTravelMode = travelMode;
@@ -238,7 +238,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSString stringWithFormat:@"%.2f", fov] forKey:@"fov"];
     [parameters setObject:[NSString stringWithFormat:@"%.2f", pitch] forKey:@"pitch"];
 
-    [manager GET:googleAPIStreetViewImageURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIStreetViewImageURLPath]  parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (successful)
             successful(responseObject);
@@ -273,7 +273,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSString stringWithFormat:@"%.2f", fov] forKey:@"fov"];
     [parameters setObject:[NSString stringWithFormat:@"%.2f", pitch] forKey:@"pitch"];
     
-    [manager GET:googleAPIStreetViewImageURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIStreetViewImageURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (successful)
             successful(responseObject);
@@ -308,7 +308,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     }
     [parameters setObject:parametersMarkers forKey:@"markers"];
     
-    [manager GET:googleAPIStaticMapImageURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIStaticMapImageURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(successful)
             successful(responseObject);
@@ -343,7 +343,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     }
     [parameters setObject:parametersMarkers forKey:@"markers"];
     
-    [manager GET:googleAPIStaticMapImageURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIStaticMapImageURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(successful)
             successful(responseObject);
@@ -386,7 +386,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         [parameters setObject:[NSString stringWithFormat:@"country:%@", countryRestriction] forKey:@"components"];
     }
     
-    [manager GET:googleAPIPlacesAutocompleteURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIPlacesAutocompleteURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPPlacesAutocomplete *placesAutocomplete = [LPPlacesAutocomplete placesAutocompleteWithObjects:responseObject];
         
@@ -443,7 +443,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     
-    [manager GET:googleAPIPlaceDetailsURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIPlaceDetailsURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPPlaceDetailsResults *placeDetailsResults = [LPPlaceDetailsResults placeDetailsResultsWithObjects:responseObject];
         
@@ -721,7 +721,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     }
     
     
-    [manager GET:googleAPIPlaceTextSearchURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIPlaceTextSearchURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPPlaceSearchResults *placeDetailsResults = [LPPlaceSearchResults placeSearchResultsWithObjects:responseObject];
         
@@ -783,7 +783,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         [parameters setObject:[NSString stringWithFormat:@"%d", maxWidth] forKey:@"maxwidth"];
     }
     
-    [manager GET:googleAPIPlacePhotoURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIPlacePhotoURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if(successful)
             successful(responseObject);
@@ -873,7 +873,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     NSLog(@"After: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
 
     
-    [manager GET:googleAPIDistanceMatrixURLPath parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:[NSString stringWithFormat:@"%@/%@", googleAPIUri, googleAPIDistanceMatrixURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPDistanceMatrix *distanceMatrix = [LPDistanceMatrix distanceMatrixWithObjects:responseObject];
         distanceMatrix.requestTravelMode = travelMode;
