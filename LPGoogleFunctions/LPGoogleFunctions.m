@@ -41,7 +41,7 @@ NSString *const STATUS_OVER_QUERY_LIMIT = @"OVER_QUERY_LIMIT";
 NSString *const STATUS_REQUEST_DENIED = @"REQUEST_DENIED";
 NSString *const STATUS_UNKNOWN_ERROR = @"UNKNOWN_ERROR";
 
-NSString *const googleAPIUri           = @"https://maps.googleapis.com"
+NSString *const googleAPIUri           = @"https://maps.googleapis.com";
 NSString *const googleAPIDirectionsURLPath = @"maps/api/directions/json?";
 NSString *const googleAPIStaticMapImageURLPath = @"maps/api/staticmap?";
 NSString *const googleAPIStreetViewImageURLPath = @"maps/api/streetview?";
