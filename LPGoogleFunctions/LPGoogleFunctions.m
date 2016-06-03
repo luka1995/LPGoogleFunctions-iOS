@@ -855,12 +855,17 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
         
+        NSArray *sortedKeys = [[parameters allKeys] sortedArrayUsingSelector: @selector(compare:)];
+        NSMutableArray *sortedValues = [NSMutableArray array];
+        for (NSString *key in sortedKeys)
+            [sortedValues addObject: [parameters objectForKey: key]];
+        
         
         
         NSMutableString* urlStr = [NSMutableString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDistanceMatrixURLPath];
-        for (NSString* key in parameters) {
+        for (int i=0; i<sortedKeys.count; i++) {
             
-            [urlStr appendString:[NSString stringWithFormat:@"%@=%@&", key, [parameters objectForKey:key]]];
+            [urlStr appendString:[NSString stringWithFormat:@"%@=%@&", sortedKeys[i], sortedValues[i]]];
         }
         
         NSString *newUrlStr = [urlStr substringToIndex:[urlStr length]-1];
