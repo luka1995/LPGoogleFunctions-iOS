@@ -221,7 +221,12 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+    }
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
     [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"location"];
@@ -250,7 +255,13 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+    }
+
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
     [parameters setObject:[NSString stringWithFormat:@"%@", address] forKey:@"location"];
@@ -351,8 +362,14 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+    }
+
     [parameters setObject:[NSString stringWithFormat:@"%@", input] forKey:@"input"];
     [parameters setObject:[LPPrediction getStringFromGooglePlaceType:placeType] forKey:@"types"];
     [parameters setObject:[NSString stringWithFormat:@"%d", offset] forKey:@"offset"];
@@ -411,7 +428,13 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+    }
+
     [parameters setObject:[NSString stringWithFormat:@"%@", reference] forKey:@"reference"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
@@ -677,7 +700,13 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
     
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+    }
+
     [parameters setObject:[NSString stringWithFormat:@"%@", query] forKey:@"query"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
@@ -731,8 +760,14 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     manager.responseSerializer = [AFImageResponseSerializer serializer];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-    
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+    }
+
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", reference] forKey:@"photoreference"];
     
@@ -796,7 +831,13 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     }
     [parameters setObject:[NSString stringWithFormat:@"%@", destinationsString] forKey:@"destinations"];
     
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+    }
+
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixTravelMode:travelMode] forKey:@"mode"];
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixAvoid:avoid] forKey:@"avoid"];
@@ -805,6 +846,8 @@ NSString *const googleAPIDistanceMatrixURL = @"https://maps.googleapis.com/maps/
     if (departureTime) {
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
     }
+    
+    NSLog("loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURL);
     
     [manager GET:googleAPIDistanceMatrixURL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

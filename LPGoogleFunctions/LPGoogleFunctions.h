@@ -75,6 +75,8 @@ typedef enum {
 @property (nonatomic, assign) BOOL sensor; /** Using GPS location sensor */
 @property (nonatomic, strong) NSString *languageCode; /** Language ISO code (default "en") */
 @property (nonatomic, strong) NSString *googleAPIBrowserKey;
+@property (nonatomic, strong) NSString *googleAPIClientID;
+@property (nonatomic, strong) NSString *googleAPICryptoKey;
 
 + (instancetype)sharedInstance;
 
