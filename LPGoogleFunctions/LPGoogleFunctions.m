@@ -858,8 +858,9 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         
         
         NSMutableString* urlStr = [NSMutableString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDistanceMatrixURLPath];
-        for (NSDictionary* parameter in parameters) {
-            [urlStr appendString:[NSString stringWithFormat:@"%@,&", parameter]];
+        for (NSString* key in parameters) {
+            
+            [urlStr appendString:[NSString stringWithFormat:@"%@=%@,&", key, [parameters objectForKey:key]]];
         }
         
         NSString *newUrlStr = [urlStr substringToIndex:[urlStr length]-1];
