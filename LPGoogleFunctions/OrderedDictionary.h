@@ -12,10 +12,10 @@
 //  appreciated but not required.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
-@interface OrderedDictionary : NSMutableDictionary
-{
+@interface OrderedDictionary : NSMutableDictionary {
+    
 	NSMutableDictionary *dictionary;
 	NSMutableArray *array;
 }
