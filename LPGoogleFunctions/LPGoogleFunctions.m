@@ -28,6 +28,7 @@
 // THE SOFTWARE.
 
 #import "LPGoogleFunctions.h"
+#import "OrderedDictionary.h"
 
 #import "LPURLSigner.h"
 
@@ -805,7 +806,8 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSMutableDictionary *parameters = [NSMutableDictionary new]; 
+    OrderedDictionary *parameters = [[OrderedDictionary alloc] init];
+//    NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     NSMutableString *originsString = [NSMutableString new];
     for (int i=0; i<[origins count]; i++) {
@@ -855,7 +857,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
         
-        NSArray *sortedKeys = [[parameters allKeys] sortedArrayUsingSelector: @selector(compare:)];
+        NSArray *sortedKeys = [parameters allKeys]; // sortedArrayUsingSelector: @selector(compare:)
         NSMutableArray *sortedValues = [NSMutableArray array];
         for (NSString *key in sortedKeys)
             [sortedValues addObject: [parameters objectForKey: key]];
