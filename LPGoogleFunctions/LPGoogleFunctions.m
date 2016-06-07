@@ -799,10 +799,6 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
 
 - (void)loadDistanceMatrixForOrigins:(NSArray *)origins forDestinations:(NSArray *)destinations directionsTravelMode:(LPGoogleDistanceMatrixTravelMode)travelMode directionsAvoidTolls:(LPGoogleDistanceMatrixAvoid)avoid directionsUnit:(LPGoogleDistanceMatrixUnit)unit departureTime:(NSDate *)departureTime successfulBlock:(void (^)(LPDistanceMatrix *distanceMatrix))successful failureBlock:(void (^)(LPGoogleStatus status))failure
 {
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDistanceMatrix:)]) {
-        [self.delegate googleFunctionsWillLoadDistanceMatrix:self];
-    }
-    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
@@ -853,42 +849,22 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
         
-        NSLog(@"Before: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
-        
-        NSMutableArray *sortedKeys = [parameters allKeys]; // sortedArrayUsingSelector: @selector(compare:)
-        NSMutableArray *sortedValues = [NSMutableArray array];
-        for (NSString *key in sortedKeys)
-            [sortedValues addObject: [parameters objectForKey: key]];
-        
         NSMutableString* urlStr = [NSMutableString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDistanceMatrixURLPath];
         for (NSString* key in parameters) {
             [urlStr appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
         }
-        //        for (int i=0; i<sortedKeys.count; i++) {
-        //
-        //            [urlStr appendString:[NSString stringWithFormat:@"&%@=%@", sortedKeys[i], sortedValues[i]]];
-        //        }
-        
         NSString *newUrlStr = [urlStr substringToIndex:[urlStr length]-1];
         NSURL* url = [NSURL URLWithString:newUrlStr];
-        
-        NSLog(@"url: %@ \n url to sign: %@?%@", url, [url path], [url query]);
         NSString* signature = [[LPURLSigner sharedManager] createSignatureWithHMAC_SHA1:[NSString stringWithFormat:@"%@?%@", [url path], [url query]] key:self.googleAPICryptoKey];
         
-        //        [sortedKeys addObject:@"signature"];
-        //        [sortedValues addObject:[NSString stringWithFormat:@"%@", signature]];
         [parameters setObject:[NSString stringWithFormat:@"%@", signature] forKey:@"signature"];
     }
-    
-    NSLog(@"After: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
-    
     
     NSMutableString* params = [NSMutableString string];
     for (NSString* key in parameters) {
         [params appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
     }
     NSString *newParams = [params substringToIndex:[params length]-1];
-    
     
     [manager GET:[NSString stringWithFormat:@"%@/%@?%@", googleAPIUri, googleAPIDistanceMatrixURLPath, newParams] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
