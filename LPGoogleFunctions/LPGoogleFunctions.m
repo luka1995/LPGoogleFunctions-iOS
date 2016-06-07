@@ -162,11 +162,11 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[LPDirections getDirectionsAvoid:avoid] forKey:@"avoid"];
     [parameters setObject:[LPDirections getDirectionsUnit:unit] forKey:@"units"];
     [parameters setObject:[NSString stringWithFormat:@"%@", alternatives ? @"true" : @"false"] forKey:@"alternatives"];
-
+    
     if (departureTime) {
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
     }
-
+    
     if (arrivalTime) {
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [arrivalTime timeIntervalSince1970]] forKey:@"arrival_time"];
     }
@@ -182,7 +182,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         
         [parameters setObject:waypointsString forKey:@"waypoints"];
     }
-
+    
     [manager GET:[NSString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDirectionsURLPath]  parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPDirections *directions = [LPDirections directionsWithObjects:responseObject];
@@ -238,7 +238,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSString stringWithFormat:@"%.2f", heading] forKey:@"heading"];
     [parameters setObject:[NSString stringWithFormat:@"%.2f", fov] forKey:@"fov"];
     [parameters setObject:[NSString stringWithFormat:@"%.2f", pitch] forKey:@"pitch"];
-
+    
     [manager GET:[NSString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIStreetViewImageURLPath]  parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (successful)
@@ -266,7 +266,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
     }
-
+    
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
     [parameters setObject:[NSString stringWithFormat:@"%@", address] forKey:@"location"];
@@ -367,14 +367,14 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-
+    
     if (self.googleAPIBrowserKey) {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
     }
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
     }
-
+    
     [parameters setObject:[NSString stringWithFormat:@"%@", input] forKey:@"input"];
     [parameters setObject:[LPPrediction getStringFromGooglePlaceType:placeType] forKey:@"types"];
     [parameters setObject:[NSString stringWithFormat:@"%d", offset] forKey:@"offset"];
@@ -382,7 +382,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSString stringWithFormat:@"%f,%f",location.latitude, location.longitude] forKey:@"location"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
-
+    
     if(countryRestriction) {
         [parameters setObject:[NSString stringWithFormat:@"country:%@", countryRestriction] forKey:@"components"];
     }
@@ -439,7 +439,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
     }
-
+    
     [parameters setObject:[NSString stringWithFormat:@"%@", reference] forKey:@"reference"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
@@ -483,7 +483,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
 - (void)speakText:(NSString *)text failureBlock:(void (^)(NSError *error))failure
 {
     [googlePlayer stop];
-
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
@@ -524,7 +524,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSString stringWithFormat:@"%@", address] forKey:@"address"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
-
+    
     if ([filterComponents count] > 0) {
         NSString *comString = @"components=";
         
@@ -534,7 +534,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
             comString = [comString stringByAppendingFormat:@"%@:%@|", [LPGeocodingFilter getGeocodingFilter:filter.filter], filter.value];
         }
     }
-
+    
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:googleAPIGeocodingURLPath parameters:parameters error:nil];
     
     [self loadGeocodingRequest:request successfulBlock:^(LPGeocodingResults *geocodingResults) {
@@ -571,7 +571,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
             comString = [comString stringByAppendingFormat:@"%@:%@|", [LPGeocodingFilter getGeocodingFilter:filter.filter], filter.value];
         }
     }
-
+    
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:googleAPIGeocodingURLPath parameters:parameters error:nil];
     
     [self loadGeocodingRequest:request successfulBlock:^(LPGeocodingResults *geocodingResults) {
@@ -643,11 +643,11 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
             
             [self loadPlaceDetailsForReference:reference successfulBlock:^(LPPlaceDetailsResults *placeDetailsResults) {
                 LPPlaceDetails *placeWithDetails = [placeDetailsResults.result copy];
-
+                
                 [array addObject:placeWithDetails];
-
+                
                 whichLoaded++;
-
+                
                 if (whichLoaded >= [placesAutocomplete.predictions count]) {
                     if ([array count] > 0) {
                         if (!blockSend) {
@@ -667,7 +667,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
                 }
             } failureBlock:^(LPGoogleStatus status) {
                 whichLoaded++;
-
+                
                 if (whichLoaded >= [placesAutocomplete.predictions count]) {
                     if ([array count] > 0) {
                         if (!blockSend) {
@@ -711,7 +711,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
     }
-
+    
     [parameters setObject:[NSString stringWithFormat:@"%@", query] forKey:@"query"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
@@ -765,14 +765,14 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     manager.responseSerializer = [AFImageResponseSerializer serializer];
     
     NSMutableDictionary *parameters = [NSMutableDictionary new];
-
+    
     if (self.googleAPIBrowserKey) {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
     }
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
     }
-
+    
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", reference] forKey:@"photoreference"];
     
@@ -802,12 +802,12 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDistanceMatrix:)]) {
         [self.delegate googleFunctionsWillLoadDistanceMatrix:self];
     }
-
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
     OrderedDictionary *parameters = [[OrderedDictionary alloc] init];
-//    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    //    NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     NSMutableString *originsString = [NSMutableString new];
     for (int i=0; i<[origins count]; i++) {
@@ -839,16 +839,12 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixTravelMode:travelMode] forKey:@"mode"];
-    [parameters setObject:[LPDistanceMatrix getDistanceMatrixAvoid:avoid] forKey:@"avoid"];
+    //    [parameters setObject:[LPDistanceMatrix getDistanceMatrixAvoid:avoid] forKey:@"avoid"];
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixUnit:unit] forKey:@"units"];
     
     if (departureTime) {
         [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
     }
-    
-    NSLog(@"Before: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
-    
-    
     
     
     if (self.googleAPIBrowserKey) {
@@ -857,32 +853,44 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     else {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
         
-        NSArray *sortedKeys = [parameters allKeys]; // sortedArrayUsingSelector: @selector(compare:)
+        NSLog(@"Before: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
+        
+        NSMutableArray *sortedKeys = [parameters allKeys]; // sortedArrayUsingSelector: @selector(compare:)
         NSMutableArray *sortedValues = [NSMutableArray array];
         for (NSString *key in sortedKeys)
             [sortedValues addObject: [parameters objectForKey: key]];
         
-        
-        
         NSMutableString* urlStr = [NSMutableString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDistanceMatrixURLPath];
-        for (int i=0; i<sortedKeys.count; i++) {
-            
-            [urlStr appendString:[NSString stringWithFormat:@"%@=%@&", sortedKeys[i], sortedValues[i]]];
+        for (NSString* key in parameters) {
+            [urlStr appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
         }
+        //        for (int i=0; i<sortedKeys.count; i++) {
+        //
+        //            [urlStr appendString:[NSString stringWithFormat:@"&%@=%@", sortedKeys[i], sortedValues[i]]];
+        //        }
         
         NSString *newUrlStr = [urlStr substringToIndex:[urlStr length]-1];
         NSURL* url = [NSURL URLWithString:newUrlStr];
         
         NSLog(@"url: %@ \n url to sign: %@?%@", url, [url path], [url query]);
         NSString* signature = [[LPURLSigner sharedManager] createSignatureWithHMAC_SHA1:[NSString stringWithFormat:@"%@?%@", [url path], [url query]] key:self.googleAPICryptoKey];
-
+        
+        //        [sortedKeys addObject:@"signature"];
+        //        [sortedValues addObject:[NSString stringWithFormat:@"%@", signature]];
         [parameters setObject:[NSString stringWithFormat:@"%@", signature] forKey:@"signature"];
     }
-
-    NSLog(@"After: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
-
     
-    [manager GET:[NSString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDistanceMatrixURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSLog(@"After: loadDistanceMatrixForOrigins: %@, Matrix API: %@", parameters, googleAPIDistanceMatrixURLPath);
+    
+    
+    NSMutableString* params = [NSMutableString string];
+    for (NSString* key in parameters) {
+        [params appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
+    }
+    NSString *newParams = [params substringToIndex:[params length]-1];
+    
+    
+    [manager GET:[NSString stringWithFormat:@"%@/%@?%@", googleAPIUri, googleAPIDistanceMatrixURLPath, newParams] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         LPDistanceMatrix *distanceMatrix = [LPDistanceMatrix distanceMatrixWithObjects:responseObject];
         distanceMatrix.requestTravelMode = travelMode;
