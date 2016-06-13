@@ -322,7 +322,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     }];
 }
 
-- (void)loadStaticMapImageForFromLocation:(LPLocation *)location toLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers path:(NSString *)path weight:(NSString *)weight polyline:(NSString *)polyline format:(NSString *)format successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
+- (void)loadStaticMapImageForFromLocation:(LPLocation *)location toLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers path:(NSString *)path format:(NSString *)format successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -337,8 +337,6 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
     [parameters setObject:[LPGoogleFunctions getMapType:maptype] forKey:@"maptype"];
     [parameters setObject:path forKey:@"path"];
-    [parameters setObject:weight forKey:@"weight"];
-    [parameters setObject:polyline forKey:@"enc"];
     [parameters setObject:format forKey:@"format"];
     
     NSMutableSet *parametersMarkers = [[NSMutableSet alloc] init];
