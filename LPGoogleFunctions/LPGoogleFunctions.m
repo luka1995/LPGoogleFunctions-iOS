@@ -332,7 +332,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     
 //    [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"center"];
 //    [parameters setObject:(self.sensor ? @"true" : @"false") forKey:@"sensor"];
-    [parameters setObject:[NSNumber numberWithInt:zoom] forKey:@"zoom"];
+//    [parameters setObject:[NSNumber numberWithInt:zoom] forKey:@"zoom"];
     [parameters setObject:[NSNumber numberWithInt:scale] forKey:@"scale"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
     [parameters setObject:[LPGoogleFunctions getMapType:maptype] forKey:@"maptype"];
