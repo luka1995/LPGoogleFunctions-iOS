@@ -43,7 +43,6 @@ NSString *const STATUS_REQUEST_DENIED = @"REQUEST_DENIED";
 NSString *const STATUS_UNKNOWN_ERROR = @"UNKNOWN_ERROR";
 
 NSString *const googleAPIUri           = @"https://maps.googleapis.com";
-NSString *const googleAPIDirectionsURLPath = @"maps/api/directions/json";
 NSString *const googleAPIStaticMapImageURLPath = @"maps/api/staticmap";
 NSString *const googleAPIStreetViewImageURLPath = @"maps/api/streetview";
 NSString *const googleAPIPlacesAutocompleteURLPath = @"maps/api/place/autocomplete/json";
@@ -52,6 +51,7 @@ NSString *const googleAPIGeocodingURLPath = @"maps/api/geocode/json";
 NSString *const googleAPIPlaceTextSearchURLPath = @"maps/api/place/textsearch/json";
 NSString *const googleAPIPlacePhotoURLPath = @"maps/api/place/photo";
 NSString *const googleAPIDistanceMatrixURLPath = @"maps/api/distancematrix/json";
+NSString *const googleAPIDirectionsURLPath = @"maps/api/directions/json";
 
 NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/translate_tts?";
 
@@ -797,7 +797,10 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixTravelMode:travelMode] forKey:@"mode"];
-    //    [parameters setObject:[LPDistanceMatrix getDistanceMatrixAvoid:avoid] forKey:@"avoid"];
+    if ([[LPDistanceMatrix getDistanceMatrixAvoid:avoid] length] != 0) {
+        [parameters setObject:[LPDistanceMatrix getDistanceMatrixAvoid:avoid] forKey:@"avoid"];
+    }
+    
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixUnit:unit] forKey:@"units"];
     
     if (departureTime) {
@@ -872,14 +875,18 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    OrderedDictionary *parameters = [[OrderedDictionary alloc] init];
+    
+    //    NSMutableDictionary *parameters = [NSMutableDictionary new];
     
     [parameters setObject:[NSString stringWithFormat:@"%f,%f", origin.latitude, origin.longitude] forKey:@"origin"];
     [parameters setObject:[NSString stringWithFormat:@"%f,%f", destination.latitude, destination.longitude] forKey:@"destination"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     [parameters setObject:[LPStep getDirectionsTravelMode:travelMode] forKey:@"mode"];
-    [parameters setObject:[LPDirections getDirectionsAvoid:avoid] forKey:@"avoid"];
+    if ([[LPDirections getDirectionsAvoid:avoid] length] != 0) {
+        [parameters setObject:[LPDirections getDirectionsAvoid:avoid] forKey:@"avoid"];
+    }
     [parameters setObject:[LPDirections getDirectionsUnit:unit] forKey:@"units"];
     [parameters setObject:[NSString stringWithFormat:@"%@", alternatives ? @"true" : @"false"] forKey:@"alternatives"];
     
@@ -927,7 +934,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         [params appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
     }
     NSString *newParams = [params substringToIndex:[params length]-1];
-     
+    
     
     
     [manager GET:[NSString stringWithFormat:@"%@/%@?%@", googleAPIUri, googleAPIDirectionsURLPath, newParams]  parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -964,6 +971,5 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         
     }];
 }
-
 
 @end
