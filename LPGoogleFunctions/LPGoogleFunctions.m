@@ -143,81 +143,6 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     }
 }
 
-- (void)loadDirectionsForOrigin:(LPLocation *)origin forDestination:(LPLocation *)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate *)departureTime arrivalTime:(NSDate *)arrivalTime waypoints:(NSArray *)waypoints successfulBlock:(void (^)(LPDirections *directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure
-{
-    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDirections:)]) {
-        [self.delegate googleFunctionsWillLoadDirections:self];
-    }
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    
-    [parameters setObject:[NSString stringWithFormat:@"%f,%f", origin.latitude, origin.longitude] forKey:@"origin"];
-    [parameters setObject:[NSString stringWithFormat:@"%f,%f", destination.latitude, destination.longitude] forKey:@"destination"];
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
-    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
-    [parameters setObject:[LPStep getDirectionsTravelMode:travelMode] forKey:@"mode"];
-    [parameters setObject:[LPDirections getDirectionsAvoid:avoid] forKey:@"avoid"];
-    [parameters setObject:[LPDirections getDirectionsUnit:unit] forKey:@"units"];
-    [parameters setObject:[NSString stringWithFormat:@"%@", alternatives ? @"true" : @"false"] forKey:@"alternatives"];
-    
-    if (departureTime) {
-        [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
-    }
-    
-    if (arrivalTime) {
-        [parameters setObject:[NSString stringWithFormat:@"%.0f", [arrivalTime timeIntervalSince1970]] forKey:@"arrival_time"];
-    }
-    
-    if (waypoints.count > 0) {
-        NSString *waypointsString = @"";
-        
-        for (int i=0; i<[waypoints count]; i++) {
-            LPWaypoint *waypoint = (LPWaypoint *)[waypoints objectAtIndex:i];
-            
-            waypointsString = [waypointsString stringByAppendingFormat:@"%f,%f|", waypoint.location.latitude, waypoint.location.longitude];
-        }
-        
-        [parameters setObject:waypointsString forKey:@"waypoints"];
-    }
-    
-    [manager GET:[NSString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDirectionsURLPath]  parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        LPDirections *directions = [LPDirections directionsWithObjects:responseObject];
-        directions.requestTravelMode = travelMode;
-        
-        LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:directions.statusCode];
-        
-        if (status == LPGoogleStatusOK) {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadDirections:)]) {
-                [self.delegate googleFunctions:self didLoadDirections:directions];
-            }
-            
-            if (successful)
-                successful(directions);
-        } else {
-            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)]) {
-                [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:status];
-            }
-            
-            if (failure)
-                failure(status);
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)]) {
-            [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:LPGoogleStatusUnknownError];
-        }
-        
-        if (failure)
-            failure(LPGoogleStatusUnknownError);
-        
-    }];
-}
-
 - (void)loadStreetViewImageForLocation:(LPLocation *)location imageSize:(CGSize)size heading:(float)heading fov:(float)fov pitch:(float)pitch successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -937,5 +862,108 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         
     }];
 }
+
+- (void)loadDirectionsForOrigin:(LPLocation *)origin forDestination:(LPLocation *)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate *)departureTime arrivalTime:(NSDate *)arrivalTime waypoints:(NSArray *)waypoints successfulBlock:(void (^)(LPDirections *directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+{
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDirections:)]) {
+        [self.delegate googleFunctionsWillLoadDirections:self];
+    }
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", origin.latitude, origin.longitude] forKey:@"origin"];
+    [parameters setObject:[NSString stringWithFormat:@"%f,%f", destination.latitude, destination.longitude] forKey:@"destination"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
+    [parameters setObject:[LPStep getDirectionsTravelMode:travelMode] forKey:@"mode"];
+    [parameters setObject:[LPDirections getDirectionsAvoid:avoid] forKey:@"avoid"];
+    [parameters setObject:[LPDirections getDirectionsUnit:unit] forKey:@"units"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", alternatives ? @"true" : @"false"] forKey:@"alternatives"];
+    
+    if (departureTime) {
+        [parameters setObject:[NSString stringWithFormat:@"%.0f", [departureTime timeIntervalSince1970]] forKey:@"departure_time"];
+    }
+    
+    if (arrivalTime) {
+        [parameters setObject:[NSString stringWithFormat:@"%.0f", [arrivalTime timeIntervalSince1970]] forKey:@"arrival_time"];
+    }
+    
+    if (waypoints.count > 0) {
+        NSString *waypointsString = @"";
+        
+        for (int i=0; i<[waypoints count]; i++) {
+            LPWaypoint *waypoint = (LPWaypoint *)[waypoints objectAtIndex:i];
+            
+            waypointsString = [waypointsString stringByAppendingFormat:@"%f,%f|", waypoint.location.latitude, waypoint.location.longitude];
+        }
+        
+        [parameters setObject:waypointsString forKey:@"waypoints"];
+    }
+    
+    
+    
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+        
+        NSMutableString* urlStr = [NSMutableString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIDirectionsURLPath];
+        for (NSString* key in parameters) {
+            [urlStr appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
+        }
+        NSString *newUrlStr = [urlStr substringToIndex:[urlStr length]-1];
+        NSURL* url = [NSURL URLWithString:newUrlStr];
+        NSString* signature = [[LPURLSigner sharedManager] createSignatureWithHMAC_SHA1:[NSString stringWithFormat:@"%@?%@", [url path], [url query]] key:self.googleAPICryptoKey];
+        
+        [parameters setObject:[NSString stringWithFormat:@"%@", signature] forKey:@"signature"];
+    }
+    
+    NSMutableString* params = [NSMutableString string];
+    for (NSString* key in parameters) {
+        [params appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
+    }
+    NSString *newParams = [params substringToIndex:[params length]-1];
+     
+    
+    
+    [manager GET:[NSString stringWithFormat:@"%@/%@?%@", googleAPIUri, googleAPIDirectionsURLPath, newParams]  parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        LPDirections *directions = [LPDirections directionsWithObjects:responseObject];
+        directions.requestTravelMode = travelMode;
+        
+        LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:directions.statusCode];
+        
+        if (status == LPGoogleStatusOK) {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadDirections:)]) {
+                [self.delegate googleFunctions:self didLoadDirections:directions];
+            }
+            
+            if (successful)
+                successful(directions);
+        } else {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)]) {
+                [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:status];
+            }
+            
+            if (failure)
+                failure(status);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingDirectionsWithStatus:)]) {
+            [self.delegate googleFunctions:self errorLoadingDirectionsWithStatus:LPGoogleStatusUnknownError];
+        }
+        
+        if (failure)
+            failure(LPGoogleStatusUnknownError);
+        
+    }];
+}
+
 
 @end
