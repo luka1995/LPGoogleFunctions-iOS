@@ -43,7 +43,6 @@ NSString *const STATUS_REQUEST_DENIED = @"REQUEST_DENIED";
 NSString *const STATUS_UNKNOWN_ERROR = @"UNKNOWN_ERROR";
 
 NSString *const googleAPIUri           = @"https://maps.googleapis.com";
-NSString *const googleAPIStaticMapImageURLPath = @"maps/api/staticmap";
 NSString *const googleAPIStreetViewImageURLPath = @"maps/api/streetview";
 NSString *const googleAPIPlacesAutocompleteURLPath = @"maps/api/place/autocomplete/json";
 NSString *const googleAPIPlaceDetailsURLPath = @"maps/api/place/details/json";
@@ -52,6 +51,7 @@ NSString *const googleAPIPlaceTextSearchURLPath = @"maps/api/place/textsearch/js
 NSString *const googleAPIPlacePhotoURLPath = @"maps/api/place/photo";
 NSString *const googleAPIDistanceMatrixURLPath = @"maps/api/distancematrix/json";
 NSString *const googleAPIDirectionsURLPath = @"maps/api/directions/json";
+NSString *const googleAPIStaticMapImageURLPath = @"maps/api/staticmap";
 
 NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/translate_tts?";
 
@@ -226,43 +226,6 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSNumber numberWithInt:scale] forKey:@"scale"];
     [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
     [parameters setObject:[LPGoogleFunctions getMapType:maptype] forKey:@"maptype"];
-    
-    NSMutableSet *parametersMarkers = [[NSMutableSet alloc] init];
-    for (int i=0; i<[markers count]; i++) {
-        LPMapImageMarker *marker = (LPMapImageMarker *)[markers objectAtIndex:i];
-        [parametersMarkers addObject:[marker getMarkerURLString]];
-    }
-    [parameters setObject:parametersMarkers forKey:@"markers"];
-    
-    [manager GET:[NSString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIStaticMapImageURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        if(successful)
-            successful(responseObject);
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        if(failure)
-            failure(error);
-        
-    }];
-}
-
-- (void)loadStaticMapImageForFromLocation:(LPLocation *)location toLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers path:(NSString *)path format:(NSString *)format successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFImageResponseSerializer serializer];
-    
-    NSMutableDictionary *parameters = [NSMutableDictionary new];
-    
-//    [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"center"];
-//    [parameters setObject:(self.sensor ? @"true" : @"false") forKey:@"sensor"];
-//    [parameters setObject:[NSNumber numberWithInt:zoom] forKey:@"zoom"];
-    [parameters setObject:[NSNumber numberWithInt:scale] forKey:@"scale"];
-    [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
-    [parameters setObject:[LPGoogleFunctions getMapType:maptype] forKey:@"maptype"];
-    [parameters setObject:path forKey:@"path"];
-    [parameters setObject:format forKey:@"format"];
     
     NSMutableSet *parametersMarkers = [[NSMutableSet alloc] init];
     for (int i=0; i<[markers count]; i++) {
@@ -914,7 +877,6 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     }
     
     
-    
     if (self.googleAPIBrowserKey) {
         [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
     }
@@ -971,6 +933,128 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         
         if (failure)
             failure(LPGoogleStatusUnknownError);
+        
+    }];
+}
+
+- (void)loadStaticMapImageForFromLocationOld:(LPLocation *)location toLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers path:(NSString *)path format:(NSString *)format successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFImageResponseSerializer serializer];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    //    [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"center"];
+    //    [parameters setObject:(self.sensor ? @"true" : @"false") forKey:@"sensor"];
+    //    [parameters setObject:[NSNumber numberWithInt:zoom] forKey:@"zoom"];
+    [parameters setObject:[NSNumber numberWithInt:scale] forKey:@"scale"];
+    [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
+    [parameters setObject:[LPGoogleFunctions getMapType:maptype] forKey:@"maptype"];
+    [parameters setObject:path forKey:@"path"];
+    [parameters setObject:format forKey:@"format"];
+    
+    NSMutableSet *parametersMarkers = [[NSMutableSet alloc] init];
+    for (int i=0; i<[markers count]; i++) {
+        LPMapImageMarker *marker = (LPMapImageMarker *)[markers objectAtIndex:i];
+        [parametersMarkers addObject:[marker getMarkerURLString]];
+    }
+    [parameters setObject:parametersMarkers forKey:@"markers"];
+    
+    [manager GET:[NSString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIStaticMapImageURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(successful)
+            successful(responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(error);
+        
+    }];
+}
+
+- (void)loadStaticMapImageForFromLocation:(LPLocation *)location toLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype sourceMarker:(NSString *)sourceMarker destMarker:(NSString *)destMarker path:(NSString *)path format:(NSString *)format successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFImageResponseSerializer serializer];
+    
+    //    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    OrderedDictionary *parameters = [[OrderedDictionary alloc] init];
+    
+    //    [parameters setObject:[NSString stringWithFormat:@"%f,%f", location.latitude, location.longitude] forKey:@"center"];
+    //    [parameters setObject:(self.sensor ? @"true" : @"false") forKey:@"sensor"];
+    //    [parameters setObject:[NSNumber numberWithInt:zoom] forKey:@"zoom"];
+    
+    [parameters setObject:[NSNumber numberWithInt:scale] forKey:@"scale"];
+    [parameters setObject:[NSString stringWithFormat:@"%dx%d", (int)size.width, (int)size.height] forKey:@"size"];
+    [parameters setObject:[LPGoogleFunctions getMapType:maptype] forKey:@"maptype"];
+    [parameters setObject:path forKey:@"path"];
+    [parameters setObject:format forKey:@"format"];
+    
+    NSMutableSet *parametersMarkers = [[NSMutableSet alloc] init];
+    [parametersMarkers addObject:sourceMarker];
+    [parametersMarkers addObject:destMarker];
+    
+    //    for (int i=0; i<[markers count]; i++) {
+    //        LPMapImageMarker *marker = (LPMapImageMarker *)[markers objectAtIndex:i];
+    //        [parametersMarkers addObject:[marker getMarkerURLString]];
+    //    }
+    [parameters setObject:parametersMarkers forKey:@"markers"];
+    
+    
+    
+    
+    if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+        
+        NSMutableString* urlStr = [NSMutableString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIStaticMapImageURLPath];
+        for (NSString* key in parameters) {
+            if ([parameters[key] isKindOfClass:[NSMutableSet class]]) {
+                for (int i=0; i<[parameters[key] count]; i++) {
+                    [urlStr appendString:[NSString stringWithFormat:@"%@=%@&", key, [parameters[key] allObjects][i]]];
+                }
+            }
+            else {
+                [urlStr appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
+            }
+        }
+        NSString *newUrlStr = [urlStr substringToIndex:[urlStr length]-1];
+        NSURL* url = [NSURL URLWithString:[newUrlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        NSString* signature = [[LPURLSigner sharedManager] createSignatureWithHMAC_SHA1:[NSString stringWithFormat:@"%@?%@", [url path], [url query]] key:self.googleAPICryptoKey];
+        
+        [parameters setObject:[NSString stringWithFormat:@"%@", signature] forKey:@"signature"];
+    }
+    
+    NSMutableString* params = [NSMutableString string];
+    for (NSString* key in parameters) {
+        
+        if ([parameters[key] isKindOfClass:[NSMutableSet class]]) {
+            for (int i=0; i<[parameters[key] count]; i++) {
+                [params appendString:[NSString stringWithFormat:@"%@=%@&", key, [parameters[key] allObjects][i]]];
+            }
+        }
+        else {
+            [params appendString:[NSString stringWithFormat:@"%@=%@&", key, parameters[key]]];
+        }
+    }
+    NSString *newParams = [params substringToIndex:[params length]-1];
+    
+    
+    
+    [manager GET:[NSString stringWithFormat:@"%@/%@?%@", googleAPIUri, googleAPIStaticMapImageURLPath, [newParams stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(successful)
+            successful(responseObject);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if(failure)
+            failure(error);
         
     }];
 }
