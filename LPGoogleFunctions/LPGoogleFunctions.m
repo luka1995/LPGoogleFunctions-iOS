@@ -760,7 +760,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     [parameters setObject:[LPDistanceMatrix getDistanceMatrixTravelMode:travelMode] forKey:@"mode"];
-    [parameters setObject:@"pessimistic" forKey:@"traffic_model"];
+    //    [parameters setObject:@"pessimistic" forKey:@"traffic_model"]; // , optimistic
     
     if ([[LPDistanceMatrix getDistanceMatrixAvoid:avoid] length] != 0) {
         [parameters setObject:[LPDistanceMatrix getDistanceMatrixAvoid:avoid] forKey:@"avoid"];
@@ -849,7 +849,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     [parameters setObject:[NSString stringWithFormat:@"%@", self.sensor ? @"true" : @"false"] forKey:@"sensor"];
     [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
     [parameters setObject:[LPStep getDirectionsTravelMode:travelMode] forKey:@"mode"];
-    [parameters setObject:@"pessimistic" forKey:@"traffic_model"];
+    //    [parameters setObject:@"optimistic" forKey:@"traffic_model"];
     if ([[LPDirections getDirectionsAvoid:avoid] length] != 0) {
         [parameters setObject:[LPDirections getDirectionsAvoid:avoid] forKey:@"avoid"];
     }
