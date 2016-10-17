@@ -831,7 +831,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     }];
 }
 
-- (void)loadDirectionsForOrigin:(LPLocation *)origin forDestination:(LPLocation *)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate *)departureTime arrivalTime:(NSDate *)arrivalTime waypoints:(NSArray *)waypoints successfulBlock:(void (^)(LPDirections *directions))successful failureBlock:(void (^)(LPGoogleStatus status))failure
+- (void)loadDirectionsForOrigin:(LPLocation *)origin forDestination:(LPLocation *)destination directionsTravelMode:(LPGoogleDirectionsTravelMode)travelMode directionsAvoidTolls:(LPGoogleDirectionsAvoid)avoid directionsUnit:(LPGoogleDirectionsUnit)unit directionsAlternatives:(BOOL)alternatives departureTime:(NSDate *)departureTime arrivalTime:(NSDate *)arrivalTime waypoints:(NSArray *)waypoints successfulBlock:(void (^)(LPDirections *directions))successful failureBlock:(void (^)(LPGoogleStatus status, NSString* errorMessage))failure
 {
     if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadDirections:)]) {
         [self.delegate googleFunctionsWillLoadDirections:self];
@@ -922,7 +922,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
             }
             
             if (failure)
-                failure(status);
+                failure(status, directions.errorMessage);
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -932,7 +932,7 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
         }
         
         if (failure)
-            failure(LPGoogleStatusUnknownError);
+            failure(LPGoogleStatusUnknownError, [error localizedDescription]);
         
     }];
 }
