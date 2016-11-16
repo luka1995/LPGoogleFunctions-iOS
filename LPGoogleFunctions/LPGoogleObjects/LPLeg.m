@@ -19,6 +19,7 @@
         self.departureTime = [coder decodeObjectForKey:@"departureTime"];
         self.distance = [coder decodeObjectForKey:@"distance"];
         self.duration = [coder decodeObjectForKey:@"duration"];
+        self.durationInTraffic = [coder decodeObjectForKey:@"duration_in_traffic"];
         self.endAddress = [coder decodeObjectForKey:@"endAddress"];
         self.endLocation = [coder decodeObjectForKey:@"endLocation"];
         self.startAddress = [coder decodeObjectForKey:@"startAddress"];
@@ -35,6 +36,7 @@
     [coder encodeObject:self.departureTime forKey:@"departureTime"];
     [coder encodeObject:self.distance forKey:@"distance"];
     [coder encodeObject:self.duration forKey:@"duration"];
+    [coder encodeObject:self.durationInTraffic forKey:@"duration_in_traffic"];
     [coder encodeObject:self.endAddress forKey:@"endAddress"];
     [coder encodeObject:self.endLocation forKey:@"endLocation"];
     [coder encodeObject:self.startAddress forKey:@"startAddress"];
@@ -61,6 +63,10 @@
         
         if (![[dictionary objectForKey:@"duration"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"duration"]) {
             new.duration = [LPDuration durationWithObjects:[dictionary objectForKey:@"duration"]];
+        }
+        
+        if (![[dictionary objectForKey:@"duration_in_traffic"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"duration_in_traffic"]) {
+            new.durationInTraffic = [LPDuration durationWithObjects:[dictionary objectForKey:@"duration_in_traffic"]];
         }
         
         if (![[dictionary objectForKey:@"end_address"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"end_address"]) {
@@ -113,6 +119,10 @@
         [dictionary setObject:self.duration.dictionary forKey:@"duration"];
     }
     
+    if(self.durationInTraffic && ![self.durationInTraffic isKindOfClass:[NSNull class]]) {
+        [dictionary setObject:self.durationInTraffic.dictionary forKey:@"duration_in_traffic"];
+    }
+
     [dictionary setObject:[NSString stringWithFormat:@"%@", self.endAddress] forKey:@"endAddress"];
     
     if(self.endLocation && ![self.endLocation isKindOfClass:[NSNull class]]) {
@@ -151,6 +161,7 @@
     [new setDepartureTime:[self departureTime]];
     [new setDistance:[self distance]];
     [new setDuration:[self duration]];
+    [new setDurationInTraffic:[self durationInTraffic]];
     [new setEndAddress:[self endAddress]];
     [new setEndLocation:[self endLocation]];
     [new setStartAddress:[self startAddress]];

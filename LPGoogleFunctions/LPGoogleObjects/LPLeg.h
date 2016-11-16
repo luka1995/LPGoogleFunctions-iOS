@@ -19,6 +19,7 @@
 @property (nonatomic, strong) LPTime *departureTime;
 @property (nonatomic, strong) LPDistance *distance;
 @property (nonatomic, strong) LPDuration *duration;
+@property (nonatomic, strong) LPDuration *durationInTraffic;
 @property (nonatomic, strong) NSString *endAddress;
 @property (nonatomic, strong) LPLocation *endLocation;
 @property (nonatomic, strong) NSString *startAddress;

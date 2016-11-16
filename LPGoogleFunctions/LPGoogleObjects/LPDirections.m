@@ -12,14 +12,14 @@
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-	self = [LPDirections new];
+    self = [LPDirections new];
     if (self) {
         self.routes = [coder decodeObjectForKey:@"routes"];
         self.statusCode = [coder decodeObjectForKey:@"statusCode"];
         self.requestTravelMode = [coder decodeIntForKey:@"requestTravelMode"];
-	}
-	
-	return self;
+    }
+    
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
@@ -36,7 +36,7 @@
     if (![dictionary isKindOfClass:[NSNull class]]) {
         if (![[dictionary objectForKey:@"routes"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"routes"]) {
             NSMutableArray *array = [NSMutableArray new];
-
+            
             for (int i=0; i<[[dictionary objectForKey:@"routes"] count]; i++) {
                 LPRoute *route = [LPRoute routeWithObjects:[[dictionary objectForKey:@"routes"] objectAtIndex:i]];
                 route.number=i;
@@ -50,15 +50,19 @@
         if (![[dictionary objectForKey:@"status"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"status"]) {
             new.statusCode = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"status"]];
         }
+        
+        if (![[dictionary objectForKey:@"error_message"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"error_message"]) {
+            new.errorMessage = [NSString stringWithFormat:@"%@", [dictionary objectForKey:@"error_message"]];
+        }
     }
     
-	return new;
+    return new;
 }
 
 - (NSDictionary *)dictionary
 {
     NSMutableDictionary *dictionary = [NSMutableDictionary new];
-
+    
     if (self.routes && ![self.routes isKindOfClass:[NSNull class]]) {
         NSMutableArray *array = [NSMutableArray new];
         
@@ -68,7 +72,7 @@
         
         [dictionary setObject:array forKey:@"routes"];
     }
-
+    
     [dictionary setObject:[NSString stringWithFormat:@"%@", self.statusCode] forKey:@"statusCode"];
     [dictionary setObject:[NSString stringWithFormat:@"%@", [LPStep getDirectionsTravelMode:self.requestTravelMode]] forKey:@"requestTravelMode"];
     
@@ -94,10 +98,14 @@
 + (NSString *)getDirectionsAvoid:(LPGoogleDirectionsAvoid)avoid
 {
     switch (avoid) {
+        case LPGoogleDirectionsAvoidIndoor:
+            return @"indoor";
+        case LPGoogleDirectionsAvoidFerries:
+            return @"ferries";
         case LPGoogleDirectionsAvoidHighways:
             return @"highways";
         case LPGoogleDirectionsAvoidTolls:
-            return @"avoid";
+            return @"tolls";
         default:
             return @"";
     }

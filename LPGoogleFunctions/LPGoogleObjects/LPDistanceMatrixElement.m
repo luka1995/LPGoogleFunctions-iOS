@@ -13,14 +13,15 @@
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-	self = [LPDistanceMatrixElement new];
+    self = [LPDistanceMatrixElement new];
     if (self) {
         self.statusCode = [coder decodeObjectForKey:@"statusCode"];
         self.distance = [coder decodeObjectForKey:@"distance"];
         self.duration = [coder decodeObjectForKey:@"duration"];
-	}
-	
-	return self;
+        self.durationInTraffic = [coder decodeObjectForKey:@"duration_in_traffic"];
+    }
+    
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder
@@ -28,6 +29,7 @@
     [coder encodeObject:self.statusCode forKey:@"statusCode"];
     [coder encodeObject:self.distance forKey:@"distance"];
     [coder encodeObject:self.duration forKey:@"duration"];
+    [coder encodeObject:self.durationInTraffic forKey:@"duration_in_traffic"];
 }
 
 + (id)distanceMatrixElementWithObjects:(NSDictionary *)dictionary
@@ -45,6 +47,10 @@
         
         if (![[dictionary objectForKey:@"duration"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"duration"]) {
             new.duration = [LPDuration durationWithObjects:[dictionary objectForKey:@"duration"]];
+        }
+        
+        if (![[dictionary objectForKey:@"duration_in_traffic"] isKindOfClass:[NSNull class]] && [dictionary objectForKey:@"duration_in_traffic"]) {
+            new.durationInTraffic = [LPDuration durationWithObjects:[dictionary objectForKey:@"duration_in_traffic"]];
         }
     }
     
@@ -65,6 +71,11 @@
         [dictionary setObject:self.duration.dictionary forKey:@"duration"];
     }
     
+    if(self.durationInTraffic && ![self.durationInTraffic isKindOfClass:[NSNull class]]) {
+        [dictionary setObject:self.durationInTraffic.dictionary forKey:@"duration_in_traffic"];
+    }
+    
+    
     return dictionary;
 }
 
@@ -80,6 +91,7 @@
     [new setStatusCode:self.statusCode];
     [new setDistance:self.distance];
     [new setDuration:self.duration];
+    [new setDurationInTraffic:self.durationInTraffic];
     
     return new;
 }

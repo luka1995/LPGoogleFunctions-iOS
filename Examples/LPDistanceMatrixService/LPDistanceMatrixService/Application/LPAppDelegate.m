@@ -11,17 +11,8 @@
 
 @implementation LPAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    
-    // UINavigationBar style
-    
-    NSMutableDictionary *titleBarAttributes = [NSMutableDictionary dictionaryWithDictionary: [[UINavigationBar appearance] titleTextAttributes]];
-    [titleBarAttributes setValue:[UIFont boldSystemFontOfSize:20.0f] forKey:NSFontAttributeName];
-    [titleBarAttributes setValue:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
-    [[UINavigationBar appearance] setTitleTextAttributes:titleBarAttributes];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor purpleColor]];
     
     // Init Controller
     

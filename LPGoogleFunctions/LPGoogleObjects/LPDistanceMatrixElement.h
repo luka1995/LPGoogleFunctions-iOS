@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) LPDistance *distance;
 @property (nonatomic, strong) LPDuration *duration;
+@property (nonatomic, strong) LPDuration *durationInTraffic;
 @property (nonatomic, strong) NSString *statusCode;
 
 + (id)distanceMatrixElementWithObjects:(NSDictionary *)dictionary;

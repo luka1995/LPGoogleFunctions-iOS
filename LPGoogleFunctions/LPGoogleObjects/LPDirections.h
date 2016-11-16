@@ -12,7 +12,9 @@
 typedef enum {
     LPGoogleDirectionsAvoidNone,
     LPGoogleDirectionsAvoidTolls,
-    LPGoogleDirectionsAvoidHighways
+    LPGoogleDirectionsAvoidHighways,
+    LPGoogleDirectionsAvoidFerries,
+    LPGoogleDirectionsAvoidIndoor
 } LPGoogleDirectionsAvoid;
 
 typedef enum {
@@ -25,6 +27,7 @@ typedef enum {
 
 @property (nonatomic, strong) NSArray *routes;
 @property (nonatomic, strong) NSString *statusCode;
+@property (nonatomic, strong) NSString *errorMessage;
 @property (nonatomic, assign) LPGoogleDirectionsTravelMode requestTravelMode;
 
 + (id)directionsWithObjects:(NSDictionary *)dictionary;
