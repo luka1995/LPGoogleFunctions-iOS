@@ -12,7 +12,9 @@
 typedef enum {
     LPGoogleDirectionsAvoidNone,
     LPGoogleDirectionsAvoidTolls,
-    LPGoogleDirectionsAvoidHighways
+    LPGoogleDirectionsAvoidHighways,
+    LPGoogleDirectionsAvoidFerries,
+    LPGoogleDirectionsAvoidIndoor
 } LPGoogleDirectionsAvoid;
 
 typedef enum {

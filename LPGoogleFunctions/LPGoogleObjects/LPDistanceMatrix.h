@@ -13,7 +13,9 @@
 typedef enum {
     LPGoogleDistanceMatrixAvoidNone,
     LPGoogleDistanceMatrixAvoidTolls,
-    LPGoogleDistanceMatrixAvoidHighways
+    LPGoogleDistanceMatrixAvoidHighways,
+    LPGoogleDistanceMatrixAvoidFerries,
+    LPGoogleDistanceMatrixAvoidIndoor
 } LPGoogleDistanceMatrixAvoid;
 
 typedef enum {
@@ -24,7 +26,8 @@ typedef enum {
 typedef enum {
     LPGoogleDistanceMatrixModeDriving,
     LPGoogleDistanceMatrixModeWalking,
-    LPGoogleDistanceMatrixModeBicycling
+    LPGoogleDistanceMatrixModeBicycling,
+    LPGoogleDistanceMatrixModeTransit
 } LPGoogleDistanceMatrixTravelMode;
 
 @interface LPDistanceMatrix : NSObject <NSCoding>

@@ -12,6 +12,7 @@
 NSString *const googleDistanceMatrixTravelModeDriving = @"driving";
 NSString *const googleDistanceMatrixTravelModeBicycling = @"bicycling";
 NSString *const googleDistanceMatrixTravelModeWalking = @"walking";
+NSString *const googleDistanceMatrixTravelModeTransit = @"transit";
 
 
 @implementation LPDistanceMatrix
@@ -160,6 +161,8 @@ NSString *const googleDistanceMatrixTravelModeWalking = @"walking";
         return LPGoogleDistanceMatrixModeDriving;
     } else if ([string isEqualToString:googleDistanceMatrixTravelModeBicycling] || [string isEqualToString:[googleDistanceMatrixTravelModeBicycling uppercaseString]]) {
         return LPGoogleDistanceMatrixModeBicycling;
+    } else if ([string isEqualToString:googleDistanceMatrixTravelModeTransit] || [string isEqualToString:[googleDistanceMatrixTravelModeTransit uppercaseString]]) {
+        return LPGoogleDistanceMatrixModeTransit;
     } else {
         return LPGoogleDistanceMatrixModeWalking;
     }
@@ -172,6 +175,8 @@ NSString *const googleDistanceMatrixTravelModeWalking = @"walking";
             return googleDistanceMatrixTravelModeDriving;
         case LPGoogleDistanceMatrixModeBicycling:
             return googleDistanceMatrixTravelModeBicycling;
+        case LPGoogleDistanceMatrixModeTransit:
+            return googleDistanceMatrixTravelModeTransit;
         default:
             return googleDistanceMatrixTravelModeWalking;
     }
@@ -180,10 +185,14 @@ NSString *const googleDistanceMatrixTravelModeWalking = @"walking";
 + (NSString *)getDistanceMatrixAvoid:(LPGoogleDistanceMatrixAvoid)avoid
 {
     switch (avoid) {
+        case LPGoogleDistanceMatrixAvoidIndoor:
+            return @"indoor";
+        case LPGoogleDistanceMatrixAvoidFerries:
+            return @"ferries";
         case LPGoogleDistanceMatrixAvoidHighways:
             return @"highways";
         case LPGoogleDistanceMatrixAvoidTolls:
-            return @"avoid";
+            return @"tolls";
         default:
             return @"";
     }

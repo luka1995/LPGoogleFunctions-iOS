@@ -98,10 +98,14 @@
 + (NSString *)getDirectionsAvoid:(LPGoogleDirectionsAvoid)avoid
 {
     switch (avoid) {
+        case LPGoogleDirectionsAvoidIndoor:
+            return @"indoor";
+        case LPGoogleDirectionsAvoidFerries:
+            return @"ferries";
         case LPGoogleDirectionsAvoidHighways:
             return @"highways";
         case LPGoogleDirectionsAvoidTolls:
-            return @"avoid";
+            return @"tolls";
         default:
             return @"";
     }

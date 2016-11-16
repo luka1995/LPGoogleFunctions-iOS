@@ -9,7 +9,7 @@
 #import "LPMainViewController.h"
 
 
-NSString *const googleAPIBrowserKey = @"";
+NSString *const googleAPIBrowserKey = @"AIzaSyDYq6cfchnqdab5cWBmNcw258IAr79SRV8";
 
 
 @interface LPMainViewController ()
@@ -26,25 +26,35 @@ NSString *const googleAPIBrowserKey = @"";
 
 #pragma mark - Lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.title = @"Distance Matrix";
+}
 
+- (IBAction)didTapMyLocation:(id)sender {
+    
     [self initLocationManager];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+- (IBAction)didTapAvoidFerries:(id)sender {
+    NSMutableArray *originsArray = [NSMutableArray new];
+    NSMutableArray *destinationsArray = [NSMutableArray new];
+    ////////////////////////
+    // Avoid Ferries example
+    //54.9295559,10.8084975
+    //54.8788256,10.991052
+    ////////////////////////
+    [originsArray addObject:[LPLocation locationWithLatitude:54.9295559 longitude:10.8084975]];
+    [destinationsArray addObject:[LPLocation locationWithLatitude:54.8788256 longitude:10.991052]];
     
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    
+    [self.googleFunctions loadDistanceMatrixForOrigins:originsArray forDestinations:destinationsArray directionsTravelMode:LPGoogleDistanceMatrixModeDriving directionsAvoidTolls:LPGoogleDistanceMatrixAvoidFerries directionsUnit:LPGoogleDistanceMatrixUnitMetric departureTime:nil successfulBlock:^(LPDistanceMatrix *distanceMatrix) {
+        self.distanceMatrix = distanceMatrix;
+        
+        self.textView.text = self.distanceMatrix.description;
+    } failureBlock:^(LPGoogleStatus status) {
+        NSLog(@"Error: %@", [LPGoogleFunctions getGoogleStatus:status]);
+    }];
 }
 
 #pragma mark - CLLocationManager & Delegate
@@ -72,11 +82,10 @@ NSString *const googleAPIBrowserKey = @"";
         
         NSMutableArray *originsArray = [NSMutableArray new];
         NSMutableArray *destinationsArray = [NSMutableArray new];
-        
         [originsArray addObject:[LPLocation locationWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude]];
-        [destinationsArray addObject:[LPLocation locationWithLatitude:46.033928 longitude:14.447681]];
+                [destinationsArray addObject:[LPLocation locationWithLatitude:46.033928 longitude:14.447681]];
         
-        [self.googleFunctions loadDistanceMatrixForOrigins:originsArray forDestinations:destinationsArray directionsTravelMode:LPGoogleDistanceMatrixModeDriving directionsAvoidTolls:LPGoogleDistanceMatrixAvoidNone directionsUnit:LPGoogleDistanceMatrixUnitMetric departureTime:nil successfulBlock:^(LPDistanceMatrix *distanceMatrix) {
+        [self.googleFunctions loadDistanceMatrixForOrigins:originsArray forDestinations:destinationsArray directionsTravelMode:LPGoogleDistanceMatrixModeDriving directionsAvoidTolls:LPGoogleDistanceMatrixAvoidFerries directionsUnit:LPGoogleDistanceMatrixUnitMetric departureTime:nil successfulBlock:^(LPDistanceMatrix *distanceMatrix) {
             self.distanceMatrix = distanceMatrix;
             
             self.textView.text = self.distanceMatrix.description;
