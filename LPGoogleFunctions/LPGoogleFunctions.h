@@ -137,10 +137,6 @@ typedef enum {
  */
 - (void)loadStaticMapImageForLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 
-- (void)loadStaticMapImageForFromLocation:(LPLocation *)location toLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype markersArray:(NSArray *)markers path:(NSString *)path format:(NSString *)format successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
-
-- (void)loadStaticMapImageForFromLocation:(LPLocation *)location toLocation:(LPLocation *)location zoomLevel:(int)zoom imageSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype sourceMarker:(NSString *)sourceMarker destMarker:(NSString *)destMarker path:(NSString *)path format:(NSString *)format successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
-
 /**
  * The Google Maps Image APIs make it easy to embed a static Google Maps image into your image view.
  * @param Defines the center of the map.
@@ -244,6 +240,10 @@ typedef enum {
  * @param Failure block with status.
  */
 - (void)loadDistanceMatrixForOrigins:(NSArray *)origins forDestinations:(NSArray *)destinations directionsTravelMode:(LPGoogleDistanceMatrixTravelMode)travelMode directionsAvoidTolls:(LPGoogleDistanceMatrixAvoid)avoid directionsUnit:(LPGoogleDistanceMatrixUnit)unit departureTime:(NSDate *)departureTime successfulBlock:(void (^)(LPDistanceMatrix *distanceMatrix))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+
+- (void)loadStaticMapImageWithSize:(CGSize)size imageScale:(int)scale mapType:(LPGoogleMapType)maptype sourceMarker:(NSString *)sourceMarker destMarker:(NSString *)destMarker path:(NSString *)path format:(NSString *)format successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
+
+- (void)loadPlacesAutocompleteForInput:(NSString *)input offset:(int)offset location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction forceBrowserKey:(NSString *)browserKey successfulBlock:(void (^)(NSArray *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
 @end
 
