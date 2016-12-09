@@ -245,6 +245,8 @@ typedef enum {
 
 - (void)loadPlacesAutocompleteForInput:(NSString *)input offset:(int)offset location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction forceBrowserKey:(NSString *)browserKey successfulBlock:(void (^)(NSArray *placesAutocomplete))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 
+- (void)loadPlaceDetailsForPlaceID:(NSString *)placeID forceBrowserKey:(NSString *)browserKey successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
+
 @end
 
 
@@ -268,6 +270,8 @@ typedef enum {
 - (void)googleFunctionsWillLoadPlaceDetailsResult:(LPGoogleFunctions *)googleFunctions forReference:(NSString *)reference;
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlaceDetailsResultWithStatus:(LPGoogleStatus)status;
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceDetailsResult:(LPPlaceDetailsResults *)placeDetailsResults;
+
+- (void)googleFunctionsWillLoadPlaceDetailsResult:(LPGoogleFunctions *)googleFunctions forPlaceID:(NSString *)placeID;
 
 #pragma mark - Geocoding
 - (void)googleFunctionsWillLoadGeocoding:(LPGoogleFunctions *)googleFunctions forAddress:(NSString *)address filterComponents:(NSArray *)filterComponents;

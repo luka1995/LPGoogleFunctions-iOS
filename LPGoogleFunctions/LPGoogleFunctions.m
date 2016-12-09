@@ -1046,4 +1046,63 @@ NSString *const googleAPITextToSpeechURL = @"https://translate.google.com/transl
     }];
 }
 
+- (void)loadPlaceDetailsForPlaceID:(NSString *)placeID forceBrowserKey:(NSString *)browserKey successfulBlock:(void (^)(LPPlaceDetailsResults *placeDetailsResults))successful failureBlock:(void (^)(LPGoogleStatus status))failure {
+    if ([self.delegate respondsToSelector:@selector(googleFunctionsWillLoadPlaceDetailsResult:forPlaceID:)]) {
+        [self.delegate googleFunctionsWillLoadPlaceDetailsResult:self forPlaceID:placeID];
+    }
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    NSMutableDictionary *parameters = [NSMutableDictionary new];
+    
+    if (browserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", browserKey] forKey:@"key"];
+    }
+    else if (self.googleAPIBrowserKey) {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIBrowserKey] forKey:@"key"];
+    }
+    else {
+        [parameters setObject:[NSString stringWithFormat:@"%@", self.googleAPIClientID] forKey:@"client"];
+    }
+    
+    [parameters setObject:[NSString stringWithFormat:@"%@", placeID] forKey:@"placeid"];
+    [parameters setObject:[NSString stringWithFormat:@"%@", self.languageCode] forKey:@"language"];
+    
+    [manager GET:[NSString stringWithFormat:@"%@/%@?", googleAPIUri, googleAPIPlaceDetailsURLPath] parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        LPPlaceDetailsResults *placeDetailsResults = [LPPlaceDetailsResults placeDetailsResultsWithObjects:responseObject];
+        
+        NSString *statusCode = placeDetailsResults.statusCode;
+        
+        if ([statusCode isEqualToString:@"OK"]) {
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:didLoadPlaceDetailsResult:)]) {
+                [self.delegate googleFunctions:self didLoadPlaceDetailsResult:placeDetailsResults];
+            }
+            
+            if (successful)
+                successful(placeDetailsResults);
+        } else {
+            LPGoogleStatus status = [LPGoogleFunctions getGoogleStatusFromString:statusCode];
+            
+            if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlaceDetailsResultWithStatus:)]) {
+                [self.delegate googleFunctions:self errorLoadingPlaceDetailsResultWithStatus:status];
+            }
+            
+            if (failure)
+                failure(status);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        if ([self.delegate respondsToSelector:@selector(googleFunctions:errorLoadingPlacesAutocompleteWithStatus:)]) {
+            [self.delegate googleFunctions:self errorLoadingPlaceDetailsResultWithStatus:LPGoogleStatusUnknownError];
+        }
+        
+        if (failure)
+            failure(LPGoogleStatusUnknownError);
+        
+    }];
+}
+
 @end
