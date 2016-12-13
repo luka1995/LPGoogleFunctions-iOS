@@ -9,7 +9,7 @@
 #import "LPMainViewController.h"
 
 
-NSString *const googleAPIBrowserKey = @"AIzaSyDYq6cfchnqdab5cWBmNcw258IAr79SRV8";
+NSString *const googleAPIBrowserKey = @"";
 
 
 @interface LPMainViewController ()
