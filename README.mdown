@@ -1,4 +1,4 @@
-#LPGoogleFunctions
+# LPGoogleFunctions
 
 LPGoogleFunctions is an iOS library that provides easy access to certain Google API functions.
 
@@ -7,7 +7,7 @@ https://developers.google.com/
 Created by Luka Penger
 http://lukapenger.eu
 
-##Examples
+## Examples
 
 * LPPlacesAutocompleteService
 * LPStaticMapImagesService
@@ -21,7 +21,7 @@ http://lukapenger.eu
 [![ScreenShots](ScreenShots/img4-thumb.png)](ScreenShots/img4.png)
 [![ScreenShots](ScreenShots/img5-thumb.png)](ScreenShots/img5.png)
 
-##Usage
+## Usage
 
 If you'd like to include this component as a pod using CocoaPods, just add the following line to your Podfile:
 
@@ -37,7 +37,7 @@ Configure global variables in
 }
 ```
 
-##ARC
+## ARC
 
 LPGoogleFunctions uses ARC (Automatic Reference Counting).
 
@@ -45,7 +45,7 @@ If you are using LPGoogleFunctions in your non-arc project, you will need to set
 
 To set a compiler flag in Xcode, go to your active target and select the "Build Phases" tab. Now select all LPGoogleFunctions source files, press Enter, insert `-fobjc-arc` and then "Done" to disable ARC for LPGoogleFunctions.
 
-##Directions service
+## Directions service
 
 The Google Directions API is a service that calculates directions between locations using an HTTP request. You can search for directions for several modes of transportation, include transit, driving, walking or cycling. Directions may specify origins, destinations and waypoints either as text strings (e.g. "Chicago, IL" or "Darwin, NT, Australia") or as latitude/longitude coordinates. The Directions API can return multi-part directions using a series of waypoints.
 
@@ -73,7 +73,7 @@ You can use blocks and delegate methods:
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingDirectionsWithStatus:(LPGoogleStatus)status;
 ```
 
-##Street View Images service
+## Street View Images service
 
 The Google Maps Image APIs make it easy to embed a street view image into your image view.
 
@@ -97,7 +97,7 @@ Method for address:
 
 Successful block will return UIImage.
 
-##Static Map Images service
+## Static Map Images service
 
 The Google Maps Image APIs make it easy to embed a static Google Maps image into your image view.
 
@@ -122,7 +122,7 @@ Method for address:
 
 Successful block will return UIImage.
 
-##Places Autocomplete service
+## Places Autocomplete service
 
 The Google Places Autocomplete API is a web service that returns Place information based on text search terms, and, optionally, geographic bounds. The API can be used to provide autocomplete functionality for text-based geographic searches, by returning Places such as businesses, addresses, and points of interest as a user types.
 
@@ -145,7 +145,7 @@ You can use blocks and delegate methods:
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlacesAutocomplete:(LPPlacesAutocomplete *)placesAutocomplete;
 ```
 
-##Place Details For Reference service
+## Place Details For Reference service
 
 Once you have a reference from a Place Search, you can request more details about a particular establishment or point of interest by initiating a Place Details request. A Place Details request returns more comprehensive information about the indicated place such as its complete address, phone number, user rating and reviews.
 
@@ -165,7 +165,7 @@ You can use blocks and delegate methods:
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadPlaceDetailsResult:(LPPlaceDetailsResults *)placeDetailsResults;
 ```
 
-##Google Text to Speech service
+## Google Text to Speech service
 
 Google Speak Text.
 
@@ -177,7 +177,7 @@ Google Speak Text.
 - (void)speakText:(NSString *)text failureBlock:(void (^)(NSError *error))failure;
 ```
 
-##Geocoding service
+## Geocoding service
 
 Geocoding is the process of converting addresses (like "1600 Amphitheatre Parkway, Mountain View, CA") into geographic coordinates (like latitude 37.423021 and longitude -122.083739), which you can use to place markers or position the map.
 
@@ -205,7 +205,7 @@ You can use blocks and delegate methods:
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions didLoadGeocodingResults:(LPGeocodingResults *)geocodingResults;
 ```
 
-##Place Autocomplete with Details service
+## Place Autocomplete with Details service
 
 Place Autocomplete + Place Details
 
@@ -222,7 +222,7 @@ Place Autocomplete + Place Details
 - (void)loadPlacesAutocompleteWithDetailsForInput:(NSString *)input offset:(int)offset radius:(int)radius location:(LPLocation *)location placeType:(LPGooglePlaceType)placeType countryRestriction:(NSString *)countryRestriction successfulBlock:(void (^)(NSArray *placesWithDetails))successful failureBlock:(void (^)(LPGoogleStatus status))failure;
 ```
 
-##Place Text Search service
+## Place Text Search service
 
 The Google Places API Text Search Service is a web service that returns information about a set of Places based on a string — for example "pizza in New York" or "shoe stores near Ottawa".
 
@@ -244,7 +244,7 @@ You can use blocks and delegate methods:
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingPlaceSearchWithStatus:(LPGoogleStatus)status;
 ```
 
-##Place Photo for Reference service
+## Place Photo for Reference service
 
 The Places Photo service is a read-only API that allows you to easily add high quality photographic content to your application. The Photo service gives you access to the millions of photos stored in the Places and Google+ Local database. When you search for Places using either a Place Search or Place Details request, photo references will be returned for relevant photographic content. The Photo service lets you access the referenced photos, and resize the image to the optimal size for your application.
 
@@ -258,7 +258,7 @@ The Places Photo service is a read-only API that allows you to easily add high q
 - (void)loadPlacePhotoForReference:(NSString *)reference maxHeight:(int)maxHeight maxWidth:(int)maxWidth successfulBlock:(void (^)(UIImage *image))successful failureBlock:(void (^)(NSError *error))failure;
 ```
 
-##Distance Matrix service
+## Distance Matrix service
 
 The Google Distance Matrix API is a service that provides travel distance and time for a matrix of origins and destinations. The information returned is based on the recommended route between start and end points, as calculated by the Google Maps API, and consists of rows containing duration and distance values for each pair.
 
@@ -283,7 +283,7 @@ You can use blocks and delegate methods:
 - (void)googleFunctions:(LPGoogleFunctions *)googleFunctions errorLoadingDistanceMatrixWithStatus:(LPGoogleStatus)status;
 ```
 
-##Uses Frameworks - Libraries
+## Uses Frameworks - Libraries
 
 * UIKit.framework
 * Foundation.framework
@@ -293,10 +293,10 @@ You can use blocks and delegate methods:
 LPGoogleFunctions uses AFNetworking library for networking.
 https://github.com/AFNetworking/AFNetworking
 
-##License
+## License
 
 This code is distributed under the terms and conditions of the [MIT license](https://github.com/luka1995/LPGoogleFunctions/blob/master/LICENSE).
 
-##Change log
+## Change log
 
 A brief summary of each LPGoogleFunctions release can be found on the [wiki](https://github.com/luka1995/LPGoogleFunctions/wiki/Change-log).
