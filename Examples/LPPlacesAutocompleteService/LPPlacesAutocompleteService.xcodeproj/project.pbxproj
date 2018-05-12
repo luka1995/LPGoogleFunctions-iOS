@@ -54,6 +54,9 @@
 		0CCB5F2E1912BCB500648FCC /* LPImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB5F2D1912BCB500648FCC /* LPImage.m */; };
 		0CCB5F311912BE6100648FCC /* LPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CCB5F301912BE6100648FCC /* LPCell.m */; };
 		0CCB5F331912BEC800648FCC /* LPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CCB5F321912BEC800648FCC /* LPCell.xib */; };
+		C1D82F051DF99E4C0076EB8B /* GTMStringEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D82F021DF99E4C0076EB8B /* GTMStringEncoding.m */; };
+		C1D82F061DF99E4C0076EB8B /* LPURLSigner.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D82F041DF99E4C0076EB8B /* LPURLSigner.m */; };
+		C1D82F091DF99E640076EB8B /* OrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C1D82F081DF99E640076EB8B /* OrderedDictionary.m */; };
 		FFBF8355195B0FF2006A0E0F /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBF8331195B0FF2006A0E0F /* AFHTTPRequestOperation.m */; };
 		FFBF8356195B0FF2006A0E0F /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBF8333195B0FF2006A0E0F /* AFHTTPRequestOperationManager.m */; };
 		FFBF8357195B0FF2006A0E0F /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBF8335195B0FF2006A0E0F /* AFHTTPSessionManager.m */; };
@@ -162,6 +165,13 @@
 		0CCB5F2F1912BE6100648FCC /* LPCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCell.h; sourceTree = "<group>"; };
 		0CCB5F301912BE6100648FCC /* LPCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCell.m; sourceTree = "<group>"; };
 		0CCB5F321912BEC800648FCC /* LPCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LPCell.xib; sourceTree = "<group>"; };
+		C1D82F001DF99E4C0076EB8B /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		C1D82F011DF99E4C0076EB8B /* GTMStringEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMStringEncoding.h; sourceTree = "<group>"; };
+		C1D82F021DF99E4C0076EB8B /* GTMStringEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMStringEncoding.m; sourceTree = "<group>"; };
+		C1D82F031DF99E4C0076EB8B /* LPURLSigner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPURLSigner.h; sourceTree = "<group>"; };
+		C1D82F041DF99E4C0076EB8B /* LPURLSigner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPURLSigner.m; sourceTree = "<group>"; };
+		C1D82F071DF99E640076EB8B /* OrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderedDictionary.h; path = ../../../LPGoogleFunctions/OrderedDictionary.h; sourceTree = "<group>"; };
+		C1D82F081DF99E640076EB8B /* OrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderedDictionary.m; path = ../../../LPGoogleFunctions/OrderedDictionary.m; sourceTree = "<group>"; };
 		FFBF8330195B0FF2006A0E0F /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		FFBF8331195B0FF2006A0E0F /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		FFBF8332195B0FF2006A0E0F /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -302,6 +312,9 @@
 		0CCB5DF11912B1AA00648FCC /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				C1D82F071DF99E640076EB8B /* OrderedDictionary.h */,
+				C1D82F081DF99E640076EB8B /* OrderedDictionary.m */,
+				C1D82EFE1DF99E4C0076EB8B /* AQGoogleSignature */,
 				FFBF832E195B0FF2006A0E0F /* AFNetworking */,
 				0CCB5F2B1912BC8E00648FCC /* LPImage */,
 				0CCB5DF21912B1B600648FCC /* LPGoogleFunctions */,
@@ -398,6 +411,27 @@
 				0CCB5F2D1912BCB500648FCC /* LPImage.m */,
 			);
 			name = LPImage;
+			sourceTree = "<group>";
+		};
+		C1D82EFE1DF99E4C0076EB8B /* AQGoogleSignature */ = {
+			isa = PBXGroup;
+			children = (
+				C1D82EFF1DF99E4C0076EB8B /* GoogleSignature */,
+				C1D82F031DF99E4C0076EB8B /* LPURLSigner.h */,
+				C1D82F041DF99E4C0076EB8B /* LPURLSigner.m */,
+			);
+			name = AQGoogleSignature;
+			path = ../../../LPGoogleFunctions/AQGoogleSignature;
+			sourceTree = "<group>";
+		};
+		C1D82EFF1DF99E4C0076EB8B /* GoogleSignature */ = {
+			isa = PBXGroup;
+			children = (
+				C1D82F001DF99E4C0076EB8B /* GTMDefines.h */,
+				C1D82F011DF99E4C0076EB8B /* GTMStringEncoding.h */,
+				C1D82F021DF99E4C0076EB8B /* GTMStringEncoding.m */,
+			);
+			path = GoogleSignature;
 			sourceTree = "<group>";
 		};
 		FFBF832E195B0FF2006A0E0F /* AFNetworking */ = {
@@ -574,15 +608,18 @@
 				0CCB5E401912B1B600648FCC /* LPMapImageMarker.m in Sources */,
 				0CCB5E4B1912B1B600648FCC /* LPStop.m in Sources */,
 				0CCB5E461912B1B600648FCC /* LPPlaceSearchResults.m in Sources */,
+				C1D82F061DF99E4C0076EB8B /* LPURLSigner.m in Sources */,
 				0CCB5E391912B1B600648FCC /* LPEvent.m in Sources */,
 				0CCB5E441912B1B600648FCC /* LPPlacePhoto.m in Sources */,
 				0CCB5E501912B1B600648FCC /* LPWaypoint.m in Sources */,
 				0CCB5E471912B1B600648FCC /* LPPolyline.m in Sources */,
 				0CCB5E481912B1B600648FCC /* LPPrediction.m in Sources */,
+				C1D82F091DF99E640076EB8B /* OrderedDictionary.m in Sources */,
 				0CCB5F2E1912BCB500648FCC /* LPImage.m in Sources */,
 				FFBF8364195B0FF2006A0E0F /* UIRefreshControl+AFNetworking.m in Sources */,
 				FFBF8361195B0FF2006A0E0F /* UIButton+AFNetworking.m in Sources */,
 				0CCB5E411912B1B600648FCC /* LPMatchedSubstring.m in Sources */,
+				C1D82F051DF99E4C0076EB8B /* GTMStringEncoding.m in Sources */,
 				0CCB5E371912B1B600648FCC /* LPDistance.m in Sources */,
 				FFBF8356195B0FF2006A0E0F /* AFHTTPRequestOperationManager.m in Sources */,
 				0CCB5E3B1912B1B600648FCC /* LPGeocodingResults.m in Sources */,
